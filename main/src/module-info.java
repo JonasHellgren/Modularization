@@ -1,4 +1,4 @@
 module main
 {
-    requires util
+    requires util;
 }
