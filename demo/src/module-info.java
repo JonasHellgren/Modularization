@@ -1,0 +1,5 @@
+module demo
+{
+    requires delivery;
+
+}
