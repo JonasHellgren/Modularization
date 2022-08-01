@@ -8,6 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="delivery" />
+        <module name="demo_with_aggregated_module" />
+        <module name="billing_delivery_aggregated" />
         <module name="demo" />
         <module name="billing" />
       </profile>
