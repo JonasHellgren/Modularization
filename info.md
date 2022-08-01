@@ -4,4 +4,19 @@ Module util does not export package internal.
 module-info-java file worked first then src folder under each module was blue marked and package keyword used in top 
 of classes.
 
-![img.png](img.png)
+![img_1.png](img_1.png)
+
+module-info-java file in main module
+    
+    module main
+    {
+    requires util;
+    }
+
+
+module-info-java file in util module
+
+    module util
+    {
+    exports util;
+    }
