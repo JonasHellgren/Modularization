@@ -1,0 +1,4 @@
+module controller
+{
+    requires service;
+}
