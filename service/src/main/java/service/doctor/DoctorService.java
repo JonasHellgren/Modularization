@@ -2,7 +2,9 @@ package service.doctor;
 
 import dao.doctor.DoctorRepo;
 import dao.doctor.DoctorRepoInterface;
+import mailservice.EmailService;
 import model.doctor.Doctor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +17,9 @@ import java.util.stream.Stream;
 public class DoctorService {
 
     private DoctorRepoInterface<Doctor> repo;
+
+    @Autowired
+    private EmailService emailService;
 
     @PostConstruct
     public void initDoctorService() {
@@ -29,6 +34,7 @@ public class DoctorService {
     }
 
     public List<Doctor> getDoctors() {
+        emailService.sendEmail();
         return repo.findAll();
         //return Collections.emptyList();
     }

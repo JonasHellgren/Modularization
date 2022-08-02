@@ -1,0 +1,4 @@
+module email
+{
+    exports mailservice
+}

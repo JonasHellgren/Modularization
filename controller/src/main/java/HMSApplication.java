@@ -4,7 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication //(scanBasePackages = {"com.javatechie.*"})
 //Following is used in tutorial but does not work: @ComponentScan  (basePackages = {"com.javatechie.*"})
-@ComponentScan (basePackages = "controller.doctor,service.doctor")
+@ComponentScan (basePackages = "controller.doctor,service.doctor,mailservice")
 
 //Following is used in tutorial but works anyway
 //@EntityScan  (basePackages = "controller.doctor,service.doctor")
