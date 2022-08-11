@@ -1,0 +1,13 @@
+@startuml
+
+component demo
+component delivery
+component billing
+
+demo --> delivery : requires (class DeliverService)
+delivery --> billing : requires transitive
+
+note right of billing: exports services (interface BillingService) and model (class Invoice))
+
+
+@enduml

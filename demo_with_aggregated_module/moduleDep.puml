@@ -1,0 +1,14 @@
+@startuml
+
+component demo_aggregated_module
+component billing_delivery_aggregated
+
+
+demo_aggregated_module --> billing_delivery_aggregated : requires (class DeliverService)
+billing_delivery_aggregated --> billing : requires
+billing_delivery_aggregated --> delivery : requires
+
+note right of billing: exports services and model
+note right of delivery: exports service
+
+@enduml
