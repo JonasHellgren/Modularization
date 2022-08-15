@@ -1,6 +1,6 @@
 open module ball_service
 {
-   exports api;
+   exports ball_service.api;
    requires transitive domain;
 
    requires java.logging;

@@ -1,31 +1,34 @@
-package ball_runner;
+package viewer;
 
 //import ball_service.api.BallService;
 //import models.Ball;
 //import ball_service.api.BallService;
 //import models.Ball;
 //import models.Ball;
-import ball_service.api.BallService;
 import domain.models.Ball;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 @Component
 public class ScheduledTask {
 
     public static final long CALLING_TIME = 500L;
-    public static final long CALC_TIME = 2000L;
+    public static final long INIT_DELAY = 2000L;
 
-    @Autowired
-    BallService ballService;
+    public static final String URL = "http://localhost:8080/ballpos";
 
-    @Scheduled(initialDelay = CALLING_TIME, fixedRate = CALLING_TIME)
+  //  @Autowired
+  //  BallService ballService;
+
+    @Scheduled(initialDelay = INIT_DELAY, fixedRate = CALLING_TIME)
     public void calculate() throws InterruptedException {
 
-        ballService.step();
-        Ball ball=ballService.getBall();
-        System.out.println("ball = " + ball);
+
+        RestTemplate rt=new RestTemplate();
+            Ball ball = rt.getForObject(URL, Ball.class);
+            System.out.println("ball = " + ball);
 
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@ComponentScan(basePackages = {"api","ball_runner"})
+@ComponentScan(basePackages = {"ball_service/api","ball_runner"})
 public class ScheduleApplication {
     public static void main(String[] args) {
         SpringApplication.run(ScheduleApplication.class, args);

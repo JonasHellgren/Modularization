@@ -1,8 +1,7 @@
-open module ball_runner
+open module swing.viewer
 {
-   //exports ball_service.api;
-   requires  ball_service;
 
+    requires  domain;
 
     requires spring.context;
     requires spring.boot.autoconfigure;
@@ -12,5 +11,6 @@ open module ball_runner
     requires org.apache.tomcat.embed.core;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
+    requires java.desktop;
 
 }

@@ -7,7 +7,8 @@
 		<module>ball_runner</module>
 		<module>ball_service</module>
 		<module>domain</module>
-	</modules>
+        <module>swing_viewer</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

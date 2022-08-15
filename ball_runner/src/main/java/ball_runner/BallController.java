@@ -1,8 +1,9 @@
 package ball_runner;
 
-//import api.BallService;
-//import api.BallService;
-import api.BallService;
+//import ball_service.api.BallService;
+//import ball_service.api.BallService;
+import ball_service.api.BallService;
+import domain.models.Ball;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,11 +24,14 @@ public class BallController {
     @Autowired
     BallService ballService;
 
-    @GetMapping(value = "/ballpos")
-    public String getBallPos() {
-
-       // return "saasffffffffffffffff";
+    @GetMapping(value = "/ballposString")
+    public String getBallPosString() {
         return ballService.getBall().toString();
+    }
+
+    @GetMapping(value = "/ballpos")
+    public Ball getBallPos() {
+        return ballService.getBall();
     }
 
 }
