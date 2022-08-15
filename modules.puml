@@ -1,6 +1,4 @@
 @startuml
-'https://plantuml.com/class-diagram
-
 component controller
 component service
 component repository
@@ -17,6 +15,5 @@ note right of service: exports service.doctor
 note right of repository: exports dao.doctor
 note right of email: exports mailservice
 note right of domain: exports model.doctor
-
 
 @enduml

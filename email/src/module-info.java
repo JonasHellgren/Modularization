@@ -1,4 +1,0 @@
-module email
-{
-    exports mailservice
-}

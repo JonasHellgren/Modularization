@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import service.doctor.DoctorService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class DoctorController implements ErrorController {
@@ -20,11 +22,17 @@ public class DoctorController implements ErrorController {
     @GetMapping ("/doctors")
     public List<Doctor> getDoctors() {
         System.out.println("doctors");
+
+
+        List<String> doctorList= service.getDoctors().stream().
+                map(d -> d.toString()).collect(Collectors.toList());
+
+
         return service.getDoctors();
     }
 
    // private final static String PATH = "/error";
-    @Override
+   // @Override
    // @RequestMapping(PATH)
    // @ResponseBody
     public String getErrorPath() {

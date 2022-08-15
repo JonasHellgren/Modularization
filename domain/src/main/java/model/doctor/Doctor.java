@@ -1,22 +1,21 @@
 package model.doctor;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Entity
+@Getter
 public class Doctor {
 
-    @Id
+   // @Id
     private int id;
     private String name;
     private String specialist;
+
+
 }
