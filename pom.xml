@@ -5,6 +5,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>ball_runner</module>
+		<module>ball_service</module>
+		<module>domain</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
