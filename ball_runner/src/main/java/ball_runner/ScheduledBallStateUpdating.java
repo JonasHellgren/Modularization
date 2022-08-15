@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ScheduledTask {
+public class ScheduledBallStateUpdating {
 
     public static final long CALLING_TIME = Settings.DT_MILLIS;
 
@@ -17,10 +17,6 @@ public class ScheduledTask {
 
     @Scheduled(initialDelay = CALLING_TIME, fixedRate = CALLING_TIME)
     public void calculate() throws InterruptedException {
-
         ballService.step();
-        Ball ball=ballService.getBall();
-        System.out.println("ball = " + ball);
-
     }
 }

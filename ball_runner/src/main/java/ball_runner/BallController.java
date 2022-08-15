@@ -1,7 +1,5 @@
 package ball_runner;
 
-//import ball_service.api.BallService;
-//import ball_service.api.BallService;
 import ball_service.api.BallService;
 import domain.models.Ball;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BallController {
-
-  //  private static final Logger logger = Logger.getLogger(BallController.class.getName());
-
 
     @Autowired
     BallService ballService;

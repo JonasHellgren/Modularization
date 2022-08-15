@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import domain.settings.Settings;
 
 @Service
-public class BallService implements BallServiceApi {
+public class BallService implements BallServiceInterface {
     
     Ball ball;
     BallBounceRunner ballBounceRunner;
@@ -37,6 +37,7 @@ public class BallService implements BallServiceApi {
     }
 
 
+    //non clean if statements in stepOld replaced by step
     @Override
     public void step() {
         //Updates ball states

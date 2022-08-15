@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Set;
+import javax.annotation.PostConstruct;
 
 @Component
-public class ScheduledTask {
+public class ScheduledPanelPainting {
 
     public static final long CALLING_TIME =  Settings.DT_MILLIS;
     public static final long INIT_DELAY = 1000L;
@@ -20,12 +19,22 @@ public class ScheduledTask {
     @Autowired
     BallPanel panel;
 
+    private RestTemplate restTemplate;
+
+    @PostConstruct
+    public void setup() {
+         restTemplate=new RestTemplate();
+    }
+
     @Scheduled(initialDelay = INIT_DELAY, fixedRate = CALLING_TIME)
     public void calculate() throws InterruptedException {
-        RestTemplate rt=new RestTemplate();
-        Ball ballFromUrl = rt.getForObject(URL, Ball.class);
+        setPanelFromRestEndPointData();
+        panel.repaint();
+    }
+
+    private void setPanelFromRestEndPointData() {
+        Ball ballFromUrl = restTemplate.getForObject(URL, Ball.class);
         assert ballFromUrl != null;
         panel.setBallPos(ballFromUrl.x,ballFromUrl.y);
-        panel.repaint();
     }
 }

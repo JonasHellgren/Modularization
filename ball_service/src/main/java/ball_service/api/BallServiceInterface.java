@@ -2,10 +2,10 @@ package ball_service.api;
 
 import domain.models.Ball;
 
-public interface BallServiceApi {
+public interface BallServiceInterface {
 
     //static factory method
-    static BallServiceApi build() {
+    static BallServiceInterface build() {
         return BallService.newBallService();
     }
 

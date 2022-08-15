@@ -23,8 +23,6 @@ import java.awt.*;
 @ComponentScan(basePackages = {"viewer"})
 public class ViewApplication {
 
-    public static final int TIME_BETWEEN_PAINTS = 100;
-
     public static void main(String[] args) {
         new SpringApplicationBuilder(ViewApplication.class)
                 .headless(false)  //allow AWT classes to be instantiated
@@ -52,13 +50,6 @@ public class ViewApplication {
             });
 
             frame.add(panel);
-
-
-           // while (true) {
-           //     panel.repaint();
-          //      Thread.sleep(Settings.DT_MILLIS);
-         //   }
-
 
         };
 

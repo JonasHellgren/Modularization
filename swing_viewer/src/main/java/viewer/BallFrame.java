@@ -7,11 +7,9 @@ import javax.swing.*;
 @Component
 public class BallFrame extends JFrame {
 
-    /**    * Creates new  Frame     */
     public BallFrame() {
         initComponents();
     }
-
 
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
