@@ -1,6 +1,5 @@
 open module swing.viewer
 {
-
     requires  domain;
 
     requires spring.context;

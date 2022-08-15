@@ -8,12 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//import java.util.logging.Logger;
-
-//web browser: http://localhost:8080/result
-//web browser: http://localhost:8080/mode
 //web browser: http://localhost:8080/ballpos
-//postman: http://localhost:8080/input
 
 @RestController
 public class BallController {

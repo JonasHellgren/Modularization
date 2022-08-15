@@ -2,11 +2,14 @@ package viewer;
 
 import domain.models.Ball;
 import domain.settings.Settings;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.Random;
 
+@Component
 public class BallPanel extends JPanel {
     //Can be seen as view class.
 
@@ -15,13 +18,12 @@ public class BallPanel extends JPanel {
     public BallPanel() {
         this.ball = Ball.newBallRandomPosAndSpeed();
     }
-/*
-    public void copyModelStates(GameModel gameModel) {
-        racket.copyPos(gameModel.getRacket());
-        tennisBall.copyPos(gameModel.getTennisBall());
-    }
-*/
 
+
+    public void setBallPos(int x, int y) {
+        ball.x=x;
+        ball.y=y;
+    }
 
 
     @Override
@@ -31,15 +33,8 @@ public class BallPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        /*
-        for (Dot dot : dots) {
-            g.setColor(dot.color);
-            g.fillOval(dot.x, dot.y, dot.r, dot.r);
-        }
-*/
         g.setColor(ball.COLOR);
         g.fillOval(ball.x, Settings.H - ball.y, ball.radius, ball.radius);
-
 
     }
 }

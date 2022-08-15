@@ -1,12 +1,8 @@
 package ball_runner;
 
-//import ball_service.api.BallService;
-//import models.Ball;
-//import ball_service.api.BallService;
-//import models.Ball;
-//import models.Ball;
 import ball_service.api.BallService;
 import domain.models.Ball;
+import domain.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,8 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduledTask {
 
-    public static final long CALLING_TIME = 500L;
-    public static final long CALC_TIME = 2000L;
+    public static final long CALLING_TIME = Settings.DT_MILLIS;
 
     @Autowired
     BallService ballService;

@@ -23,7 +23,7 @@ import java.awt.*;
 @ComponentScan(basePackages = {"viewer"})
 public class ViewApplication {
 
-    public static final String URL = "http://localhost:8080/ballpos";
+    public static final int TIME_BETWEEN_PAINTS = 100;
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(ViewApplication.class)
@@ -35,8 +35,8 @@ public class ViewApplication {
     @Autowired
     private BallFrame frame;
 
-    BallPanel panel;
-
+    @Autowired
+    private BallPanel panel;
 
     @Bean
     public CommandLineRunner runGame() {
@@ -51,25 +51,18 @@ public class ViewApplication {
                 }
             });
 
-            addPanel();
-
-            /*
-            RestTemplate rt=new RestTemplate();
+            frame.add(panel);
 
 
-            while (true) {
-                Ball ball = rt.getForObject(URL, Ball.class);
-                System.out.println("ball = " + ball);
-            }
-*/
+           // while (true) {
+           //     panel.repaint();
+          //      Thread.sleep(Settings.DT_MILLIS);
+         //   }
+
 
         };
 
     }
 
-    private void addPanel() {
-        panel = new BallPanel();
-        frame.add(panel);
-    }
 
 }
