@@ -1,7 +1,7 @@
 open module ball_runner
 {
-  // exports api;
- //  requires  ball_service;
+   //exports api;
+   requires  ball_service;
 
 
     requires spring.context;

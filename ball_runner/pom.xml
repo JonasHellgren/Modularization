@@ -10,6 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ball_runner</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ball_service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
