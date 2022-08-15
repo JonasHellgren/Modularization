@@ -14,8 +14,6 @@ public class ScheduledPanelPainting {
     public static final long CALLING_TIME =  Settings.DT_MILLIS;
     public static final long INIT_DELAY = 1000L;
 
-    public static final String URL = Settings.BALL_POS_URL;
-
     @Autowired
     BallPanel panel;
 
@@ -33,7 +31,7 @@ public class ScheduledPanelPainting {
     }
 
     private void setPanelFromRestEndPointData() {
-        Ball ballFromUrl = restTemplate.getForObject(URL, Ball.class);
+        Ball ballFromUrl = restTemplate.getForObject(Settings.BALL_POS_URL, Ball.class);
         assert ballFromUrl != null;
         panel.setBallPos(ballFromUrl.x,ballFromUrl.y);
     }
