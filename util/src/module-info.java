@@ -1,4 +1,0 @@
-module util
-{
-exports util;
-}

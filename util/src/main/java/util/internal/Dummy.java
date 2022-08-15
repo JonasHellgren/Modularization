@@ -1,4 +1,4 @@
-package internal;
+package util.internal;
 
 public class Dummy {
 }

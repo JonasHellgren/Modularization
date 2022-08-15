@@ -1,6 +1,6 @@
-package util;
+package util.api;
 
-import internal.AddHelper;
+import util.internal.AddHelper;
 
 public class Calculator {
 

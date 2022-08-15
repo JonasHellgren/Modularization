@@ -1,6 +1,6 @@
 package main;
 
-import util.Calculator;
+import util.api.Calculator;
 
 public class Runner {
 
