@@ -2,11 +2,13 @@ package domain.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nd4j.linalg.api.ndarray.INDArray;
 //import org.nd4j.linalg.api.ndarray.INDArray;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Vertex3D {
     Data3D data;
 
