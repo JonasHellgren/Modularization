@@ -8,6 +8,7 @@
 		<module>environment_service</module>
 		<module>domain</module>
 		<module>view_runner1</module>
+		<module>view_service</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

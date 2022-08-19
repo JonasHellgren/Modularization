@@ -1,0 +1,27 @@
+@startuml
+component ball_runner
+component ball_service
+component swing_viewer
+component domain
+
+ball_runner --> ball_service : requires
+ball_service --> domain : requires
+swing_viewer --> domain : requires
+
+note right of ball_runner
+Application for running ball_service, i.e. updating ball position.
+Exposes ball states via REST endpoint.
+end note
+note right of swing_viewer
+Swing based application for viewing ball position
+end note
+note right of ball_service
+Logic for updating ball position.
+Exports ball_service.api.
+end note
+note right of domain
+Defines the domain classes Ball and Settings.
+Exports domain.models AND domain.settings
+end note
+
+@enduml

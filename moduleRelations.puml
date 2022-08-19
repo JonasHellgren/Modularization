@@ -1,0 +1,36 @@
+@startuml
+component environment_runner
+component environment_service
+component view_runner1
+component view_service
+component domain
+
+environment_runner --> environment_service : requires
+environment_service --> domain : requires
+view_runner1 --> view_service : requires
+view_service --> domain : requires
+
+note right of environment_runner
+Application for running environment_service, i.e. providing 3d model data.
+Exposes data via REST endpoint.
+end note
+
+note right of environment_service
+Mainly in memory repo for 3d model data
+Exports environment_service.api.
+end note
+
+note right of view_runner1
+Swing based application for viewing 3d model
+end note
+
+note right of view_service
+Logic for transforming and projecting 3D model data
+end note
+
+note right of domain
+Defines the domain classes,for example Vertex
+Exports domain.models AND domain.settings
+end note
+
+@enduml

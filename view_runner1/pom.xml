@@ -16,7 +16,31 @@
             <artifactId>domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>org.nd4j</groupId>
+                    <artifactId>nd4j-native</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.nd4j</groupId>
+                    <artifactId>nd4j-common</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.nd4j</groupId>
+                    <artifactId>nd4j-guava</artifactId>
+                </exclusion>
+
+
+            </exclusions>
+
         </dependency>
+
+
+
+
     </dependencies>
 
     <properties>
