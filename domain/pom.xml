@@ -31,14 +31,17 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+        <groupId>org.nd4j</groupId>
+        <artifactId>nd4j-api</artifactId>
+        <version>1.0.0-M1.1</version>
+        </dependency>
 
         <dependency>
             <groupId>org.nd4j</groupId>
             <artifactId>nd4j-native</artifactId>
             <version>1.0.0-M1.1</version>
             <exclusions>
-
-
             </exclusions>
         </dependency>
 
@@ -52,7 +55,12 @@
         </dependency>
 
 
-
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
 
 
 

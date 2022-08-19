@@ -3,7 +3,7 @@ module environment_service
    exports environment_service.api;
    exports test to junit;
 
-   requires transitive domain;
+   requires transitive  domain;
 
    requires java.logging;
    //requires lombok;
