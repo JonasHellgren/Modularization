@@ -1,6 +1,8 @@
 module environment_service
 {
    exports environment_service.api;
+   exports test to junit;
+
    requires transitive domain;
 
    requires java.logging;
@@ -11,5 +13,6 @@ module environment_service
    requires spring.boot;
    requires spring.web;
    requires spring.beans;
+   requires junit;
 
 }
