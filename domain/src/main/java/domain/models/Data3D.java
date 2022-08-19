@@ -24,7 +24,7 @@ public class Data3D {
         z=ia.getFloat(2);
     }
 
-    public INDArray getIndarray() {
+    public INDArray extractIndarray() {
         double[] arr1Dim = {x, y, z};
         return Nd4j.createFromArray(arr1Dim);
     }

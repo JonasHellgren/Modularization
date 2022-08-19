@@ -1,7 +1,7 @@
 module environment_service
 {
    exports environment_service.api;
-   requires  domain;
+   requires transitive domain;
 
    requires java.logging;
    //requires lombok;

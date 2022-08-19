@@ -1,0 +1,12 @@
+läsa par via rest  x
+pasta foldrar
+skapa moduler view_runner1 view_service
+view service api - render() updateViewAngle
+
+rita godyckliga vertex3D och linjer i panel
+ladda in 3d data till viewer
+klass worldToCameraTransformer - transformera 3d data
+klass UVNCoordinateProjector - projicera 3d data
+Mediator klass i view_service
+
+p.XIDX=1; p.YIDX=2; p.ZIDX=3

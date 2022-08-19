@@ -2,6 +2,7 @@ package domain.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.nd4j.linalg.api.ndarray.INDArray;
 //import org.nd4j.linalg.api.ndarray.INDArray;
 
 @Data
@@ -13,7 +14,7 @@ public class Vertex3D {
     this.data=new Data3D(x,y,z);
     }
 
-       /*
+
     public Vertex3D(INDArray ia) {
         assert ia.length()==3;
         this.data=new Data3D(ia.getFloat(0),ia.getFloat(1),ia.getFloat(2));
@@ -21,21 +22,21 @@ public class Vertex3D {
 
 
     public Vertex3D plus(Vector3D vector3D) {
-        INDArray v1=this.data.getIndarray();
-        INDArray v2= vector3D.data.getIndarray();
+        INDArray v1=this.data.extractIndarray();
+        INDArray v2= vector3D.data.extractIndarray();
         INDArray sumIndArr = v1.add(v2);
         return new Vertex3D(sumIndArr);
     }
 
     public Vertex3D minus(Vector3D vector3D) {
-        INDArray v1=this.data.getIndarray();
-        INDArray v2= vector3D.data.getIndarray();
+        INDArray v1=this.data.extractIndarray();
+        INDArray v2= vector3D.data.extractIndarray();
         INDArray sumIndArr = v1.sub(v2);
         return new Vertex3D(sumIndArr);
     }
 
     public float norm() {
-        INDArray vIndArr=data.getIndarray();
+        INDArray vIndArr=data.extractIndarray();
         return  norm(vIndArr);
     }
 
@@ -44,7 +45,7 @@ public class Vertex3D {
         return (float) Math.sqrt(prod.getDouble(0));
     }
 
-
+    /*
      */
 
 

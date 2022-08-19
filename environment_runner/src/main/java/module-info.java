@@ -1,9 +1,8 @@
 open module environment_runner
 {
-   //exports ball_service.api;
-  // requires  ball_service;
 
-//    requires environment_service;
+
+    requires environment_service;
 
 
     requires spring.context;

@@ -3,7 +3,6 @@ package domain.models;
 import lombok.Data;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.factory.Nd4j;
 
 @Data
 public class Vector3D {
@@ -20,7 +19,7 @@ public class Vector3D {
 
 
     public Vector3D cross(Vector3D vOther) {
-        INDArray vRes=vectorCross(data.getIndarray(), vOther.data.getIndarray());
+        INDArray vRes=vectorCross(data.extractIndarray(), vOther.data.extractIndarray());
         Data3D data=new Data3D(vRes);
         return new Vector3D(data);
     }
