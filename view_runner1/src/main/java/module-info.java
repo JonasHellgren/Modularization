@@ -2,6 +2,7 @@ open module swing.viewer
 {
     requires  domain;
 
+    requires static lombok;
     requires spring.context;
     requires spring.boot.autoconfigure;
     requires spring.boot;

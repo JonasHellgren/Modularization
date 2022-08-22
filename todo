@@ -1,7 +1,7 @@
 läsa par via rest  x
 pasta foldrar  x
 skapa moduler view_runner1 view_service  x
-view service api - render() updateViewAngle
+view service api - render() updateViewAngle  x
 
 rita godyckliga vertex3D och linjer i panel
 ladda in 3d data till viewer
