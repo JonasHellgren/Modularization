@@ -1,7 +1,6 @@
 package viewer;
 
 import domain.settings.Constants;
-import domain.settings.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.WebApplicationType;
@@ -27,10 +26,10 @@ public class ViewApplication {
     }
 
     @Autowired
-    private BallFrame frame;
+    private View3DFrame frame;
 
     @Autowired
-    private BallPanel panel;
+    private View3DPanel panel;
 
     @Bean
     public CommandLineRunner runGame() {

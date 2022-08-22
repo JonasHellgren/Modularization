@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 
 @Component
-public class BallFrame extends JFrame {
+public class View3DFrame extends JFrame {
 
-    public BallFrame() {
+    public View3DFrame() {
         initComponents();
     }
 
