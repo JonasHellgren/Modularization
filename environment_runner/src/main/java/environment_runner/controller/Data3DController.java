@@ -9,7 +9,7 @@ package environment_runner.controller;
 //import environment_service.api.EnvironmentService;
 import domain.models.Edge3D;
 import domain.models.Vertex3D;
-import environment_service.api.EnvironmentService;
+import environment_service.api.Data3DService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +21,10 @@ import java.util.List;
 
 
 @RestController
-public class EnvironmentController {
+public class Data3DController {
 
     @Autowired
-    EnvironmentService environmentService;
+    Data3DService data3DService;
 
     @GetMapping(value = "/test")
     public String test() {
@@ -35,17 +35,17 @@ public class EnvironmentController {
     @GetMapping(value = "/vertices")
     public List<Vertex3D> getVertices() {
 
-        System.out.println("environmentService.getVertices() = " + environmentService.getVertices());
+        System.out.println("environmentService.getVertices() = " + data3DService.getVertices());
 
-        return environmentService.getVertices();
+        return data3DService.getVertices();
     }
 
 
 
     @GetMapping(value = "/edges")
     public List<Edge3D> getEdges() {
-        System.out.println("environmentService.getEdges() = " + environmentService.getEdges());
-        return environmentService.getEdges();
+        System.out.println("environmentService.getEdges() = " + data3DService.getEdges());
+        return data3DService.getEdges();
     }
 
 

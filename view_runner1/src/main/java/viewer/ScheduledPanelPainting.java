@@ -39,7 +39,7 @@ public class ScheduledPanelPainting {
     @Scheduled(initialDelay = INIT_DELAY, fixedRate = CALLING_TIME)
     public void calculate() throws InterruptedException {
         setPanelFromRestEndPointData();
-        setDummyPanelData();
+
 
         panel.repaint();
     }
@@ -64,6 +64,7 @@ public class ScheduledPanelPainting {
 
         } catch (RestClientException e) {
             log.warning("URL = " + VERTEX_URL + " does not exist");
+            setDummyPanelData();
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
         }

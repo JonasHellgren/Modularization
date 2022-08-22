@@ -5,7 +5,7 @@ import domain.models.Vertex3D;
 
 import java.util.List;
 
-public interface EnvironmentServiceInterface {
+public interface Data3DServiceInterface {
 
     void insertVertices(List<Vertex3D> vertices);
     List<Vertex3D> getVertices();

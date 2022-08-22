@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EnvironmentService implements EnvironmentServiceInterface {
+public class Data3DService implements Data3DServiceInterface {
 
     VertexRepo vertexRepo;
     EdgeRepo edgeRepo;
 
-    public EnvironmentService() {
+    public Data3DService() {
         this.vertexRepo = InMemRepoInterface.newVertexRepoBarnExample();
         this.edgeRepo = InMemRepoInterface.newEdgeRepoBarnExample();
     }

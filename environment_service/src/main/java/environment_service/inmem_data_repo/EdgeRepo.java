@@ -39,14 +39,6 @@ public class EdgeRepo implements InMemRepoInterface<Edge3D> {
         return edge3DList.size();
     }
 
-    public static List<Edge3D> edgeListBarnExample() {
-        return new ArrayList<>(
-                Arrays.asList(
-                        new Edge3D(1,2),
-                        new Edge3D(2,3),
-                        new Edge3D(3,4)));
-    }
-
     @Override
     public String  toString() {
         StringBuilder sb = new StringBuilder();

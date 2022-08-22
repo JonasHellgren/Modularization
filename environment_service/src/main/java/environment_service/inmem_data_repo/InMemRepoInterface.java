@@ -1,5 +1,7 @@
 package environment_service.inmem_data_repo;
 
+import environment_service.data3d_examples.BarnData;
+
 import java.util.List;
 
 public interface InMemRepoInterface<T> {
@@ -18,14 +20,14 @@ public interface InMemRepoInterface<T> {
 
     static VertexRepo newVertexRepoBarnExample() {
         VertexRepo repo=InMemRepoInterface.newVertexRepo();
-        repo.insertAll(VertexRepo.vertexListBarnExample());
+        repo.insertAll(BarnData.vertexList());
         return repo;
     }
 
 
     static EdgeRepo newEdgeRepoBarnExample() {
         EdgeRepo repo=InMemRepoInterface.newEdgeRepo();
-        repo.insertAll(EdgeRepo.edgeListBarnExample());
+        repo.insertAll(BarnData.edgeList());
         return repo;
     }
 

@@ -1,7 +1,6 @@
 package environment_runner.controller;
 
 import domain.models.Parameter;
-import environment_service.api.EnvironmentService;
 import environment_service.api.ParameterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

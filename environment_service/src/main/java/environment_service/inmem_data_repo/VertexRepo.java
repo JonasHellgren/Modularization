@@ -40,13 +40,6 @@ public class VertexRepo implements InMemRepoInterface<Vertex3D> {
         return vertex3DList.size();
     }
 
-    public static List<Vertex3D> vertexListBarnExample() {
-        return new ArrayList<>(
-                Arrays.asList(
-                        new Vertex3D(0,0,0),
-                        new Vertex3D(0,0,1),
-                        new Vertex3D(0,1,1)));
-    }
 
     @Override
     public String  toString() {
