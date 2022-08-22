@@ -2,9 +2,8 @@ import domain.models.Vector3D;
 import domain.models.Vertex3D;
 import org.junit.Assert;
 import org.junit.Test;
-import viewservice.transformer.WorldToCameraTransformer;
+import viewservice.logic.WorldToCameraTransformer;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

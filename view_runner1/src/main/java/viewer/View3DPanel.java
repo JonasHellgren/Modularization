@@ -2,8 +2,8 @@ package viewer;
 
 import domain.settings.Constants;
 import lombok.Setter;
-import models.Dot2D;
-import models.Line2D;
+import domain.models.Dot2D;
+import domain.models.Line2D;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;

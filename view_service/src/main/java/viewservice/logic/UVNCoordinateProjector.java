@@ -1,4 +1,4 @@
-package viewservice.projector;
+package viewservice.logic;
 
 import domain.models.Vertex3D;
 import domain.utils.CommonMath;

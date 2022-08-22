@@ -6,7 +6,9 @@ view service api - render() updateViewAngle  x
 rita godyckliga vertex3D och linjer i panel  x
 ladda in 3d data till viewer
 klass worldToCameraTransformer - transformera 3d data  x
-klass UVNCoordinateProjector - projicera 3d data
-Mediator klass i view_service
+klass UVNCoordinateProjector - projicera 3d data x
+ViewMediator  klass i view_service
+LineExtractor
+
 
 p.XIDX=1; p.YIDX=2; p.ZIDX=3

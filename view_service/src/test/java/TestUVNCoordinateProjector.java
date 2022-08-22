@@ -1,8 +1,7 @@
 import domain.models.Vertex3D;
 import org.junit.Assert;
 import org.junit.Test;
-import viewservice.projector.UVNCoordinateProjector;
-import viewservice.transformer.WorldToCameraTransformer;
+import viewservice.logic.UVNCoordinateProjector;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +42,6 @@ public class TestUVNCoordinateProjector {
         Assert.assertTrue(projectedVertices.get(0).equals(vDesired1));
         Assert.assertTrue(projectedVertices.get(1).equals(vDesired2));
     }
-
 
 
     private List<Vertex3D> getVertexThetaIsZero() {
