@@ -17,6 +17,23 @@ public class Vector3D {
         this.data=data;
     }
 
+    public Vector3D reverse() {  //todo clean up with INdatrray method
+        INDArray v=data.extractIndarray();
+        float v1 = v.getFloat(0);
+        float v2 = v.getFloat(1);
+        float v3 = v.getFloat(2);
+        return new Vector3D(-v1,-v2,-v3);
+    }
+
+    public Vector3D divfloat(float denom) {
+
+        assert Math.abs(denom) > Float.MIN_VALUE;
+
+        INDArray ia=data.extractIndarray();
+        INDArray ia2=ia.div(denom);
+        Data3D data3D=new Data3D(ia2);
+        return new Vector3D(data3D);
+    }
 
     public Vector3D cross(Vector3D vOther) {
         INDArray vRes=vectorCross(data.extractIndarray(), vOther.data.extractIndarray());
@@ -40,6 +57,16 @@ public class Vector3D {
 
         return M.mmul(b);
 
+    }
+
+    public float norm() {
+        return  data.norm();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Vector3D v=(Vector3D) obj;
+        return  data.equals(v.data);
     }
 
 

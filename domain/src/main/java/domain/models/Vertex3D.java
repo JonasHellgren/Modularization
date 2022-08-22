@@ -37,18 +37,22 @@ public class Vertex3D {
         return new Vertex3D(sumIndArr);
     }
 
+    //v=x*M=(M'*x')'
+    //https://math.stackexchange.com/questions/1615793/how-to-multiply-a-vector-from-the-left-side-with-matrix
+    public Vertex3D mult(Matrix M)  {
+        Matrix Mtranspose=M.transpose();
+        return Mtranspose.mult(this);
+    }
+
     public float norm() {
-        INDArray vIndArr=data.extractIndarray();
-        return  norm(vIndArr);
+        return  data.norm();
     }
 
-    private float norm(INDArray v) {
-        INDArray prod = v.mmul(v);
-        return (float) Math.sqrt(prod.getDouble(0));
+    @Override
+    public boolean equals(Object obj) {
+        Vertex3D v=(Vertex3D) obj;
+        return  data.equals(v.data);
     }
-
-    /*
-     */
 
 
 }

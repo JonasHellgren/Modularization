@@ -34,9 +34,9 @@ public class TestMatrix {
 
     @Test
     public void createFromVectors() {
-        Vector3D v1=new Vector3D(1,4,7);
-        Vector3D v2=new Vector3D(2,5,8);
-        Vector3D v3=new Vector3D(3,6,9);
+        Vector3D v1=new Vector3D(1,2,3);
+        Vector3D v2=new Vector3D(4,5,6);
+        Vector3D v3=new Vector3D(7,8,9);
 
         Matrix M=new Matrix(v1,v2,v3);
         System.out.println("M = " + M);

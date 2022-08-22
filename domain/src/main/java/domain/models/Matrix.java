@@ -14,10 +14,11 @@ public class Matrix {
     }
 
     public Matrix(Vector3D v1, Vector3D v2, Vector3D v3) {
+
         double[][] arr2Dim = {
-                {v1.data.x, v2.data.x, v3.data.x},
-                {v1.data.y, v2.data.y, v3.data.y},
-                {v1.data.z, v2.data.z, v3.data.z}};
+                {v1.data.x, v1.data.y, v1.data.z},
+                {v2.data.x, v2.data.y, v2.data.z},
+                {v3.data.x, v3.data.y, v3.data.z}};
 
         M = Nd4j.createFromArray(arr2Dim);
     }
