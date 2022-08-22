@@ -25,7 +25,7 @@ public class TestVector3D {
     @Test public void divfloat() {
 
         Vector3D v1= new Vector3D(10f, 0f, 0f);
-        Vector3D v2=v1.divfloat(10f);
+        Vector3D v2=v1.divWithScalar(10f);
         System.out.println("v2 = " + v2);
 
         Assert.assertEquals(1,v2.getData().getX(),0.1);

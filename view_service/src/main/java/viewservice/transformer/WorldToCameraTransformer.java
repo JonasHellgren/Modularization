@@ -29,12 +29,9 @@ public class WorldToCameraTransformer {
 
     private void creteM() {
         Vector3D V = new Vector3D(0, 1, 0);   //"up" vector
-        Vector3D Vnorm = V.divfloat(V.norm());
         Vector3D N = r.reverse();
-        Vector3D Nnorm = N.divfloat(N.norm());
         Vector3D U = V.cross(N);
-        Vector3D Unorm = U.divfloat(U.norm());
-        M = new Matrix(Unorm, Vnorm, Nnorm);
+        M = new Matrix(U.divWithScalar(U.norm()), V.divWithScalar(V.norm()), N.divWithScalar(N.norm()));
     }
 
     public void transform() {

@@ -15,7 +15,7 @@ import org.nd4j.linalg.factory.Nd4j;
 @NoArgsConstructor
 public class Data3D {
 
-    public static final double DELTA = 0.00001;
+    public static final double DELTA = 0.01;
     float x;
     float y;
     float z;

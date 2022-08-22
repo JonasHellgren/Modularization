@@ -1,5 +1,6 @@
 package domain.models;
 
+import domain.utils.CommonMath;
 import lombok.Data;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
@@ -25,9 +26,9 @@ public class Vector3D {
         return new Vector3D(-v1,-v2,-v3);
     }
 
-    public Vector3D divfloat(float denom) {
+    public Vector3D divWithScalar(float denom) {
 
-        assert Math.abs(denom) > Float.MIN_VALUE;
+        assert !CommonMath.isZero(denom);
 
         INDArray ia=data.extractIndarray();
         INDArray ia2=ia.div(denom);
