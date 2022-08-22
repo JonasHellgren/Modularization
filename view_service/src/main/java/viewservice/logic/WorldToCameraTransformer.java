@@ -4,12 +4,13 @@ import domain.models.Matrix;
 import domain.models.Vector3D;
 import domain.models.Vertex3D;
 import lombok.Getter;
+import viewservice.view_mediator.MediatorMemberAbstract;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class WorldToCameraTransformer {
+public class WorldToCameraTransformer extends MediatorMemberAbstract {
 
     List<Vertex3D> worldVertices;   //input vertices
     List<Vertex3D> UVNVertices;     //result vertices
