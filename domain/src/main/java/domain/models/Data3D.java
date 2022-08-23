@@ -4,7 +4,9 @@ package domain.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.math3.linear.*;
 
+import java.util.Arrays;
 
 
 @Data
@@ -18,21 +20,23 @@ public class Data3D {
     float z;
 
 
-    public Data3D(INDArray ia) {
-        x=ia.getFloat(0);
-        y=ia.getFloat(1);
-        z=ia.getFloat(2);
+    public Data3D(double[] arr) {
+        x=(float) arr[0];
+        y=(float) arr[1];
+        z=(float) arr[2];
     }
 
-    public INDArray extractIndarray() {
-        double[] arr1Dim = {x, y, z};
-        return Nd4j.createFromArray(arr1Dim);
+    public double[] getDoubleArray() {
+        return new double[]{(double) x, (double) y, (double) z};
+    }
+
+    public float[] getFloatArray() {
+        return new float[]{x, y, z};
     }
 
     public float norm() {
-        INDArray vIndArr=extractIndarray();
-        INDArray prod = vIndArr.mmul(vIndArr);
-        return (float) Math.sqrt(prod.getDouble(0));
+        RealVector v = new ArrayRealVector(getDoubleArray(), false);
+        return (float) v.getNorm();
     }
 
     public boolean equals(Data3D dataOther) {
@@ -43,7 +47,7 @@ public class Data3D {
         if (!(dataOther instanceof Data3D)) return false;
 
         //For each significant field in the class, check if that field matches the corresponding field of this object
-        if (this.extractIndarray().equalsWithEps(dataOther.extractIndarray(), DELTA)) {
+        if (Arrays.equals(this.getDoubleArray(), dataOther.getDoubleArray())) {
             return true;
         }
 

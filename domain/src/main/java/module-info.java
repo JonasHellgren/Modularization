@@ -6,7 +6,8 @@ open module domain
 
     requires static lombok;
     requires junit;
-  //  requires ejml.all;
+    requires commons.math3;
+    //  requires ejml.all;
     //requires ejml.core;
    // requires  nd4j-native-api;
   // requires nd4j.api;

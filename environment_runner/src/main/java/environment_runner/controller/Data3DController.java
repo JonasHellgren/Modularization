@@ -8,6 +8,7 @@ package environment_runner.controller;
 //import domain.models.Vertex3D;
 //import environment_service.api.EnvironmentService;
 
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
 
 
@@ -34,6 +35,15 @@ public class Data3DController {
         double[][] matrixData = { {1d,2d,3d}, {2d,5d,3d}};
         RealMatrix m = MatrixUtils.createRealMatrix(matrixData);
         System.out.println("m = " + m);
+        double[][] matrixData2 = { {1d,2d}, {2d,5d}, {1d, 7d}};
+        RealMatrix n = new Array2DRowRealMatrix(matrixData2);
+
+        RealMatrix p = m.multiply(n);
+        System.out.println(p.getRowDimension());    // 2
+        System.out.println(p.getColumnDimension()); // 2
+
+        System.out.println("p = " + p);
+
 
         return "test";
     }

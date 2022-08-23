@@ -2,8 +2,10 @@ package domain.models;
 
 import domain.utils.CommonMath;
 import lombok.Data;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
 
 @Data
 public class Vector3D {
@@ -18,45 +20,45 @@ public class Vector3D {
         this.data=data;
     }
 
+    public Vector3D(double[] arr1d) {
+        new Vector3D(new Data3D(arr1d));
+    }
+
+
     public Vector3D reverse() {  //todo clean up with INdatrray method
-        INDArray v=data.extractIndarray();
-        float v1 = v.getFloat(0);
-        float v2 = v.getFloat(1);
-        float v3 = v.getFloat(2);
-        return new Vector3D(-v1,-v2,-v3);
+        float[] v=data.getFloatArray();
+        return new Vector3D(-v[0],-v[1],-v[2]);
     }
 
     public Vector3D divWithScalar(float denom) {
-
         assert !CommonMath.isZero(denom);
-
-        INDArray ia=data.extractIndarray();
-        INDArray ia2=ia.div(denom);
-        Data3D data3D=new Data3D(ia2);
-        return new Vector3D(data3D);
+        RealVector rv = new ArrayRealVector(data.getDoubleArray(), false);
+        rv.mapDivide(denom);
+        return new Vector3D(rv.toArray());
     }
 
     public Vector3D cross(Vector3D vOther) {
-        INDArray vRes=vectorCross(data.extractIndarray(), vOther.data.extractIndarray());
+        double[] vRes=vectorCross(data.getDoubleArray(), vOther.data.getDoubleArray());
         Data3D data=new Data3D(vRes);
         return new Vector3D(data);
     }
 
 
     //https://en.wikipedia.org/wiki/Cross_product
-    private INDArray vectorCross(INDArray a, INDArray b) {
-        double a1 = a.getDouble(0);
-        double a2 = a.getDouble(1);
-        double a3 = a.getDouble(2);
+    private double[] vectorCross(double[] a, double[] b) {
+        double a1= a[0];
+        double a2= a[1];
+        double a3= a[2];
 
         double[][] arr2Dim = {
                 {0.0, -a3, a2},
                 {a3, 0.0, -a1},
                 {-a2, a1, 0.0}};
 
-        INDArray M = Nd4j.createFromArray(arr2Dim);
-
-        return M.mmul(b);
+        RealMatrix M = MatrixUtils.createRealMatrix(arr2Dim);
+        RealVector v = new ArrayRealVector(b, false);
+        RealVector vRes = M.operate(v);
+        return vRes.toArray();
 
     }
 

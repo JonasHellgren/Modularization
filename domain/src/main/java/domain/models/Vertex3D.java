@@ -3,8 +3,8 @@ package domain.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.nd4j.linalg.api.ndarray.INDArray;
-//import org.nd4j.linalg.api.ndarray.INDArray;
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.RealVector;
 
 @Data
 @AllArgsConstructor
@@ -17,24 +17,27 @@ public class Vertex3D {
     }
 
 
-    public Vertex3D(INDArray ia) {
-        assert ia.length()==3;
-        this.data=new Data3D(ia.getFloat(0),ia.getFloat(1),ia.getFloat(2));
+    public Vertex3D(double[] arr1d) {
+        assert arr1d.length==3;
+        this.data=new Data3D(arr1d);
     }
 
 
-    public Vertex3D plus(Vector3D vector3D) {
-        INDArray v1=this.data.extractIndarray();
-        INDArray v2= vector3D.data.extractIndarray();
-        INDArray sumIndArr = v1.add(v2);
-        return new Vertex3D(sumIndArr);
+    public Vertex3D plus(Vector3D otherV) {
+        RealVector rv1 = new ArrayRealVector(data.getDoubleArray(), false);
+        RealVector rv2 = new ArrayRealVector(otherV.data.getDoubleArray(), false);
+        rv1.add(rv2);
+        return new Vertex3D(rv1.toArray());
     }
 
-    public Vertex3D minus(Vector3D vector3D) {
-        INDArray v1=this.data.extractIndarray();
-        INDArray v2= vector3D.data.extractIndarray();
-        INDArray sumIndArr = v1.sub(v2);
-        return new Vertex3D(sumIndArr);
+    public Vertex3D minus(Vector3D otherV) {
+
+        RealVector rv1 = new ArrayRealVector(data.getDoubleArray(), false);
+        RealVector rv2 = new ArrayRealVector(otherV.data.getDoubleArray(), false);
+        rv1.subtract(rv2);
+        return new Vertex3D(rv1.toArray());
+
+
     }
 
     //v=x*M=(M'*x')'

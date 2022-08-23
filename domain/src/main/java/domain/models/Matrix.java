@@ -1,49 +1,62 @@
 package domain.models;
 
 import lombok.Getter;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
+
+import java.util.Arrays;
 
 @Getter
 public class Matrix {
 
-    INDArray M;
+    double[][] Marray;
+    RealMatrix M;
 
     public Matrix(double[][] arr2Dim) {
-        M = Nd4j.createFromArray(arr2Dim);
+        setFields(arr2Dim);
+    }
+
+    private void setFields(double[][] arr2Dim) {
+        Marray = arr2Dim;
+        M = MatrixUtils.createRealMatrix(arr2Dim);
     }
 
     public Matrix(Vector3D v1, Vector3D v2, Vector3D v3) {
-
         double[][] arr2Dim = {
-                {v1.data.x, v1.data.y, v1.data.z},
-                {v2.data.x, v2.data.y, v2.data.z},
-                {v3.data.x, v3.data.y, v3.data.z}};
+                {(double) v1.data.x, (double) v1.data.y, (double) v1.data.z},
+                {(double) v2.data.x, (double) v2.data.y, (double) v2.data.z},
+                {(double) v3.data.x, (double) v3.data.y, (double) v3.data.z}};
 
-        M = Nd4j.createFromArray(arr2Dim);
+        setFields(arr2Dim);
     }
 
+
     public Vertex3D mult(Vertex3D vertex3D) {
-        INDArray resultV = M.mmul(vertex3D.data.extractIndarray());
-        return new Vertex3D(resultV);
+        RealVector rv = new ArrayRealVector(vertex3D.data.getDoubleArray(), false);
+        RealMatrix Mcopy = M.copy();
+        RealVector vRes = Mcopy.operate(rv);
+        return new Vertex3D(vRes.toArray());
     }
 
     public long[] size() {
-        return M.shape();
+
+        return new long[]{(long) M.getRowDimension(), (long) M.getColumnDimension()};
     }
 
-    public float getFloat(long row, long col) {
-        return M.getFloat(row,col);
+    public float getElementAsFloat(long row, long col) {
+        return (float) M.getEntry((int) row,(int) col);
     }
 
     public Matrix transpose() {
-        INDArray mTranspose = M.transpose();
-        double[][] arr2Dim=mTranspose.toDoubleMatrix();
-        return new Matrix(arr2Dim);
+        RealMatrix Mold = MatrixUtils.createRealMatrix(Marray);
+        return new Matrix(Mold.transpose().getData());
     }
 
     @Override
     public String toString() {
-        return M.toString();
+        System.out.println("toString Marray = " + Arrays.deepToString(Marray));
+        return Arrays.deepToString(Marray);
     }
 }

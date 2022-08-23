@@ -5,7 +5,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 
+
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,7 +31,7 @@ public class TestMatrix {
         System.out.println("M = " + M);
         Assert.assertEquals(3, M.size()[0] , DELTA);
         Assert.assertEquals(3, M.size()[1] , DELTA);
-        Assert.assertEquals(1, M.getFloat(0,0) , DELTA);
+        Assert.assertEquals(1, M.getElementAsFloat(0,0) , DELTA);
 
     }
 
@@ -38,11 +41,17 @@ public class TestMatrix {
         Vector3D v2=new Vector3D(4,5,6);
         Vector3D v3=new Vector3D(7,8,9);
 
-        Matrix M=new Matrix(v1,v2,v3);
-        System.out.println("M = " + M);
-        Assert.assertEquals(3, M.size()[0] , DELTA);
-        Assert.assertEquals(3, M.size()[1] , DELTA);
-        Assert.assertEquals(1, M.getFloat(0,0) , DELTA);
+        System.out.println("v1 = " + v1);
+
+        Matrix Mat=new Matrix(v1,v2,v3);
+        System.out.println(Arrays.deepToString(Mat.getMarray()));
+     //   System.out.println("Mat = " + Mat);
+     //   System.out.println("Mat = " + Mat);
+     //   System.out.println("\"balle\" = " + "balle");
+
+        Assert.assertEquals(3, Mat.size()[0] , DELTA);
+        Assert.assertEquals(3, Mat.size()[1] , DELTA);
+        Assert.assertEquals(1, Mat.getElementAsFloat(0,0) , DELTA);
 
     }
 
@@ -62,9 +71,9 @@ public class TestMatrix {
         System.out.println("mTransp = " + mTransp);
 
        Assertions.assertAll(
-                () -> assertEquals(4, mTransp.getM().getDouble(0, 1), DELTA),
-                () -> assertEquals(5, mTransp.getM().getDouble(1, 1), DELTA),
-                () -> assertEquals(6, mTransp.getM().getDouble(2, 1), DELTA)
+                () -> assertEquals(4, mTransp.getElementAsFloat(0, 1), DELTA),
+                () -> assertEquals(5, mTransp.getElementAsFloat(1, 1), DELTA),
+                () -> assertEquals(6, mTransp.getElementAsFloat(2, 1), DELTA)
 
         );
 
