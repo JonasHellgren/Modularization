@@ -11,33 +11,31 @@ import org.apache.commons.math3.linear.RealVector;
 @NoArgsConstructor
 public class Vertex3D {
     Data3D data;
+    RealVector realVector;
 
     public Vertex3D(float x, float y, float z) {
     this.data=new Data3D(x,y,z);
+    realVector = getVector(data);
     }
 
 
     public Vertex3D(double[] arr1d) {
         assert arr1d.length==3;
         this.data=new Data3D(arr1d);
+        realVector = getVector(data);
     }
 
 
     public Vertex3D plus(Vector3D otherV) {
-        RealVector rv1 = new ArrayRealVector(data.getDoubleArray(), false);
-        RealVector rv2 = new ArrayRealVector(otherV.data.getDoubleArray(), false);
-        rv1.add(rv2);
-        return new Vertex3D(rv1.toArray());
+        RealVector rv2 = getVector(otherV.data);
+        RealVector res= realVector.add(rv2);
+        return new Vertex3D(res.toArray());
     }
 
     public Vertex3D minus(Vector3D otherV) {
-
-        RealVector rv1 = new ArrayRealVector(data.getDoubleArray(), false);
-        RealVector rv2 = new ArrayRealVector(otherV.data.getDoubleArray(), false);
-        rv1.subtract(rv2);
-        return new Vertex3D(rv1.toArray());
-
-
+        RealVector rv2 = getVector(otherV.data);
+        RealVector res= realVector.subtract(rv2);
+        return new Vertex3D(res.toArray());
     }
 
     //v=x*M=(M'*x')'
@@ -50,6 +48,11 @@ public class Vertex3D {
     public float norm() {
         return  data.norm();
     }
+
+    private ArrayRealVector getVector(Data3D data) {
+        return new ArrayRealVector(data.getDoubleArray());
+    }
+
 
     @Override
     public boolean equals(Object obj) {

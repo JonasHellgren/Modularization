@@ -21,7 +21,7 @@ public class Vector3D {
     }
 
     public Vector3D(double[] arr1d) {
-        new Vector3D(new Data3D(arr1d));
+        this(new Data3D(arr1d));
     }
 
 
@@ -32,8 +32,8 @@ public class Vector3D {
 
     public Vector3D divWithScalar(float denom) {
         assert !CommonMath.isZero(denom);
-        RealVector rv = new ArrayRealVector(data.getDoubleArray(), false);
-        rv.mapDivide(denom);
+        RealVector rv = new ArrayRealVector(data.getDoubleArray());
+        rv.mapDivideToSelf(denom);
         return new Vector3D(rv.toArray());
     }
 

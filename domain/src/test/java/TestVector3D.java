@@ -28,6 +28,9 @@ public class TestVector3D {
         Vector3D v2=v1.divWithScalar(10f);
         System.out.println("v2 = " + v2);
 
+        System.out.println("v1 = " + v1);
+        System.out.println("v2 = " + v2);
+
         Assert.assertEquals(1,v2.getData().getX(),0.1);
 
 

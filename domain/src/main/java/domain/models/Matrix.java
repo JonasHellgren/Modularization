@@ -34,7 +34,7 @@ public class Matrix {
 
 
     public Vertex3D mult(Vertex3D vertex3D) {
-        RealVector rv = new ArrayRealVector(vertex3D.data.getDoubleArray(), false);
+        RealVector rv = new ArrayRealVector(vertex3D.data.getDoubleArray());
         RealMatrix Mcopy = M.copy();
         RealVector vRes = Mcopy.operate(rv);
         return new Vertex3D(vRes.toArray());
