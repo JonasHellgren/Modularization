@@ -19,3 +19,8 @@ Tog bort all nd4j dep förutom behåller nd4j:protobuf  nd4j:nd4j-api    nd4j:ja
                 </exclusion>
                 
             </exclusions>
+
+
+Ovan funkar dock ej. Runtime error när skall använda ND4J.
+
+https://github.com/eclipse/deeplearning4j/issues/7377

@@ -1,15 +1,16 @@
 package environment_runner.controller;
 
-import domain.models.Parameter;
-import environment_service.api.ParameterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Parameter;
+
 @RestController
 public class ParameterController {
 
+    /*
     @Autowired
     ParameterService parameterService;
 
@@ -20,4 +21,6 @@ public class ParameterController {
         return parameterService.getParameter(name);
     }
 
+
+     */
 }

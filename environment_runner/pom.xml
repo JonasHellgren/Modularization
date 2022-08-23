@@ -43,6 +43,7 @@
             <scope>compile</scope>
 
             <exclusions>
+
                 <exclusion>
                     <groupId>org.nd4j</groupId>
                     <artifactId>nd4j-native</artifactId>
@@ -53,14 +54,20 @@
                     <artifactId>nd4j-common</artifactId>
                 </exclusion>
 
-                <exclusion>
-                    <groupId>org.nd4j</groupId>
-                    <artifactId>nd4j-guava</artifactId>
-                </exclusion>
 
             </exclusions>
 
+
+
         </dependency>
+
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>ejml-simple</artifactId>
+            <version>0.41</version>
+        </dependency>
+
+
 
     </dependencies>
 

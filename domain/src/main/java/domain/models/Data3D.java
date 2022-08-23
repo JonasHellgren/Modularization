@@ -4,10 +4,7 @@ package domain.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
-//import org.nd4j.linalg.api.ndarray.INDArray;
-//import org.nd4j.linalg.factory.Nd4j;
+
 
 
 @Data

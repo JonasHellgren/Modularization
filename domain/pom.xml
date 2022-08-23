@@ -31,29 +31,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-        <groupId>org.nd4j</groupId>
-        <artifactId>nd4j-api</artifactId>
-        <version>1.0.0-M1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-native</artifactId>
-            <version>1.0.0-M1.1</version>
-            <exclusions>
-            </exclusions>
-        </dependency>
-
-
-
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-native</artifactId>
-            <version>1.0.0-M1.1</version>
-            <classifier>windows-x86_64-avx2</classifier>
-        </dependency>
-
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -62,7 +39,11 @@
             <scope>test</scope>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>ejml-all</artifactId>
+            <version>0.41</version>
+        </dependency>
 
     </dependencies>
 
