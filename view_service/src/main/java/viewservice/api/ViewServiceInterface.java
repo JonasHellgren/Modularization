@@ -8,8 +8,15 @@ import domain.models.Vertex3D;
 import java.util.List;
 
 public interface ViewServiceInterface {
-    void transformAndProject(List<Vertex3D> vertices);
+
+    void insertVertices(List<Vertex3D> vertices);
+    void insertEdges(List<Edge3D> edge3DS);
+    void transformAndProject();
     List<Dot2D> getDots();
-    List<Line2D> getLines(List<Edge3D> edges);
-    void updateViewAngle(float newTheta);
+    List<Line2D> getLines();
+    void setR(float newR);
+    void setTheta(float newTheta);
+    void setAlpha(float newAlpha);
+
+
 }

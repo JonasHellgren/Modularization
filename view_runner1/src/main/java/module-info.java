@@ -1,6 +1,7 @@
-open module swing.viewer
+open module view_runner
 {
-    requires  domain;
+    requires view_service;
+  //  requires environment_service;
 
     requires static lombok;
     requires spring.context;

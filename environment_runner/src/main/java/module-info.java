@@ -13,5 +13,6 @@ open module environment_runner
     requires org.apache.tomcat.embed.core;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
+    requires nd4j.api;
 
 }

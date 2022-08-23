@@ -1,4 +1,4 @@
-package environment_runner.controller;
+package controller;
 
 //import domain.models.Edge3D;
 //import domain.models.Vertex3D;
@@ -8,14 +8,12 @@ package environment_runner.controller;
 //import domain.models.Vertex3D;
 //import environment_service.api.EnvironmentService;
 import domain.models.Edge3D;
-import domain.models.Vector3D;
 import domain.models.Vertex3D;
 import environment_service.api.Data3DService;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import viewservice.api.ViewService;
 
 import java.util.List;
 
@@ -27,7 +25,10 @@ import java.util.List;
 public class Data3DController {
 
     @Autowired
-    Data3DService data3DService;
+    ViewService viewService;
+
+  //  @Autowired
+  //  Data3DService data3DService;
 
     @GetMapping(value = "/test")
     public String test() {
@@ -36,26 +37,22 @@ public class Data3DController {
 
 
     @GetMapping(value = "/vertices")
-    public List<Vertex3D> getVertices() {
+    public void getVertices() {
 
         System.out.println("environmentService.getVertices() = " + data3DService.getVertices());
 
-        double[] arr1Dim = {1, 1, 1};
-        INDArray ia=Nd4j.createFromArray(arr1Dim);
-        System.out.println("ia = " + ia);
-
-
-        return data3DService.getVertices();
+        viewService.insertVertices(data3DService.getVertices());
     }
 
 
 
+    /*
     @GetMapping(value = "/edges")
     public List<Edge3D> getEdges() {
         System.out.println("environmentService.getEdges() = " + data3DService.getEdges());
         return data3DService.getEdges();
     }
 
-
+*/
 
 }

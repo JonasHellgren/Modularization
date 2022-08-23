@@ -15,7 +15,7 @@ import java.awt.*;
 
 @SpringBootApplication
 @EnableScheduling
-@ComponentScan(basePackages = {"viewer"})
+@ComponentScan(basePackages = {"viewer","viewservice/api","viewservice/logic"})
 public class ViewApplication {
 
     public static void main(String[] args) {

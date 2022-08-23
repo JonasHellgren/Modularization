@@ -37,8 +37,18 @@
             </exclusions>
 
         </dependency>
-
-
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>view_service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>environment_service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>

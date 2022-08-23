@@ -1,7 +1,7 @@
-open module swing.viewer
+open module view_service
 {
-    requires  domain;
-
+    exports viewservice.api;
+    requires transitive domain;
 
     requires nd4j.api;
     requires static lombok;

@@ -28,6 +28,15 @@ public class WorldToCameraTransformer extends MediatorMemberAbstract {
         Mtransp = M.transpose();
     }
 
+    public WorldToCameraTransformer(float R, float theta) {
+        worldVertices = new ArrayList<>();
+        UVNVertices = new ArrayList<>();
+        r = new Vector3D(R * (float) Math.sin(theta), 0, R * (float) Math.cos(theta));
+        creteM();
+        Mtransp = M.transpose();
+    }
+
+
     private void creteM() {
         Vector3D V = new Vector3D(0, 1, 0);   //"up" vector
         Vector3D N = r.reverse();

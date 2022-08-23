@@ -6,6 +6,7 @@ import domain.models.Line2D;
 import domain.models.Vertex3D;
 import domain.settings.Constants;
 import lombok.NonNull;
+import lombok.Setter;
 import viewservice.logic.UVNCoordinateProjector;
 import viewservice.logic.WorldToCameraTransformer;
 
@@ -22,11 +23,19 @@ import java.util.List;
  * receiver in the chain.
  */
 
+@Setter
 public class ViewMediator implements ViewMediatorInterface {
+
+    static final float R_DEFAULT=10;
+    static final float THETA_DEFAULT=10;
+    static final float ALPHA_DEFAULT=(float) Math.PI/4;  //zoom factor
+
 
     List<Vertex3D> vertices;
     List<Edge3D> edges;
-    float R, theta, alpha;
+    float R;      //distance to camera origo
+    float theta;  //view angle
+    float alpha;   //zoom factor
 
     WorldToCameraTransformer transformer;
     UVNCoordinateProjector projector;
@@ -49,6 +58,16 @@ public class ViewMediator implements ViewMediatorInterface {
 
         this.projector=new UVNCoordinateProjector(alpha);  //todo alpha - later via mediator
         projector.setMediator(this);
+
+    }
+
+    public ViewMediator() {
+        List<Vertex3D> vertices=new ArrayList<>();
+        List<Edge3D> edges=new ArrayList<>();
+        this.R = R_DEFAULT;
+        this.theta = THETA_DEFAULT;
+        this.alpha = ALPHA_DEFAULT;
+        new ViewMediator(vertices,edges,R,theta,alpha);
 
     }
 
@@ -80,7 +99,7 @@ public class ViewMediator implements ViewMediatorInterface {
 
         List<Dot2D> dots=new ArrayList<>();
         for (Vertex3D vertex3D:projectedVertices) {
-            Dot2D dot=new Dot2D((int) vertex3D.getData().getX()* Constants.W,(int) vertex3D.getData().getY()*Constants.H);
+            Dot2D dot=new Dot2D((int) (vertex3D.getData().getX()* Constants.W),(int) (vertex3D.getData().getY()*Constants.H));
             dots.add(dot);
         }
 

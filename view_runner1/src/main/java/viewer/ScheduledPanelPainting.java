@@ -11,6 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import viewservice.api.ViewService;
+import viewservice.api.ViewServiceDummy;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -29,6 +31,10 @@ public class ScheduledPanelPainting {
     @Autowired
     View3DPanel panel;
 
+   // @Autowired
+    //ViewService viewService;
+   // ViewServiceDummy viewServiceDummy;
+
     private RestTemplate restTemplate;
 
     @PostConstruct
@@ -45,10 +51,6 @@ public class ScheduledPanelPainting {
     }
 
     private void setPanelFromRestEndPointData() {
-        //   Ball ballFromUrl = restTemplate.getForObject(Settings.BALL_POS_URL, Ball.class);
-
-        //   Vertex3DList response=  restTemplate.getForObject(VERTEX_URL, Vertex3DList.class);
-        // assert ballFromUrl != null;
 
         try {
             ResponseEntity<Vertex3D[]> response =
@@ -60,6 +62,7 @@ public class ScheduledPanelPainting {
             assert vertices != null;
             System.out.println("vertex3DList = " + Arrays.asList(vertices));
 
+         //   viewService.insertVertices(Arrays.asList(vertices));
 
 
         } catch (RestClientException e) {
