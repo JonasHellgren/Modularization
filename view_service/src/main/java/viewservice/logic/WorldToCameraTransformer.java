@@ -20,6 +20,10 @@ public class WorldToCameraTransformer extends MediatorMemberAbstract {
     Matrix Mtransp;
 
 
+    public void setWorldVertices(List<Vertex3D> worldVertices) {
+        this.worldVertices = worldVertices;
+    }
+
     public WorldToCameraTransformer(List<Vertex3D> worldVertices, float R, float theta) {
         this.worldVertices = worldVertices;
         UVNVertices = new ArrayList<>();

@@ -1,6 +1,6 @@
 open module domain
 {
-    //exports domain.models;
+    exports domain.models;
     exports domain.settings;
     exports domain.utils;
 

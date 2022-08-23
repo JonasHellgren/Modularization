@@ -23,7 +23,7 @@ public class TestWorldToCameraTransformer {
         System.out.println("wtct.getM() = " + wtct.getM());
         Vector3D rDesired=new Vector3D(0,0,10);
         Assert.assertTrue(wtct.getR().equals(rDesired));
-        Assert.assertEquals(-1,wtct.getM().getFloat(0,0), DELTA);
+        Assert.assertEquals(-1,wtct.getM().getElementAsFloat(0,0), DELTA);
     }
 
 
@@ -38,7 +38,7 @@ public class TestWorldToCameraTransformer {
         System.out.println("wtct.getM() = " + wtct.getM());
         Vector3D rDesired=new Vector3D(7.0711f, 0, 7.0711f);
         Assert.assertTrue(wtct.getR().equals(rDesired));
-        Assert.assertEquals(-0.7071,wtct.getM().getFloat(0,0), DELTA);
+        Assert.assertEquals(-0.7071,wtct.getM().getElementAsFloat(0,0), DELTA);
     }
 
     @Test

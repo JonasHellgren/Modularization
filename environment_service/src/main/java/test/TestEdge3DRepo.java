@@ -14,7 +14,7 @@ public class TestEdge3DRepo {
     public void createRepoWithThreeItems() {
         EdgeRepo repo= InMemRepoInterface.newEdgeRepoBarnExample();
         System.out.println("repo = " + repo);
-        Assert.assertEquals(3, repo.nofItems());
+        Assert.assertEquals(15, repo.nofItems());
 
 
     }

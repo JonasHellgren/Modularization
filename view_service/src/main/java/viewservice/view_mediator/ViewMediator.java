@@ -53,13 +53,10 @@ public class ViewMediator implements ViewMediatorInterface {
         this.theta = theta;
         this.alpha = alpha;
 
-        this.transformer=new WorldToCameraTransformer(vertices,R,theta);  //todo exklude vertices, R, theta - later via mediator
-        transformer.setMediator(this);
-
-        this.projector=new UVNCoordinateProjector(alpha);  //todo alpha - later via mediator
-        projector.setMediator(this);
-
+        newTransformer(vertices, R, theta);
+        newProjector(alpha);
     }
+
 
     public ViewMediator() {
         List<Vertex3D> vertices=new ArrayList<>();
@@ -67,8 +64,8 @@ public class ViewMediator implements ViewMediatorInterface {
         this.R = R_DEFAULT;
         this.theta = THETA_DEFAULT;
         this.alpha = ALPHA_DEFAULT;
-        new ViewMediator(vertices,edges,R,theta,alpha);
-
+        newTransformer(vertices, R, theta);
+        newProjector(alpha);
     }
 
     public List<Vertex3D> getProjectedVertices() {
@@ -79,10 +76,14 @@ public class ViewMediator implements ViewMediatorInterface {
     public void transformAndProject() {
         transform();
         project();
+
+        System.out.println("ViewMediator transformAndProject UVNVertices.size() = " + UVNVertices.size());
+        System.out.println("ViewMediator transformAndProject projectedVertices.size() = " + projectedVertices.size());
     }
 
     @Override
     public void transform() {
+        transformer.setWorldVertices(vertices);
         transformer.transform();
         UVNVertices=transformer.getUVNVertices();
     }
@@ -103,6 +104,12 @@ public class ViewMediator implements ViewMediatorInterface {
             dots.add(dot);
         }
 
+
+        System.out.println("ViewMediator vertices.size() = " + vertices.size());
+        System.out.println("ViewMediator UVNVertices.size() = " + UVNVertices.size());
+        System.out.println("ViewMediator projectedVertices.size() = " + projectedVertices.size());
+        System.out.println("ViewMediator dots = " + dots);
+
         return dots;
     }
 
@@ -114,6 +121,17 @@ public class ViewMediator implements ViewMediatorInterface {
     @Override
     public void updateViewAngle(float newTheta) {
         this.theta=newTheta;
-
     }
+
+    private void newProjector(float alpha) {
+        this.projector = new UVNCoordinateProjector(alpha);  //todo alpha - later via mediator
+        projector.setMediator(this);
+    }
+
+    private void newTransformer(@NonNull List<Vertex3D> vertices, float R, float theta) {
+        this.transformer = new WorldToCameraTransformer(vertices, R, theta);  //todo exklude vertices, R, theta - later via mediator
+        transformer.setMediator(this);
+    }
+
+
 }

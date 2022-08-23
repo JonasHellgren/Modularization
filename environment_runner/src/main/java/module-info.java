@@ -1,10 +1,7 @@
 open module environment_runner
 {
 
-
-  //  requires environment_service;
-
-
+    requires environment_service;
 
     requires spring.context;
     requires spring.boot.autoconfigure;

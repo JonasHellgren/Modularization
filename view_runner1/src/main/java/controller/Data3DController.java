@@ -1,15 +1,6 @@
 package controller;
 
-//import domain.models.Edge3D;
-//import domain.models.Vertex3D;
-//import environment_service.api.EnvironmentService;
-//import domain.models.Vertex3D;
-//import domain.models.Vertex3D;
-//import domain.models.Vertex3D;
-//import environment_service.api.EnvironmentService;
-import domain.models.Edge3D;
-import domain.models.Vertex3D;
-import environment_service.api.Data3DService;
+;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +18,7 @@ public class Data3DController {
     @Autowired
     ViewService viewService;
 
-  //  @Autowired
+    @Autowired
   //  Data3DService data3DService;
 
     @GetMapping(value = "/test")

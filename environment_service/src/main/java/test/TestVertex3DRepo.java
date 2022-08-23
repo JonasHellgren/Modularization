@@ -14,7 +14,7 @@ public class TestVertex3DRepo {
     public void createRepoWithThreeItems() {
         VertexRepo repo= InMemRepoInterface.newVertexRepoBarnExample();
         System.out.println("repo = " + repo);
-        Assert.assertEquals(3, repo.nofItems());
+        Assert.assertEquals(10, repo.nofItems());
 
 
     }

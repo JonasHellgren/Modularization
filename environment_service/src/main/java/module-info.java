@@ -1,7 +1,8 @@
 module environment_service
 {
   // exports environment_service.api;
-  // exports test to junit;
+   exports test to junit;
+   exports environment_service.api;
 
    requires transitive  domain;
 

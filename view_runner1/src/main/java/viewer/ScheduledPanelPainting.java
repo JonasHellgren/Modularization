@@ -31,8 +31,8 @@ public class ScheduledPanelPainting {
     @Autowired
     View3DPanel panel;
 
-   // @Autowired
-    //ViewService viewService;
+    @Autowired
+    ViewService viewService;
    // ViewServiceDummy viewServiceDummy;
 
     private RestTemplate restTemplate;
@@ -45,7 +45,6 @@ public class ScheduledPanelPainting {
     @Scheduled(initialDelay = INIT_DELAY, fixedRate = CALLING_TIME)
     public void calculate() throws InterruptedException {
         setPanelFromRestEndPointData();
-
 
         panel.repaint();
     }
@@ -62,7 +61,7 @@ public class ScheduledPanelPainting {
             assert vertices != null;
             System.out.println("vertex3DList = " + Arrays.asList(vertices));
 
-         //   viewService.insertVertices(Arrays.asList(vertices));
+           viewService.insertVertices(Arrays.asList(vertices));
 
 
         } catch (RestClientException e) {
@@ -71,6 +70,13 @@ public class ScheduledPanelPainting {
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
         }
+
+        viewService.transformAndProject();
+        panel.setVertices(viewService.getDots());
+
+        System.out.println("viewService.getDots() = " + viewService.getDots());
+
+        //setDummyPanelData();
 
         // panel.setBallPos(ballFromUrl.x,ballFromUrl.y);
     }
