@@ -5,8 +5,6 @@ open module environment_runner
   //  requires environment_service;
 
 
-   // requires ejml.core;
-   // requires ejml.ddense;
 
     requires spring.context;
     requires spring.boot.autoconfigure;
@@ -16,6 +14,8 @@ open module environment_runner
     requires org.apache.tomcat.embed.core;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
-    requires ejml.simple;
+    requires org.apache.commons.lang3;
+    requires commons.math3;
+
 
 }

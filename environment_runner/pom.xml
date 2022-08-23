@@ -62,9 +62,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.ejml</groupId>
-            <artifactId>ejml-simple</artifactId>
-            <version>0.41</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
         </dependency>
 
 

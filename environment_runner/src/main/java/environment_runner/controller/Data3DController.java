@@ -8,8 +8,10 @@ package environment_runner.controller;
 //import domain.models.Vertex3D;
 //import environment_service.api.EnvironmentService;
 
-import org.ejml.simple.*;
+import org.apache.commons.math3.linear.MatrixUtils;
 
+
+import org.apache.commons.math3.linear.RealMatrix;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,24 +31,9 @@ public class Data3DController {
     @GetMapping(value = "/test")
     public String test() {
 
-        SimpleMatrix firstMatrix = new SimpleMatrix(
-                new double[][] {
-                        new double[] {1d, 5d},
-                        new double[] {2d, 3d},
-                        new double[] {1d ,7d}
-                }
-        );
-
-        SimpleMatrix secondMatrix = new SimpleMatrix(
-                new double[][] {
-                        new double[] {1d, 2d, 3d, 7d},
-                        new double[] {5d, 2d, 8d, 1d}
-                }
-        );
-
-        SimpleMatrix actual = firstMatrix.mult(secondMatrix);
-        System.out.println("actual = " + actual);
-
+        double[][] matrixData = { {1d,2d,3d}, {2d,5d,3d}};
+        RealMatrix m = MatrixUtils.createRealMatrix(matrixData);
+        System.out.println("m = " + m);
 
         return "test";
     }
