@@ -9,20 +9,16 @@ import java.util.List;
 
 public class UVNCoordinateProjector extends MediatorMemberAbstract {
 
-    List<Vertex3D> UVNVertices;             //input vertices
+    //List<Vertex3D> UVNVertices;             //input vertices
     List<Vertex3D> projectedVertices;       //result vertices
 
     public UVNCoordinateProjector() {
-        this.UVNVertices = new ArrayList<>();
+       // this.UVNVertices = new ArrayList<>();
         this.projectedVertices = new ArrayList<>();
     }
 
     public List<Vertex3D> getProjectedVertices() {
         return projectedVertices;
-    }
-
-    public void setUVNVertices(List<Vertex3D> UVNVertices) {
-        this.UVNVertices = UVNVertices;
     }
 
     public void project() {
@@ -33,6 +29,7 @@ public class UVNCoordinateProjector extends MediatorMemberAbstract {
         assert !CommonMath.isZero(tanHalfAlpha);
         float d=CommonMath.safeDiv(1,tanHalfAlpha);
 
+        List<Vertex3D> UVNVertices=mediator.getUVNVertices();
         for (Vertex3D UVNVertex:UVNVertices)  {
             float u=UVNVertex.getData().getX();
             float v=UVNVertex.getData().getY();
@@ -45,8 +42,6 @@ public class UVNCoordinateProjector extends MediatorMemberAbstract {
 
             projectedVertices.add(vertex3DProj);
         }
-
-
     }
 
 }

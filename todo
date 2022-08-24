@@ -14,8 +14,11 @@ alpha via mediator  x
 TestWorldToCameraTransformer x
 TestUVNCoordinateProjector x
 TestViewMediator x
-repo för params i mediator
 skalning skärm projectedVertices
 LineExtractor
+
+ev clean up:
+repo för params i mediator
+builder param
 
 p.XIDX=1; p.YIDX=2; p.ZIDX=3

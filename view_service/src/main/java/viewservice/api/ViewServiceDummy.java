@@ -19,7 +19,7 @@ public class ViewServiceDummy {
        // this.viewMediator = new ViewMediator();
 
         List<Vertex3D> vertices=new ArrayList<>();
-        this.transformer=new WorldToCameraTransformer(vertices);  //todo exklude vertices, R, theta - later via mediator
+        this.transformer=new WorldToCameraTransformer();  //todo exklude vertices, R, theta - later via mediator
        // transformer.setMediator(this);
 
     }

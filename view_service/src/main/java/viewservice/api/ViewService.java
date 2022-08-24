@@ -21,7 +21,7 @@ public class ViewService implements ViewServiceInterface {
 
     @Override
     public void insertVertices(List<Vertex3D> vertices) {
-        viewMediator.setVertices(vertices);
+        viewMediator.setWorldVertices(vertices);
     }
 
     @Override

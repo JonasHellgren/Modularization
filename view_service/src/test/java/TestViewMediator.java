@@ -2,7 +2,6 @@ import domain.models.Dot2D;
 import domain.models.Edge3D;
 import domain.models.Vertex3D;
 import domain.utils.CommonMath;
-import lombok.NonNull;
 import org.junit.Assert;
 import org.junit.Test;
 import viewservice.view_mediator.ViewMediator;
@@ -67,7 +66,13 @@ public class TestViewMediator {
         List<Vertex3D> vertices = getVertex3DS();
         List<Edge3D> edges = new ArrayList<>();
 
-        vm = new ViewMediator(vertices, edges,R, theta,alpha);
+        vm = new ViewMediator();
+        vm.setWorldVertices(vertices);
+        vm.setEdges(edges);
+        vm.setR(R);
+        vm.setTheta(theta);
+        vm.setAlpha(alpha);
+
         vm.transformAndProject();
         return vm.getProjectedVertices();
     }
@@ -78,7 +83,7 @@ public class TestViewMediator {
         List<Vertex3D> vertices = getVertex3DS();
 
         vm = new ViewMediator();
-        vm.setVertices(vertices);
+        vm.setWorldVertices(vertices);
         vm.transformAndProject();
         return vm.getProjectedVertices();
     }

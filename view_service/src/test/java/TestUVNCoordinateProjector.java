@@ -16,10 +16,9 @@ public class TestUVNCoordinateProjector {
     @Test
     public void transformToCameraThetaIsZero() {
         List<Vertex3D> vertexList = getVertexThetaIsZero();
-        float alpha=(float) Math.PI/4;  //zoom factor
         UVNCoordinateProjector projector=new UVNCoordinateProjector();
-        projector.setUVNVertices(vertexList);
-        ViewMediator mediator = getViewMediator(PIDIV4,R,alpha);
+        ViewMediator mediator = getViewMediator(PIDIV4,R,ALPHA);
+        mediator.setUVNVertices(vertexList);
         projector.setMediator(mediator);
 
         projector.project();
@@ -37,10 +36,9 @@ public class TestUVNCoordinateProjector {
     @Test
     public void transformToCameraThetaIsPiDiv4() {
         List<Vertex3D> vertexList = getVertexThetaIsPIDiv4();
-        float alpha=(float) Math.PI/4;  //zoom factor
         UVNCoordinateProjector projector=new UVNCoordinateProjector();
-        projector.setUVNVertices(vertexList);
-        ViewMediator mediator = getViewMediator(PIDIV4,R,alpha);
+        ViewMediator mediator = getViewMediator(PIDIV4,R,ALPHA);
+        mediator.setUVNVertices(vertexList);
         projector.setMediator(mediator);
         projector.project();
         List<Vertex3D> projectedVertices = projector.getProjectedVertices();

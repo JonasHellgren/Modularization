@@ -12,22 +12,17 @@ import java.util.List;
 @Getter
 public class WorldToCameraTransformer extends MediatorMemberAbstract {
 
-    List<Vertex3D> worldVertices;   //input vertices
     List<Vertex3D> UVNVertices;     //result vertices
 
+    /*
     public void setWorldVertices(List<Vertex3D> worldVertices) {
         this.worldVertices = worldVertices;
     }
 
-    public WorldToCameraTransformer(List<Vertex3D> worldVertices) {
-        this.worldVertices = worldVertices;
-        UVNVertices = new ArrayList<>();
-
-    }
+    */
 
 
     public WorldToCameraTransformer() {
-        worldVertices = new ArrayList<>();
         UVNVertices = new ArrayList<>();
     }
 
@@ -44,6 +39,7 @@ public class WorldToCameraTransformer extends MediatorMemberAbstract {
         Matrix M= createM();
         Matrix Mtransp = M.transpose();
         UVNVertices.clear();
+        List<Vertex3D> worldVertices=mediator.getWorldVertices();
         Vector3D r = getrVector(mediator.getTheta(), mediator.getR());
         for (Vertex3D vertexWorld : worldVertices) {
             Vertex3D tempVertex = vertexWorld.minus(r);
