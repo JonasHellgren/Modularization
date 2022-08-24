@@ -72,6 +72,7 @@ public class ViewPortTransformer extends MediatorMemberAbstract {
 
     public void transform(List<Vertex3D> vertexList) {
         Matrix M = createM();
+        viewPortDots.clear();
         for (Vertex3D v:vertexList) {
             Vertex3D resultV = M.mult(v);
             Dot2D dot=new Dot2D((int) resultV.getData().getX(),(int) resultV.getData().getY());

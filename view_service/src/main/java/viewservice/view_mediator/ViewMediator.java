@@ -8,6 +8,7 @@ import domain.settings.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import viewservice.logic.UVNCoordinateProjector;
+import viewservice.logic.ViewPortTransformer;
 import viewservice.logic.WorldToCameraTransformer;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class ViewMediator implements ViewMediatorInterface {
 
     WorldToCameraTransformer transformer;
     UVNCoordinateProjector projector;
+    ViewPortTransformer viewPortTransformer;
 
     List<Vertex3D> UVNVertices;     //transformed vertices
     List<Vertex3D> projectedVertices;       //projected vertices
@@ -66,6 +68,8 @@ public class ViewMediator implements ViewMediatorInterface {
         this.alpha = ALPHA_DEFAULT;
         newTransformer();
         newProjector();
+        newViewPortTransformer();
+
     }
 
     public List<Vertex3D> getProjectedVertices() {
@@ -94,14 +98,8 @@ public class ViewMediator implements ViewMediatorInterface {
 
     @Override
     public List<Dot2D> getDots() {
-
-        List<Dot2D> dots=new ArrayList<>();
-        for (Vertex3D vertex3D:projectedVertices) {
-            Dot2D dot=new Dot2D((int) (vertex3D.getData().getX()* Constants.W),(int) (vertex3D.getData().getY()*Constants.H));
-            dots.add(dot);
-        }
-
-        return dots;
+        viewPortTransformer.transform(projectedVertices);
+        return getViewPortTransformer().getViewPortDots();
     }
 
     @Override
@@ -125,16 +123,19 @@ public class ViewMediator implements ViewMediatorInterface {
     }
 
 
-
-
     private void newProjector() {
-        this.projector = new UVNCoordinateProjector();  //todo alpha - later via mediator
+        this.projector = new UVNCoordinateProjector();
         projector.setMediator(this);
     }
 
     private void newTransformer() {
-        this.transformer = new WorldToCameraTransformer();  //todo exklude vertices, R, theta - later via mediator
+        this.transformer = new WorldToCameraTransformer();
         transformer.setMediator(this);
+    }
+
+    private void newViewPortTransformer() {
+        this.viewPortTransformer=new ViewPortTransformer(Constants.W/2,Constants.H/2);
+        this.viewPortTransformer.setMediator(this);
     }
 
 
