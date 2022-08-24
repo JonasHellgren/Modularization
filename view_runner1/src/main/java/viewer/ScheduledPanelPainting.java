@@ -80,7 +80,7 @@ public class ScheduledPanelPainting {
         viewService.transformAndProject();
         panel.setVertices(viewService.getDots());
 
-        System.out.println("viewService.getDots() = " + viewService.getDots());
+      //  System.out.println("viewService.getDots() = " + viewService.getDots());
 
         //setDummyPanelData();
 

@@ -14,7 +14,7 @@ alpha via mediator  x
 TestWorldToCameraTransformer x
 TestUVNCoordinateProjector x
 TestViewMediator x
-skalning skärm projectedVertices
+skalning skärm projectedVertices  x
 LineExtractor
 
 ev clean up:

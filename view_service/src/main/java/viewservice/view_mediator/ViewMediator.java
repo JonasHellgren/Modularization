@@ -30,7 +30,7 @@ public class ViewMediator implements ViewMediatorInterface {
 
     static final float R_DEFAULT=10;
     static final float THETA_DEFAULT=10;
-    static final float ALPHA_DEFAULT=(float) Math.PI/4;  //zoom factor
+    static final float ALPHA_DEFAULT=(float) Math.PI/2;  //zoom factor
 
     List<Vertex3D> worldVertices;
     List<Edge3D> edges;
@@ -45,21 +45,6 @@ public class ViewMediator implements ViewMediatorInterface {
     List<Vertex3D> UVNVertices;     //transformed vertices
     List<Vertex3D> projectedVertices;       //projected vertices
 
-/*
-    public ViewMediator(@NonNull List<Vertex3D> vertices,
-                        @NonNull List<Edge3D> edges,
-                        float R, float theta, float alpha) {
-        this.vertices = vertices;
-        this.edges = edges;
-        this.R = R;
-        this.theta = theta;
-        this.alpha = alpha;
-
-        newTransformer(vertices);
-        newProjector();
-    }
-*/
-
     public ViewMediator() {
         this.worldVertices =new ArrayList<>();
         this.edges=new ArrayList<>();
@@ -72,9 +57,7 @@ public class ViewMediator implements ViewMediatorInterface {
 
     }
 
-    public List<Vertex3D> getProjectedVertices() {
-        return projectedVertices;
-    }
+
 
     @Override
     public void transformAndProject() {
@@ -91,15 +74,15 @@ public class ViewMediator implements ViewMediatorInterface {
 
     @Override
     public void project() {
-      //  projector.setUVNVertices(UVNVertices);  //todo - remove access via mediator
         projector.project();
         projectedVertices=projector.getProjectedVertices();
     }
 
     @Override
     public List<Dot2D> getDots() {
-        viewPortTransformer.transform(projectedVertices);
-        return getViewPortTransformer().getViewPortDots();
+        List<Vertex3D> vertices=viewPortTransformer.divideProjectedVerticesWithAspectRatio();
+        viewPortTransformer.transform(vertices);
+        return viewPortTransformer.getViewPortDots();
     }
 
     @Override
@@ -122,6 +105,11 @@ public class ViewMediator implements ViewMediatorInterface {
         return UVNVertices;
     }
 
+    @Override
+    public List<Vertex3D> getProjectedVertices() {
+        return projectedVertices;
+    }
+
 
     private void newProjector() {
         this.projector = new UVNCoordinateProjector();
@@ -134,7 +122,7 @@ public class ViewMediator implements ViewMediatorInterface {
     }
 
     private void newViewPortTransformer() {
-        this.viewPortTransformer=new ViewPortTransformer(Constants.W/2,Constants.H/2);
+        this.viewPortTransformer=new ViewPortTransformer(Constants.W,Constants.H);
         this.viewPortTransformer.setMediator(this);
     }
 

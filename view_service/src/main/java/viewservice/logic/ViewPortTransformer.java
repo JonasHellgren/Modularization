@@ -3,6 +3,7 @@ package viewservice.logic;
 import domain.models.Dot2D;
 import domain.models.Matrix;
 import domain.models.Vertex3D;
+import domain.utils.CommonMath;
 import viewservice.view_mediator.MediatorMemberAbstract;
 
 import java.util.ArrayList;
@@ -57,17 +58,28 @@ public class ViewPortTransformer extends MediatorMemberAbstract {
                 {0.0, 1.0, -WINDOW_YMIN},
                 {0.0, 0.0, 0.0}});
 
-
         return T1.mult(S).mult(T);
-
-      //  return new Matrix(U.divWithScalar(U.norm()), V.divWithScalar(V.norm()), N.divWithScalar(N.norm()));
     }
 
-    void transform() {
-        List<Dot2D> vertexList=mediator.getDots();
+ //why? see https://www.youtube.com/watch?v=md3jFANT3UM&list=PLgcKMlJueAM47pYH8pz_J2R9OM5jwW5Z0&index=5
+    public List<Vertex3D> divideProjectedVerticesWithAspectRatio() {
 
+        float aspectRatio=  (float) (VIEWPORT_XMAX-VIEWPORT_XMIN)/
+                            (float) (VIEWPORT_YMAX-VIEWPORT_YMIN);
+        assert !CommonMath.isZero(aspectRatio);
 
-        //todo call transform()
+        System.out.println("aspectRatio = " + aspectRatio);
+
+        List<Vertex3D> vertex3DList=new ArrayList<>();
+        for (Vertex3D v:mediator.getProjectedVertices()) {
+            float newX=v.getData().getX()/aspectRatio;
+            v.getData().setX(newX);
+
+            Vertex3D vNew=new Vertex3D(newX,v.getData().getY(),v.getData().getZ());
+            vertex3DList.add(vNew);
+        }
+        return vertex3DList;
+
     }
 
     public void transform(List<Vertex3D> vertexList) {
