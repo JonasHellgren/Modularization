@@ -3,6 +3,7 @@ import domain.models.Vertex3D;
 import org.junit.Assert;
 import org.junit.Test;
 import viewservice.logic.WorldToCameraTransformer;
+import viewservice.view_mediator.ViewMediator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,18 +12,22 @@ public class TestWorldToCameraTransformer {
 
 
     public static final double DELTA = 0.01;
+    public static final int R = 10;
 
     @Test
     public void constructorOkThetaZero()  {
 
         List<Vertex3D> vertexList = getVertex3DS();
 
-        float R=10, theta=0;
-        WorldToCameraTransformer wtct=new WorldToCameraTransformer(vertexList,R,theta);
-        System.out.println("wtct.getR() = " + wtct.getR());
-        System.out.println("wtct.getM() = " + wtct.getM());
+        WorldToCameraTransformer wtct=new WorldToCameraTransformer(vertexList);
+        ViewMediator mediator=new ViewMediator();
+        mediator.setTheta(0);
+        mediator.setR(R);
+        wtct.setMediator(mediator);
+        System.out.println("mediator.getR() = " + mediator.getR());
+       // System.out.println("mediator.getM() = " + mediator.getM());
         Vector3D rDesired=new Vector3D(0,0,10);
-        Assert.assertTrue(wtct.getR().equals(rDesired));
+        Assert.assertTrue(wtct.getrVector(mediator.getTheta(), mediator.getR()).equals(rDesired));
         Assert.assertEquals(-1,wtct.getM().getElementAsFloat(0,0), DELTA);
     }
 
@@ -32,20 +37,26 @@ public class TestWorldToCameraTransformer {
 
         List<Vertex3D> vertexList = getVertex3DS();
 
-        float R=10, theta=(float) Math.PI/4;
-        WorldToCameraTransformer wtct=new WorldToCameraTransformer(vertexList,R,theta);
-        System.out.println("wtct.getR() = " + wtct.getR());
-        System.out.println("wtct.getM() = " + wtct.getM());
+        WorldToCameraTransformer wtct=new WorldToCameraTransformer(vertexList);
+        ViewMediator mediator=new ViewMediator();
+        mediator.setTheta((float) Math.PI/4);
+        mediator.setR(R);
+        wtct.setMediator(mediator);
+        System.out.println("wtct.getR() = " + wtct.getrVector(mediator.getTheta(), mediator.getR()));
+      //  System.out.println("wtct.getM() = " + wtct.getM());
         Vector3D rDesired=new Vector3D(7.0711f, 0, 7.0711f);
-        Assert.assertTrue(wtct.getR().equals(rDesired));
+        Assert.assertTrue(wtct.getrVector(mediator.getTheta(), mediator.getR()).equals(rDesired));
         Assert.assertEquals(-0.7071,wtct.getM().getElementAsFloat(0,0), DELTA);
     }
 
     @Test
     public void transformToCameraThetaIsZero() {
         List<Vertex3D> vertexList = getVertex3DS();
-        float R=10, theta=0;
-        WorldToCameraTransformer wtct=new WorldToCameraTransformer(vertexList,R,theta);
+        WorldToCameraTransformer wtct=new WorldToCameraTransformer(vertexList);
+        ViewMediator mediator=new ViewMediator();
+        mediator.setTheta(0);
+        mediator.setR(R);
+        wtct.setMediator(mediator);
         wtct.transform();
         List<Vertex3D> vertexListCamera = wtct.getUVNVertices();
 
@@ -58,9 +69,13 @@ public class TestWorldToCameraTransformer {
     @Test
     public void transformToCameraThetaIsPiDiv4() {
         List<Vertex3D> vertexList = getVertex3DS();
-        float R=10, theta=(float) Math.PI/4;
-        WorldToCameraTransformer wtct=new WorldToCameraTransformer(vertexList,R,theta);
-        System.out.println("wtct.getR() = " + wtct.getR());
+
+        WorldToCameraTransformer wtct=new WorldToCameraTransformer(vertexList);
+        ViewMediator mediator=new ViewMediator();
+        mediator.setTheta((float) Math.PI/4);
+        mediator.setR(R);
+        wtct.setMediator(mediator);
+        System.out.println("wtct.getR() = " + wtct.getrVector(mediator.getTheta(), mediator.getR()));
         wtct.transform();
         List<Vertex3D> vertexListCamera = wtct.getUVNVertices();
 

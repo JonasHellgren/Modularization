@@ -17,4 +17,7 @@ public interface ViewMediatorInterface {
     List<Line2D> getLines();
     void updateViewAngle(float newTheta);
 
+    float getR();
+    float getTheta();
+
 }

@@ -28,6 +28,8 @@ public class ScheduledPanelPainting {
 
     public static final String VERTEX_URL = "http://localhost:8080/vertices";
 
+    float theta;
+
     @Autowired
     View3DPanel panel;
 
@@ -40,13 +42,17 @@ public class ScheduledPanelPainting {
     @PostConstruct
     public void setup() {
         restTemplate = new RestTemplate();
+        theta=0;
     }
 
     @Scheduled(initialDelay = INIT_DELAY, fixedRate = CALLING_TIME)
     public void calculate() throws InterruptedException {
         setPanelFromRestEndPointData();
-
         panel.repaint();
+
+        theta= (float) (theta+0.1);
+        viewService.setTheta(theta);
+
     }
 
     private void setPanelFromRestEndPointData() {

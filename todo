@@ -8,8 +8,13 @@ ladda in 3d data till viewer
 klass worldToCameraTransformer - transformera 3d data  x
 klass UVNCoordinateProjector - projicera 3d data x
 ViewMediator  klass i view_service  x
-fimpa ND4J
+fimpa ND4J  x
+dots are plotted  x
+alpha via mediator
+TestWorldToCameraTransformer
+TestUVNCoordinateProjector
+TestViewMediator
+skalning skärm projectedVertices
 LineExtractor
-
 
 p.XIDX=1; p.YIDX=2; p.ZIDX=3

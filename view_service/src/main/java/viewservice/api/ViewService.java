@@ -19,11 +19,9 @@ public class ViewService implements ViewServiceInterface {
         this.viewMediator = new ViewMediator();  //todo static factory
     }
 
-
     @Override
     public void insertVertices(List<Vertex3D> vertices) {
         viewMediator.setVertices(vertices);
-
     }
 
     @Override
