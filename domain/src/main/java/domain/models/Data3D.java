@@ -44,14 +44,8 @@ public class Data3D {
         //check if the argument is a reference to this object
         if (dataOther == this) return true;
 
-        System.out.println("this = " + this);
-
         //check if the argument has the correct typ
         if (!(dataOther instanceof Data3D)) return false;
-
-        System.out.println("dataOther = " + dataOther);
-
-        System.out.println("(Arrays.equals(this.getDoubleArray(), dataOther.getDoubleArray())) = " + (Arrays.equals(this.getDoubleArray(), dataOther.getDoubleArray())));
 
         //For each significant field in the class, check if that field matches the corresponding field of this object
         if (CommonMath.compareArrays(this.getFloatArray(), dataOther.getFloatArray(),DELTA)) {

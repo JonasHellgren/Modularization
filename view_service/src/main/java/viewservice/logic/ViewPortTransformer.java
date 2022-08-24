@@ -2,9 +2,7 @@ package viewservice.logic;
 
 import domain.models.Dot2D;
 import domain.models.Matrix;
-import domain.models.Vector3D;
 import domain.models.Vertex3D;
-import domain.settings.Constants;
 import viewservice.view_mediator.MediatorMemberAbstract;
 
 import java.util.ArrayList;
@@ -25,16 +23,16 @@ public class ViewPortTransformer extends MediatorMemberAbstract {
     private double VIEWPORT_YMAX;
 
 
-    List<Vertex3D> viewPortVertices;     //result vertices
+    List<Dot2D> viewPortDots;     //result dots
 
     public ViewPortTransformer(double viewPortW, double viewPortH) {
         this.VIEWPORT_XMAX=viewPortW;
         this.VIEWPORT_YMAX=viewPortH;
-        this.viewPortVertices = new ArrayList<>();
+        this.viewPortDots = new ArrayList<>();
     }
 
-    public List<Vertex3D> getViewPortVertices() {
-        return viewPortVertices;
+    public List<Dot2D> getViewPortDots() {
+        return viewPortDots;
     }
 
     public Matrix createM() {
@@ -74,11 +72,10 @@ public class ViewPortTransformer extends MediatorMemberAbstract {
 
     public void transform(List<Vertex3D> vertexList) {
         Matrix M = createM();
-
         for (Vertex3D v:vertexList) {
             Vertex3D resultV = M.mult(v);
-            System.out.println("v = " + v);
-            viewPortVertices.add(resultV);
+            Dot2D dot=new Dot2D((int) resultV.getData().getX(),(int) resultV.getData().getY());
+            viewPortDots.add(dot);
         }
     }
 
