@@ -9,7 +9,6 @@ import java.util.List;
 
 public class UVNCoordinateProjector extends MediatorMemberAbstract {
 
-    //List<Vertex3D> UVNVertices;             //input vertices
     List<Vertex3D> projectedVertices;       //result vertices
 
     public UVNCoordinateProjector() {

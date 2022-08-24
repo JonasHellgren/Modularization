@@ -40,6 +40,13 @@ public class Matrix {
         return new Vertex3D(vRes.toArray());
     }
 
+    public Matrix mult(Matrix mOther) {
+        RealMatrix rmOther = MatrixUtils.createRealMatrix(mOther.getMarray());
+        RealMatrix mRes=M.multiply(rmOther);
+        return new Matrix(mRes.getData());
+
+    }
+
     public long[] size() {
 
         return new long[]{(long) M.getRowDimension(), (long) M.getColumnDimension()};
