@@ -19,5 +19,6 @@ public interface ViewMediatorInterface {
 
     float getR();
     float getTheta();
+    float getAlpha();
 
 }

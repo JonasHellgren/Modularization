@@ -2,18 +2,26 @@ import domain.models.Vertex3D;
 import org.junit.Assert;
 import org.junit.Test;
 import viewservice.logic.UVNCoordinateProjector;
+import viewservice.view_mediator.ViewMediator;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class TestUVNCoordinateProjector {
 
+    public static final int R = 10;
+    static final float ALPHA=(float) Math.PI/4;
+    public static final float PIDIV4 = (float) Math.PI / 4;
 
     @Test
     public void transformToCameraThetaIsZero() {
         List<Vertex3D> vertexList = getVertexThetaIsZero();
         float alpha=(float) Math.PI/4;  //zoom factor
-        UVNCoordinateProjector projector=new UVNCoordinateProjector(vertexList,alpha);
+        UVNCoordinateProjector projector=new UVNCoordinateProjector();
+        projector.setUVNVertices(vertexList);
+        ViewMediator mediator = getViewMediator(PIDIV4,R,alpha);
+        projector.setMediator(mediator);
+
         projector.project();
         List<Vertex3D> projectedVertices = projector.getProjectedVertices();
 
@@ -30,7 +38,10 @@ public class TestUVNCoordinateProjector {
     public void transformToCameraThetaIsPiDiv4() {
         List<Vertex3D> vertexList = getVertexThetaIsPIDiv4();
         float alpha=(float) Math.PI/4;  //zoom factor
-        UVNCoordinateProjector projector=new UVNCoordinateProjector(vertexList,alpha);
+        UVNCoordinateProjector projector=new UVNCoordinateProjector();
+        projector.setUVNVertices(vertexList);
+        ViewMediator mediator = getViewMediator(PIDIV4,R,alpha);
+        projector.setMediator(mediator);
         projector.project();
         List<Vertex3D> projectedVertices = projector.getProjectedVertices();
 
@@ -58,6 +69,14 @@ public class TestUVNCoordinateProjector {
                 new Vertex3D(0.7071f,0,9.2929f),
                 new Vertex3D(0.7071f,1,9.2929f)
         );
+    }
+
+    private ViewMediator getViewMediator(float theta, float R, float alpha ) {
+        ViewMediator mediator=new ViewMediator();
+        mediator.setTheta(theta);
+        mediator.setR(R);
+        mediator.setAlpha(alpha);
+        return mediator;
     }
 
 }

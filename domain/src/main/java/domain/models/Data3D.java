@@ -1,6 +1,7 @@
 package domain.models;
 
 
+import domain.utils.CommonMath;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.Arrays;
 @NoArgsConstructor
 public class Data3D {
 
-    public static final double DELTA = 0.01;
+    public static final float DELTA = 0.01f;
     float x;
     float y;
     float z;
@@ -43,16 +44,23 @@ public class Data3D {
         //check if the argument is a reference to this object
         if (dataOther == this) return true;
 
+        System.out.println("this = " + this);
+
         //check if the argument has the correct typ
         if (!(dataOther instanceof Data3D)) return false;
 
+        System.out.println("dataOther = " + dataOther);
+
+        System.out.println("(Arrays.equals(this.getDoubleArray(), dataOther.getDoubleArray())) = " + (Arrays.equals(this.getDoubleArray(), dataOther.getDoubleArray())));
+
         //For each significant field in the class, check if that field matches the corresponding field of this object
-        if (Arrays.equals(this.getDoubleArray(), dataOther.getDoubleArray())) {
+        if (CommonMath.compareArrays(this.getFloatArray(), dataOther.getFloatArray(),DELTA)) {
             return true;
         }
 
         return false;
     }
+
 
 
 }

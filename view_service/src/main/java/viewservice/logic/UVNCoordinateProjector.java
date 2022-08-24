@@ -11,17 +11,10 @@ public class UVNCoordinateProjector extends MediatorMemberAbstract {
 
     List<Vertex3D> UVNVertices;             //input vertices
     List<Vertex3D> projectedVertices;       //result vertices
-    float alpha;
 
-    public UVNCoordinateProjector(List<Vertex3D> UVNVertices, float alpha) {
-        new UVNCoordinateProjector(alpha);
-        this.UVNVertices = UVNVertices;
-    }
-
-    public UVNCoordinateProjector(float alpha) {
-        this.projectedVertices=new ArrayList<>();
-        this.UVNVertices=new ArrayList<>();
-        this.alpha=alpha;
+    public UVNCoordinateProjector() {
+        this.UVNVertices = new ArrayList<>();
+        this.projectedVertices = new ArrayList<>();
     }
 
     public List<Vertex3D> getProjectedVertices() {
@@ -34,6 +27,7 @@ public class UVNCoordinateProjector extends MediatorMemberAbstract {
 
     public void project() {
 
+        double alpha=mediator.getAlpha();
         projectedVertices.clear();
         float tanHalfAlpha= (float) Math.tan(alpha/2);
         assert !CommonMath.isZero(tanHalfAlpha);

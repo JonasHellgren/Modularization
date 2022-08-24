@@ -55,7 +55,7 @@ public class ViewMediator implements ViewMediatorInterface {
         this.alpha = alpha;
 
         newTransformer(vertices);
-        newProjector(alpha);
+        newProjector();
     }
 
 
@@ -66,7 +66,7 @@ public class ViewMediator implements ViewMediatorInterface {
         this.theta = THETA_DEFAULT;
         this.alpha = ALPHA_DEFAULT;
         newTransformer(vertices);
-        newProjector(alpha);
+        newProjector();
     }
 
     public List<Vertex3D> getProjectedVertices() {
@@ -115,8 +115,8 @@ public class ViewMediator implements ViewMediatorInterface {
         this.theta=newTheta;
     }
 
-    private void newProjector(float alpha) {
-        this.projector = new UVNCoordinateProjector(alpha);  //todo alpha - later via mediator
+    private void newProjector() {
+        this.projector = new UVNCoordinateProjector();  //todo alpha - later via mediator
         projector.setMediator(this);
     }
 
