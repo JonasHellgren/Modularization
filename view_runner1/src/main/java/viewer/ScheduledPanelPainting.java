@@ -48,6 +48,7 @@ public class ScheduledPanelPainting {
 
     @Scheduled(initialDelay = INIT_DELAY, fixedRate = CALLING_TIME)
     public void calculate() throws InterruptedException {
+        restReadParameter();
         setPanelFromRestEndPointData();
         panel.repaint();
 
@@ -115,7 +116,7 @@ public class ScheduledPanelPainting {
 
             Parameter[] parameters = response.getBody();
             assert parameters != null;
-            // System.out.println("Arrays.asList(parameters) = " + Arrays.asList(parameters));
+             System.out.println("Arrays.asList(parameters) = " + Arrays.asList(parameters));
             List<Parameter> params=Arrays.asList(parameters);
             List<Parameter> paramsExclTheta=params.stream().filter(p -> !p.name.equals("theta")).collect(Collectors.toList());
             viewService.changeParameterValues(paramsExclTheta);

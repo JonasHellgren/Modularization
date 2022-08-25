@@ -60,6 +60,11 @@ public class ViewMediator implements ViewMediatorInterface {
         this.alpha = ALPHA_DEFAULT;
         this.gamma=GAMMA_DEFAULT;
         this.parameters=new ArrayList<>();
+        parameters.add(new Parameter("R",R_DEFAULT,""));
+        parameters.add(new Parameter("theta",THETA_DEFAULT,""));
+        parameters.add(new Parameter("alpha",ALPHA_DEFAULT,""));
+        parameters.add(new Parameter("gamma",GAMMA_DEFAULT,""));
+
         newTransformer();
         newProjector();
         newViewPortTransformer();
