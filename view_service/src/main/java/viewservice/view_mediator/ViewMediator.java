@@ -61,7 +61,7 @@ public class ViewMediator implements ViewMediatorInterface {
 
         parameters.add(new Parameter("R",R_DEFAULT,"Distance to camera origo"));
         parameters.add(new Parameter("theta",THETA_DEFAULT,"Distance to camera origo"));
-
+        parameters.add(new Parameter("alpha",ALPHA_DEFAULT,"zoom factor"));
 
         this.alpha = ALPHA_DEFAULT;
         this.gamma=GAMMA_DEFAULT;
@@ -122,6 +122,15 @@ public class ViewMediator implements ViewMediatorInterface {
     }
 
     @Override
+    public float getPar(String name) {
+        Optional<Parameter> par=parameters.stream().filter(p -> p.name.equals(name)).findAny();
+        if (par.isEmpty()) {
+            log.warning("Parameter not defined, name = "+name);
+        }
+        return par.map(parameter -> parameter.value).orElse(DEFAULT_PAR_VALUE);
+    }
+
+    @Override
     public List<Vertex3D> getWorldVertices() {
         return worldVertices;
     }
@@ -136,14 +145,7 @@ public class ViewMediator implements ViewMediatorInterface {
         return projectedVertices;
     }
 
-    @Override
-    public float getPar(String name) {
-        Optional<Parameter> par=parameters.stream().filter(p -> p.name.equals(name)).findAny();
-        if (par.isEmpty()) {
-            log.warning("Parameter not defined, name = "+name);
-        }
-        return par.map(parameter -> parameter.value).orElse(DEFAULT_PAR_VALUE);
-    }
+
 
     private void newProjector() {
         this.projector = new UVNCoordinateProjector();
