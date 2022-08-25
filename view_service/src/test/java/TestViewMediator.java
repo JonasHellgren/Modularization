@@ -71,9 +71,10 @@ public class TestViewMediator {
         vm.setWorldVertices(vertices);
         vm.setEdges(edges);
         vm.changeParameterValue(new Parameter("R",R,""));
-        vm.setTheta(theta);
-        vm.setAlpha(alpha);
-        vm.setGamma(0);
+        vm.changeParameterValue(new Parameter("theta",theta,""));
+        vm.changeParameterValue(new Parameter("alpha",alpha,""));
+
+        vm.changeParameterValue(new Parameter("gamma",0,""));
 
         vm.transformAndProject();
         return vm.getProjectedVertices();

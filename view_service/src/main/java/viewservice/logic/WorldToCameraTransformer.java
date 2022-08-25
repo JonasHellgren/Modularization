@@ -17,7 +17,7 @@ public class WorldToCameraTransformer extends MediatorMemberAbstract {
 
     public Matrix createM() {
         Vector3D V = new Vector3D(0, 1, 0);   //"up" vector
-        Vector3D r = getVectorBetweenCameraAndWorldOrigo(mediator.getTheta(),mediator.getGamma(), mediator.getParValue("R"));
+        Vector3D r = getVectorBetweenCameraAndWorldOrigo(mediator.getParValue("theta"),mediator.getParValue("gamma"), mediator.getParValue("R"));
         Vector3D N = r.reverse();
         Vector3D U = V.cross(N);
         return new Matrix(U.divWithScalar(U.norm()), V.divWithScalar(V.norm()), N.divWithScalar(N.norm()));
@@ -27,7 +27,7 @@ public class WorldToCameraTransformer extends MediatorMemberAbstract {
         List<Vertex3D> UVNVertices= new ArrayList<>();
         Matrix M= createM();
         Matrix Mtransp = M.transpose();
-        Vector3D r = getVectorBetweenCameraAndWorldOrigo(mediator.getTheta(), mediator.getGamma(), mediator.getParValue("R"));
+        Vector3D r = getVectorBetweenCameraAndWorldOrigo(mediator.getParValue("theta"),mediator.getParValue("gamma"), mediator.getParValue("R"));
         for (Vertex3D vertexWorld : worldVertices) {
             Vertex3D tempVertex = vertexWorld.minus(r);
             Vertex3D vertex3DCameraCoordinates = tempVertex.mult(Mtransp);

@@ -27,14 +27,14 @@ public class ViewService implements ViewServiceInterface {
         viewMediator.setEdges(edge3DS);
     }
 
+    @Override
     public void changeParameterValues(List<Parameter> pars) {
-
         for (Parameter p:pars) {
             changeParameterValue(p);
         }
-
     }
 
+    @Override
     public void changeParameterValue(Parameter par) {
         viewMediator.changeParameterValue(par);
     }
@@ -53,25 +53,5 @@ public class ViewService implements ViewServiceInterface {
     public List<Line2D> getLines() {
         return viewMediator.getLines();
     }
-
-    @Override
-    public void setR(float newR) {
-        //viewMediator.setR(newR);
-        viewMediator.changeParameterValue(new Parameter("R",newR,""));
-
-    }
-
-    @Override
-    public void setTheta(float newTheta) {
-        viewMediator.setTheta(newTheta);
-    }
-
-    @Override
-    public void setAlpha(float newAlpha) {
-        viewMediator.setAlpha(newAlpha);
-    }
-
-
-
 
 }

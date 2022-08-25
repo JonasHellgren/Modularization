@@ -26,19 +26,14 @@ public class ViewMediator implements ViewMediatorInterface {
 
     //given data
     static final float R_DEFAULT=5;
-    static final float THETA_DEFAULT=10;
+    static final float THETA_DEFAULT=(float) (0.2*Math.PI/2);
     static final float ALPHA_DEFAULT=(float) Math.PI/2;
     static final float GAMMA_DEFAULT=(float) Math.PI/8;
     static final float DEFAULT_PAR_VALUE=1;
 
-
     List<Vertex3D> worldVertices;  //3d data
     List<Edge3D> edges;  //3d data
     List<Parameter> parameters;
-   // float R;        //distance to camera origo
-    float theta;    //view angle
-    float alpha;    //zoom factor
-    float gamma;    //from above angle
 
     //work horses
     WorldToCameraTransformer transformer;
@@ -55,10 +50,6 @@ public class ViewMediator implements ViewMediatorInterface {
     public ViewMediator() {
         this.worldVertices =new ArrayList<>();
         this.edges=new ArrayList<>();
-       // this.R = R_DEFAULT;
-        this.theta = THETA_DEFAULT;
-        this.alpha = ALPHA_DEFAULT;
-        this.gamma=GAMMA_DEFAULT;
         this.parameters=new ArrayList<>();
         parameters.add(new Parameter("R",R_DEFAULT,""));
         parameters.add(new Parameter("theta",THETA_DEFAULT,""));
@@ -104,6 +95,7 @@ public class ViewMediator implements ViewMediatorInterface {
         return projectedVertices;
     }
 
+    @Override
     public void changeParameterValue(Parameter par)  {
         Optional<Parameter> parToChange=parameters.stream().filter(p -> p.name.equals(par.getName())).findAny();
 
@@ -116,7 +108,7 @@ public class ViewMediator implements ViewMediatorInterface {
 
     }
 
-   // @Override
+    @Override
     public float getParValue(String name) {
         Optional<Parameter> par=parameters.stream().filter(p -> p.name.equals(name)).findAny();
         if (par.isEmpty()) {

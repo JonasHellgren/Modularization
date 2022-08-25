@@ -1,9 +1,6 @@
 package viewservice.api;
 
-import domain.models.Dot2D;
-import domain.models.Edge3D;
-import domain.models.Line2D;
-import domain.models.Vertex3D;
+import domain.models.*;
 
 import java.util.List;
 
@@ -14,9 +11,11 @@ public interface ViewServiceInterface {
     void transformAndProject();
     List<Dot2D> getDots();
     List<Line2D> getLines();
-    void setR(float newR);
-    void setTheta(float newTheta);
-    void setAlpha(float newAlpha);
+    void changeParameterValues(List<Parameter> pars);
+    void changeParameterValue(Parameter par);
+    //   void setR(float newR);
+  //  void setTheta(float newTheta);
+//    void setAlpha(float newAlpha);
 
 
 }

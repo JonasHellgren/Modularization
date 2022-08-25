@@ -53,7 +53,8 @@ public class ScheduledPanelPainting {
         panel.repaint();
 
         theta= (float) (theta+0.01);
-        viewService.setTheta(theta);
+        //viewService.setTheta(theta);
+        viewService.changeParameterValue(new Parameter("theta",theta,""));
 
     }
 
@@ -116,7 +117,6 @@ public class ScheduledPanelPainting {
 
             Parameter[] parameters = response.getBody();
             assert parameters != null;
-            System.out.println("Arrays.asList(parameters) = " + Arrays.asList(parameters));
             List<Parameter> params=Arrays.asList(parameters);
             List<Parameter> paramsExclTheta=params.stream().filter(p -> !p.name.equals("theta")).collect(Collectors.toList());
             viewService.changeParameterValues(paramsExclTheta);
