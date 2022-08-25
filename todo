@@ -16,7 +16,10 @@ TestUVNCoordinateProjector x
 TestViewMediator x
 skalning skärm projectedVertices  x
 LineExtractor  x
-try i LineExtractor
+try i LineExtractor  x
+se mer från ovan - modda r   x
+renare mediator
+sätta zoom etc via REST
 
 ev clean up:
 repo för params i mediator

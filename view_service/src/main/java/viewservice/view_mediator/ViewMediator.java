@@ -29,15 +29,17 @@ import java.util.List;
 @Getter
 public class ViewMediator implements ViewMediatorInterface {
 
-    static final float R_DEFAULT=10;
+    static final float R_DEFAULT=5;
     static final float THETA_DEFAULT=10;
-    static final float ALPHA_DEFAULT=(float) Math.PI/2;  //zoom factor
+    static final float ALPHA_DEFAULT=(float) Math.PI/2;
+    static final float GAMMA_DEFAULT=(float) Math.PI/8;
 
     List<Vertex3D> worldVertices;
     List<Edge3D> edges;
-    float R;      //distance to camera origo
-    float theta;  //view angle
-    float alpha;   //zoom factor
+    float R;        //distance to camera origo
+    float theta;    //view angle
+    float alpha;    //zoom factor
+    float gamma;    //from above angle
 
     WorldToCameraTransformer transformer;
     UVNCoordinateProjector projector;
@@ -55,6 +57,7 @@ public class ViewMediator implements ViewMediatorInterface {
         this.R = R_DEFAULT;
         this.theta = THETA_DEFAULT;
         this.alpha = ALPHA_DEFAULT;
+        this.gamma=GAMMA_DEFAULT;
         newTransformer();
         newProjector();
         newViewPortTransformer();
@@ -98,6 +101,7 @@ public class ViewMediator implements ViewMediatorInterface {
     public void updateViewAngle(float newTheta) {
         this.theta=newTheta;
     }
+
 
     @Override
     public List<Vertex3D> getWorldVertices() {

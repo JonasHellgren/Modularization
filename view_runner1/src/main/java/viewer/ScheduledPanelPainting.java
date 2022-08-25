@@ -51,7 +51,7 @@ public class ScheduledPanelPainting {
         setPanelFromRestEndPointData();
         panel.repaint();
 
-        theta= (float) (theta+0.1);
+        theta= (float) (theta+0.01);
         viewService.setTheta(theta);
 
     }

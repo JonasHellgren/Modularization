@@ -7,5 +7,5 @@ public class Constants {
     public final static int MARGIN_Y=10;  //frame margin
 
     public final static int BALL_SPEED=10;
-    public final static int DT_MILLIS =1000;  //time step in millis, updating frequence=1/(DT/1000)
+    public final static int DT_MILLIS =1000/50;  //time step in millis, updating frequence=1/(DT/1000)
 }

@@ -21,6 +21,7 @@ public interface ViewMediatorInterface {
     float getR();
     float getTheta();
     float getAlpha();
+    float getGamma();
     List<Vertex3D> getWorldVertices();
     List<Vertex3D> getUVNVertices();
     List<Vertex3D> getProjectedVertices();

@@ -15,12 +15,12 @@ public class BarnData {
                         new Vertex3D(0,0,0),
                         new Vertex3D(0,0,1),
                         new Vertex3D(0,1,1),
-                        new Vertex3D(0,2,0.5f),
+                        new Vertex3D(0,1.5f,0.5f),
                         new Vertex3D(0,1,0),
                         new Vertex3D(1,0,0),
                         new Vertex3D(1,0,1),
                         new Vertex3D(1,1,1),
-                        new Vertex3D(1,2,0.5f),
+                        new Vertex3D(1,1.5f,0.5f),
                         new Vertex3D(1,1,0)
                 ));
     }

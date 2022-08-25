@@ -21,7 +21,6 @@ public class LineGenerator extends MediatorMemberAbstract {
             Optional<Line2D> line= getLine(dots, edge);
             line.ifPresent(lines::add);
         }
-
         return lines;
     }
 
@@ -38,7 +37,7 @@ public class LineGenerator extends MediatorMemberAbstract {
 
         } catch (IndexOutOfBoundsException e)
         {
-            log.warning("Fault dot index for line generation");
+            log.warning("Faulty vertex index for line generation, edge = "+edge);
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
         }

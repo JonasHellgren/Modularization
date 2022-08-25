@@ -19,9 +19,9 @@ public class ViewPortTransformer extends MediatorMemberAbstract {
 
 
     private final double VIEWPORT_XMIN=0.0;
-    private double VIEWPORT_XMAX;
+    private final double VIEWPORT_XMAX;
     private final double VIEWPORT_YMIN=0;
-    private double VIEWPORT_YMAX;
+    private final double VIEWPORT_YMAX;
 
 
     List<Dot2D> viewPortDots;     //result dots
@@ -68,13 +68,10 @@ public class ViewPortTransformer extends MediatorMemberAbstract {
                             (float) (VIEWPORT_YMAX-VIEWPORT_YMIN);
         assert !CommonMath.isZero(aspectRatio);
 
-        System.out.println("aspectRatio = " + aspectRatio);
-
         List<Vertex3D> vertex3DList=new ArrayList<>();
         for (Vertex3D v:mediator.getProjectedVertices()) {
             float newX=v.getData().getX()/aspectRatio;
             v.getData().setX(newX);
-
             Vertex3D vNew=new Vertex3D(newX,v.getData().getY(),v.getData().getZ());
             vertex3DList.add(vNew);
         }

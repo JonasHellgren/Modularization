@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 @Setter
 public class View3DPanel extends JPanel {
-    public static final int VERTEX_RADIUS = 5;
+    public static final int VERTEX_RADIUS = 2;
     public static final Color VERTEX_COLOR = Color.BLACK;
     public static final Color LINE_COLOR = Color.BLACK;
 
