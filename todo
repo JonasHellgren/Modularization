@@ -15,7 +15,8 @@ TestWorldToCameraTransformer x
 TestUVNCoordinateProjector x
 TestViewMediator x
 skalning skärm projectedVertices  x
-LineExtractor
+LineExtractor  x
+try i LineExtractor
 
 ev clean up:
 repo för params i mediator
