@@ -35,7 +35,7 @@ public class ViewMediator implements ViewMediatorInterface {
     List<Vertex3D> worldVertices;  //3d data
     List<Edge3D> edges;  //3d data
     List<Parameter> parameters;
-    float R;        //distance to camera origo
+   // float R;        //distance to camera origo
     float theta;    //view angle
     float alpha;    //zoom factor
     float gamma;    //from above angle
@@ -55,7 +55,7 @@ public class ViewMediator implements ViewMediatorInterface {
     public ViewMediator() {
         this.worldVertices =new ArrayList<>();
         this.edges=new ArrayList<>();
-        this.R = R_DEFAULT;
+       // this.R = R_DEFAULT;
         this.theta = THETA_DEFAULT;
         this.alpha = ALPHA_DEFAULT;
         this.gamma=GAMMA_DEFAULT;
@@ -117,7 +117,7 @@ public class ViewMediator implements ViewMediatorInterface {
     }
 
    // @Override
-    public float getPar(String name) {
+    public float getParValue(String name) {
         Optional<Parameter> par=parameters.stream().filter(p -> p.name.equals(name)).findAny();
         if (par.isEmpty()) {
             log.warning("Parameter not defined, name = "+name);

@@ -56,7 +56,9 @@ public class ViewService implements ViewServiceInterface {
 
     @Override
     public void setR(float newR) {
-        viewMediator.setR(newR);
+        //viewMediator.setR(newR);
+        viewMediator.changeParameterValue(new Parameter("R",newR,""));
+
     }
 
     @Override

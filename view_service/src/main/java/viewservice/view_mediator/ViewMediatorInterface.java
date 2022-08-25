@@ -16,7 +16,9 @@ public interface ViewMediatorInterface {
     List<Dot2D> getViewPortDots();
     List<Line2D> getLines();
 
-    float getR();
+    //float getR();
+
+    float getParValue(String name);
     float getTheta();
     float getAlpha();
     float getGamma();

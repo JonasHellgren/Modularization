@@ -1,3 +1,4 @@
+import domain.models.Parameter;
 import domain.models.Vertex3D;
 import org.junit.Assert;
 import org.junit.Test;
@@ -75,7 +76,7 @@ public class TestUVNCoordinateProjector {
     private ViewMediator getViewMediator(float theta, float R, float alpha ) {
         ViewMediator mediator=new ViewMediator();
         mediator.setTheta(theta);
-        mediator.setR(R);
+        mediator.changeParameterValue(new Parameter("R",R,""));
         mediator.setAlpha(alpha);
         return mediator;
     }
