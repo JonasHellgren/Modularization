@@ -36,7 +36,7 @@ public class ViewService implements ViewServiceInterface {
 
     @Override
     public List<Dot2D> getDots() {
-        return viewMediator.getDots();
+        return viewMediator.getViewPortDots();
     }
 
     @Override

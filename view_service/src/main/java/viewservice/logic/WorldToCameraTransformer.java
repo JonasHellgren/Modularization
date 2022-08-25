@@ -4,53 +4,40 @@ import domain.models.Matrix;
 import domain.models.Vector3D;
 import domain.models.Vertex3D;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import viewservice.view_mediator.MediatorMemberAbstract;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class WorldToCameraTransformer extends MediatorMemberAbstract {
-
-    List<Vertex3D> UVNVertices;     //result vertices
-
-    /*
-    public void setWorldVertices(List<Vertex3D> worldVertices) {
-        this.worldVertices = worldVertices;
-    }
-
-    */
-
-
-    public WorldToCameraTransformer() {
-        UVNVertices = new ArrayList<>();
-    }
-
 
     public Matrix createM() {
         Vector3D V = new Vector3D(0, 1, 0);   //"up" vector
-        Vector3D r = getrVector(mediator.getTheta(),mediator.getGamma(), mediator.getR());
+        Vector3D r = getVectorBetweenCameraAndWorldOrigo(mediator.getTheta(),mediator.getGamma(), mediator.getR());
         Vector3D N = r.reverse();
         Vector3D U = V.cross(N);
         return new Matrix(U.divWithScalar(U.norm()), V.divWithScalar(V.norm()), N.divWithScalar(N.norm()));
     }
 
-    public void transform() {
+    public List<Vertex3D>  transform(@NonNull List<Vertex3D> worldVertices ) {
+        List<Vertex3D> UVNVertices= new ArrayList<>();
         Matrix M= createM();
         Matrix Mtransp = M.transpose();
-        UVNVertices.clear();
-        List<Vertex3D> worldVertices=mediator.getWorldVertices();
-        Vector3D r = getrVector(mediator.getTheta(), mediator.getGamma(), mediator.getR());
+        Vector3D r = getVectorBetweenCameraAndWorldOrigo(mediator.getTheta(), mediator.getGamma(), mediator.getR());
         for (Vertex3D vertexWorld : worldVertices) {
             Vertex3D tempVertex = vertexWorld.minus(r);
             Vertex3D vertex3DCameraCoordinates = tempVertex.mult(Mtransp);
             UVNVertices.add(vertex3DCameraCoordinates);
         }
+        return UVNVertices;
     }
 
-    public Vector3D getrVector(float theta, float gamma,float R) {
+    public Vector3D getVectorBetweenCameraAndWorldOrigo(float theta, float gamma, float R) {
         return new Vector3D(R * (float) Math.sin(theta), (float) (R*Math.sin(gamma)), R * (float) Math.cos(theta));
     }
-
 
 }

@@ -21,8 +21,9 @@ public class TestViewPortTransformer {
         List<Vertex3D> vertexList=new ArrayList<>();
         Vertex3D v=new Vertex3D(-0.5f,-0.5f,1);
         vertexList.add(v);
-        vpt.transform(vertexList);
-        Dot2D dot=vpt.getViewPortDots().get(0);
+
+        List<Dot2D> dots=vpt.transform(vertexList);
+        Dot2D dot=dots.get(0);
 
         Dot2D dotDesired=new Dot2D(0,0);
         Assert.assertTrue(dot.equals(dotDesired));
@@ -37,8 +38,12 @@ public class TestViewPortTransformer {
         List<Vertex3D> vertexList=new ArrayList<>();
         Vertex3D v=new Vertex3D(0.5f,0.5f,1);
         vertexList.add(v);
-        vpt.transform(vertexList);
-        Dot2D dot=vpt.getViewPortDots().get(0);
+//        vpt.transform(vertexList);
+ //       Dot2D dot=vpt.getViewPortDots().get(0);
+        List<Dot2D> dots=vpt.transform(vertexList);
+        Dot2D dot=dots.get(0);
+
+
 
         Dot2D dotDesired=new Dot2D(VIEW_PORT_W, VIEW_PORT_H);
         Assert.assertTrue(dot.equals(dotDesired));
@@ -53,8 +58,9 @@ public class TestViewPortTransformer {
         List<Vertex3D> vertexList=new ArrayList<>();
         Vertex3D v=new Vertex3D(0.0f,0.0f,1);
         vertexList.add(v);
-        vpt.transform(vertexList);
-        Dot2D dot=vpt.getViewPortDots().get(0);
+
+        List<Dot2D> dots=vpt.transform(vertexList);
+        Dot2D dot=dots.get(0);
 
         Dot2D dotDesired=new Dot2D(VIEW_PORT_W/2, VIEW_PORT_H/2);
         Assert.assertTrue(dot.equals(dotDesired));

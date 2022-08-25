@@ -4,6 +4,7 @@ import domain.models.Dot2D;
 import domain.models.Matrix;
 import domain.models.Vertex3D;
 import domain.utils.CommonMath;
+import lombok.NonNull;
 import viewservice.view_mediator.MediatorMemberAbstract;
 
 import java.util.ArrayList;
@@ -17,27 +18,17 @@ public class ViewPortTransformer extends MediatorMemberAbstract {
     private final double WINDOW_YMIN=-0.5;
     private final double WINDOW_YMAX=0.5;
 
-
     private final double VIEWPORT_XMIN=0.0;
     private final double VIEWPORT_XMAX;
     private final double VIEWPORT_YMIN=0;
     private final double VIEWPORT_YMAX;
 
-
-    List<Dot2D> viewPortDots;     //result dots
-
     public ViewPortTransformer(double viewPortW, double viewPortH) {
         this.VIEWPORT_XMAX=viewPortW;
         this.VIEWPORT_YMAX=viewPortH;
-        this.viewPortDots = new ArrayList<>();
-    }
-
-    public List<Dot2D> getViewPortDots() {
-        return viewPortDots;
     }
 
     public Matrix createM() {
-
 
         Matrix T1= new Matrix(new double[][]{
                 {1.0, 0.0, VIEWPORT_XMIN},
@@ -62,14 +53,14 @@ public class ViewPortTransformer extends MediatorMemberAbstract {
     }
 
  //why? see https://www.youtube.com/watch?v=md3jFANT3UM&list=PLgcKMlJueAM47pYH8pz_J2R9OM5jwW5Z0&index=5
-    public List<Vertex3D> divideProjectedVerticesWithAspectRatio() {
+    public List<Vertex3D> divideProjectedVerticesWithAspectRatio(@NonNull  List<Vertex3D> projectedVertices) {
 
         float aspectRatio=  (float) (VIEWPORT_XMAX-VIEWPORT_XMIN)/
                             (float) (VIEWPORT_YMAX-VIEWPORT_YMIN);
         assert !CommonMath.isZero(aspectRatio);
 
         List<Vertex3D> vertex3DList=new ArrayList<>();
-        for (Vertex3D v:mediator.getProjectedVertices()) {
+        for (Vertex3D v:projectedVertices) {
             float newX=v.getData().getX()/aspectRatio;
             v.getData().setX(newX);
             Vertex3D vNew=new Vertex3D(newX,v.getData().getY(),v.getData().getZ());
@@ -79,14 +70,15 @@ public class ViewPortTransformer extends MediatorMemberAbstract {
 
     }
 
-    public void transform(List<Vertex3D> vertexList) {
+    public List<Dot2D> transform(List<Vertex3D> vertexList) {
+        List<Dot2D> viewPortDots= new ArrayList<>();
         Matrix M = createM();
-        viewPortDots.clear();
         for (Vertex3D v:vertexList) {
             Vertex3D resultV = M.mult(v);
             Dot2D dot=new Dot2D((int) resultV.getData().getX(),(int) resultV.getData().getY());
             viewPortDots.add(dot);
         }
+        return viewPortDots;
     }
 
     }

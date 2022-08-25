@@ -21,8 +21,8 @@ public class TestUVNCoordinateProjector {
         mediator.setUVNVertices(vertexList);
         projector.setMediator(mediator);
 
-        projector.project();
-        List<Vertex3D> projectedVertices = projector.getProjectedVertices();
+        List<Vertex3D> projectedVertices=projector.project(mediator.getUVNVertices());
+        //List<Vertex3D> projectedVertices = projector.getProjectedVertices();
 
         System.out.println("projectedVertices = " + projectedVertices);
 
@@ -40,8 +40,11 @@ public class TestUVNCoordinateProjector {
         ViewMediator mediator = getViewMediator(PIDIV4,R,ALPHA);
         mediator.setUVNVertices(vertexList);
         projector.setMediator(mediator);
-        projector.project();
-        List<Vertex3D> projectedVertices = projector.getProjectedVertices();
+        //projector.project();
+        //List<Vertex3D> projectedVertices = projector.getProjectedVertices();
+
+        List<Vertex3D> projectedVertices=projector.project(mediator.getUVNVertices());
+
 
         System.out.println("projectedVertices = " + projectedVertices);
 

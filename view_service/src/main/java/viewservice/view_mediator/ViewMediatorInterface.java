@@ -9,14 +9,12 @@ import java.util.List;
 
 public interface ViewMediatorInterface {
     void transformAndProject();
-    void transform();
-    void project();
+
    // void setVertices(List<Vertex3D> vertices);
    // void setEdges(List<Edge3D> edges);
     List<Edge3D> getEdges();
-    List<Dot2D> getDots();
+    List<Dot2D> getViewPortDots();
     List<Line2D> getLines();
-    void updateViewAngle(float newTheta);
 
     float getR();
     float getTheta();
