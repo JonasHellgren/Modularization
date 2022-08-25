@@ -13,6 +13,7 @@ public interface ViewMediatorInterface {
     void project();
    // void setVertices(List<Vertex3D> vertices);
    // void setEdges(List<Edge3D> edges);
+    List<Edge3D> getEdges();
     List<Dot2D> getDots();
     List<Line2D> getLines();
     void updateViewAngle(float newTheta);

@@ -8,7 +8,7 @@ import org.apache.commons.math3.linear.RealVector;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor  //needed for RestTemplate to work, else HttpException
 public class Vertex3D {
     Data3D data;
 

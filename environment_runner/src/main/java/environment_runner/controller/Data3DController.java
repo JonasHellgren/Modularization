@@ -64,14 +64,13 @@ public class Data3DController {
         return data3DService.getVertices();
     }
 
-/*
 
     @GetMapping(value = "/edges")
     public List<Edge3D> getEdges() {
         System.out.println("environmentService.getEdges() = " + data3DService.getEdges());
         return data3DService.getEdges();
     }
-*/
+
 
 
 }

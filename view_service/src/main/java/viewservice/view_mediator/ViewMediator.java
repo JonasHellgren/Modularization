@@ -7,6 +7,7 @@ import domain.models.Vertex3D;
 import domain.settings.Constants;
 import lombok.Getter;
 import lombok.Setter;
+import viewservice.logic.LineGenerator;
 import viewservice.logic.UVNCoordinateProjector;
 import viewservice.logic.ViewPortTransformer;
 import viewservice.logic.WorldToCameraTransformer;
@@ -41,9 +42,12 @@ public class ViewMediator implements ViewMediatorInterface {
     WorldToCameraTransformer transformer;
     UVNCoordinateProjector projector;
     ViewPortTransformer viewPortTransformer;
+    LineGenerator lineGenerator;
 
     List<Vertex3D> UVNVertices;     //transformed vertices
     List<Vertex3D> projectedVertices;       //projected vertices
+    List<Dot2D> dots;
+    List<Line2D> lines;
 
     public ViewMediator() {
         this.worldVertices =new ArrayList<>();
@@ -54,10 +58,8 @@ public class ViewMediator implements ViewMediatorInterface {
         newTransformer();
         newProjector();
         newViewPortTransformer();
-
+        newLineGenerator();
     }
-
-
 
     @Override
     public void transformAndProject() {
@@ -82,12 +84,14 @@ public class ViewMediator implements ViewMediatorInterface {
     public List<Dot2D> getDots() {
         List<Vertex3D> vertices=viewPortTransformer.divideProjectedVerticesWithAspectRatio();
         viewPortTransformer.transform(vertices);
-        return viewPortTransformer.getViewPortDots();
+        dots=viewPortTransformer.getViewPortDots();
+        return dots;
     }
 
     @Override
     public List<Line2D> getLines() {
-        return null;
+        lines=lineGenerator.getLines(dots);
+        return lines;
     }
 
     @Override
@@ -124,6 +128,11 @@ public class ViewMediator implements ViewMediatorInterface {
     private void newViewPortTransformer() {
         this.viewPortTransformer=new ViewPortTransformer(Constants.W,Constants.H);
         this.viewPortTransformer.setMediator(this);
+    }
+
+    private void newLineGenerator() {
+        this.lineGenerator=new LineGenerator();
+        this.lineGenerator.setMediator(this);
     }
 
 

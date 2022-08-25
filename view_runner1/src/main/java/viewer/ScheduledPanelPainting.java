@@ -1,5 +1,6 @@
 package viewer;
 
+import domain.models.Edge3D;
 import domain.models.Vertex3D;
 import domain.settings.Constants;
 import lombok.extern.java.Log;
@@ -27,7 +28,7 @@ public class ScheduledPanelPainting {
     public static final long INIT_DELAY = 1000L;
 
     public static final String VERTEX_URL = "http://localhost:8080/vertices";
-
+    public static final String EDGE_URL = "http://localhost:8080/edges";
     float theta;
 
     @Autowired
@@ -57,6 +58,16 @@ public class ScheduledPanelPainting {
 
     private void setPanelFromRestEndPointData() {
 
+        restReadVertices();
+        restReadEdges();
+        viewService.transformAndProject();
+        panel.setVertices(viewService.getDots());
+        panel.setEdges(viewService.getLines());
+
+    }
+
+
+    private void restReadVertices() {
         try {
             ResponseEntity<Vertex3D[]> response =
                     restTemplate.getForEntity(
@@ -65,10 +76,7 @@ public class ScheduledPanelPainting {
 
             Vertex3D[] vertices = response.getBody();
             assert vertices != null;
-            System.out.println("vertex3DList = " + Arrays.asList(vertices));
-
-           viewService.insertVertices(Arrays.asList(vertices));
-
+            viewService.insertVertices(Arrays.asList(vertices));
 
         } catch (RestClientException e) {
             log.warning("URL = " + VERTEX_URL + " does not exist");
@@ -76,15 +84,26 @@ public class ScheduledPanelPainting {
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
         }
+    }
 
-        viewService.transformAndProject();
-        panel.setVertices(viewService.getDots());
 
-      //  System.out.println("viewService.getDots() = " + viewService.getDots());
+    private void restReadEdges() {
+        try {
+            ResponseEntity<Edge3D[]> response =
+                    restTemplate.getForEntity(
+                            EDGE_URL,
+                            Edge3D[].class);
 
-        //setDummyPanelData();
+            Edge3D[] edges = response.getBody();
+            assert edges != null;
+            viewService.insertEdges(Arrays.asList(edges));
 
-        // panel.setBallPos(ballFromUrl.x,ballFromUrl.y);
+        } catch (RestClientException e) {
+            log.warning("URL = " + EDGE_URL + " does not exist");
+            setDummyPanelData();
+        } catch (Exception e) {
+            log.warning("Unknown exception, class = "+e.getClass());
+        }
     }
 
     private void setDummyPanelData() {
