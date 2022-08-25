@@ -1,12 +1,10 @@
 package viewservice.view_mediator;
 
-import domain.models.Dot2D;
-import domain.models.Edge3D;
-import domain.models.Line2D;
-import domain.models.Vertex3D;
+import domain.models.*;
 import domain.settings.Constants;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.java.Log;
 import viewservice.logic.LineGenerator;
 import viewservice.logic.UVNCoordinateProjector;
 import viewservice.logic.ViewPortTransformer;
@@ -14,6 +12,7 @@ import viewservice.logic.WorldToCameraTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Thanks to the mediator pattern fields do not need to be transferred via method parameters.
@@ -21,7 +20,8 @@ import java.util.List;
  */
 
 @Setter
-@Getter
+//@Getter
+@Log
 public class ViewMediator implements ViewMediatorInterface {
 
     //given data
@@ -29,15 +29,18 @@ public class ViewMediator implements ViewMediatorInterface {
     static final float THETA_DEFAULT=10;
     static final float ALPHA_DEFAULT=(float) Math.PI/2;
     static final float GAMMA_DEFAULT=(float) Math.PI/8;
+    public static float DEFAULT_PAR_VALUE = 1;
 
     List<Vertex3D> worldVertices;  //3d data
     List<Edge3D> edges;  //3d data
+    List<Parameter> parameters;
+
     float R;        //distance to camera origo
     float theta;    //view angle
     float alpha;    //zoom factor
     float gamma;    //from above angle
 
-    //work horses
+    //work horses that all can access mediator
     WorldToCameraTransformer transformer;
     UVNCoordinateProjector projector;
     ViewPortTransformer viewPortTransformer;
@@ -52,8 +55,14 @@ public class ViewMediator implements ViewMediatorInterface {
     public ViewMediator() {
         this.worldVertices =new ArrayList<>();
         this.edges=new ArrayList<>();
+        this.parameters=new ArrayList<>();  //todo define params
         this.R = R_DEFAULT;
         this.theta = THETA_DEFAULT;
+
+        parameters.add(new Parameter("R",R_DEFAULT,"Distance to camera origo"));
+        parameters.add(new Parameter("theta",THETA_DEFAULT,"Distance to camera origo"));
+
+
         this.alpha = ALPHA_DEFAULT;
         this.gamma=GAMMA_DEFAULT;
         newTransformer();
@@ -68,6 +77,11 @@ public class ViewMediator implements ViewMediatorInterface {
         projectedVertices=projector.project(UVNVertices);
     }
 
+    @Override
+    public List<Edge3D> getEdges() {
+        return edges;
+    }
+
     public List<Dot2D> getViewPortDots() {
         List<Vertex3D> vertices = viewPortTransformer.divideProjectedVerticesWithAspectRatio(projectedVertices);
         viewPortDots = viewPortTransformer.transform(vertices);
@@ -78,6 +92,33 @@ public class ViewMediator implements ViewMediatorInterface {
     public List<Line2D> getLines() {
         lines=lineGenerator.getLines(viewPortDots);
         return lines;
+    }
+
+    public float getR() {
+        return getPar("R");
+    }
+
+
+    @Override
+    public float getAlpha() {
+        return alpha;
+    }
+
+    @Override
+    public float getGamma() {
+        return gamma;
+    }
+
+    public void changeParameterValue(Parameter par)  {
+        Optional<Parameter> parToChange=parameters.stream().filter(p -> p.name.equals(par.getName())).findAny();
+
+        if (parToChange.isPresent()) {
+            parToChange.get().value=par.value;
+        } else
+        {
+            log.warning("Parameter not present, name = "+par.name);
+        }
+
     }
 
     @Override
@@ -93,6 +134,15 @@ public class ViewMediator implements ViewMediatorInterface {
     @Override
     public List<Vertex3D> getProjectedVertices() {
         return projectedVertices;
+    }
+
+    @Override
+    public float getPar(String name) {
+        Optional<Parameter> par=parameters.stream().filter(p -> p.name.equals(name)).findAny();
+        if (par.isEmpty()) {
+            log.warning("Parameter not defined, name = "+name);
+        }
+        return par.map(parameter -> parameter.value).orElse(DEFAULT_PAR_VALUE);
     }
 
     private void newProjector() {

@@ -1,5 +1,6 @@
 import domain.models.Dot2D;
 import domain.models.Edge3D;
+import domain.models.Parameter;
 import domain.models.Vertex3D;
 import domain.utils.CommonMath;
 import org.junit.Assert;
@@ -69,8 +70,11 @@ public class TestViewMediator {
         vm = new ViewMediator();
         vm.setWorldVertices(vertices);
         vm.setEdges(edges);
-        vm.setR(R);
-        vm.setTheta(theta);
+       // vm.setR(R);
+       // vm.setTheta(theta);
+
+        vm.changeParameterValue(new Parameter("theta",theta,""));
+        vm.changeParameterValue(new Parameter("R",R,""));
         vm.setAlpha(alpha);
         vm.setGamma(0);
 

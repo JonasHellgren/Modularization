@@ -1,9 +1,6 @@
 package viewservice.api;
 
-import domain.models.Dot2D;
-import domain.models.Edge3D;
-import domain.models.Line2D;
-import domain.models.Vertex3D;
+import domain.models.*;
 import org.springframework.stereotype.Service;
 import viewservice.view_mediator.ViewMediator;
 
@@ -29,6 +26,18 @@ public class ViewService implements ViewServiceInterface {
         viewMediator.setEdges(edge3DS);
     }
 
+
+    public void changeParameterValues(List<Parameter> pars) {
+        for (Parameter p:pars) {
+            changeParameterValue(p);
+        }
+    }
+
+    public void changeParameterValue(Parameter par) {
+        viewMediator.changeParameterValue(par);
+    }
+
+
     @Override
     public void transformAndProject() {
         viewMediator.transformAndProject();
@@ -44,6 +53,7 @@ public class ViewService implements ViewServiceInterface {
         return viewMediator.getLines();
     }
 
+    /*
     @Override
     public void setR(float newR) {
         viewMediator.setR(newR);
@@ -54,8 +64,6 @@ public class ViewService implements ViewServiceInterface {
         viewMediator.setTheta(newTheta);
     }
 
-    @Override
-    public void setAlpha(float newAlpha) {
-        viewMediator.setAlpha(newAlpha);
-    }
+     */
+
 }

@@ -16,10 +16,11 @@ public interface ViewMediatorInterface {
     List<Dot2D> getViewPortDots();
     List<Line2D> getLines();
 
-    float getR();
-    float getTheta();
+
+    //float getTheta();
     float getAlpha();
     float getGamma();
+    float getPar(String name);
     List<Vertex3D> getWorldVertices();
     List<Vertex3D> getUVNVertices();
     List<Vertex3D> getProjectedVertices();

@@ -1,11 +1,10 @@
 package viewer;
 
-import domain.models.Edge3D;
-import domain.models.Vertex3D;
+import domain.models.*;
 import domain.settings.Constants;
+import environment_service.api.ParameterService;
+import environment_service.inmem_parameter_repo.InMemParameterRepo;
 import lombok.extern.java.Log;
-import domain.models.Dot2D;
-import domain.models.Line2D;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,6 +17,7 @@ import viewservice.api.ViewServiceDummy;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Log
@@ -29,6 +29,9 @@ public class ScheduledPanelPainting {
 
     public static final String VERTEX_URL = "http://localhost:8080/vertices";
     public static final String EDGE_URL = "http://localhost:8080/edges";
+    public static final String PARAMETER_URL = "http://localhost:8080/parameters";
+    public static final double THETA_SPEED = 0.01;
+    public static final int THETA_INIT = 0;
     float theta;
 
     @Autowired
@@ -36,34 +39,36 @@ public class ScheduledPanelPainting {
 
     @Autowired
     ViewService viewService;
-   // ViewServiceDummy viewServiceDummy;
+
+ //   @Autowired
+  //  ParameterService parameterService;
 
     private RestTemplate restTemplate;
+
 
     @PostConstruct
     public void setup() {
         restTemplate = new RestTemplate();
-        theta=0;
+        theta= THETA_INIT;
     }
 
     @Scheduled(initialDelay = INIT_DELAY, fixedRate = CALLING_TIME)
     public void calculate() throws InterruptedException {
+        restReadParameter();
         setPanelFromRestEndPointData();
         panel.repaint();
+        theta= (float) (theta+ THETA_SPEED);
+    //    viewService.setTheta(theta);
 
-        theta= (float) (theta+0.01);
-        viewService.setTheta(theta);
-
+        viewService.changeParameterValue(new Parameter("theta",theta,"I am theta"));
     }
 
     private void setPanelFromRestEndPointData() {
-
         restReadVertices();
         restReadEdges();
         viewService.transformAndProject();
         panel.setVertices(viewService.getDots());
         panel.setEdges(viewService.getLines());
-
     }
 
 
@@ -106,6 +111,29 @@ public class ScheduledPanelPainting {
         }
     }
 
+    private void restReadParameter() {
+        try {
+            ResponseEntity<Parameter[]> response =
+                    restTemplate.getForEntity(
+                            PARAMETER_URL,
+                            Parameter[].class);
+
+            Parameter[] parameters = response.getBody();
+            assert parameters != null;
+           // System.out.println("Arrays.asList(parameters) = " + Arrays.asList(parameters));
+            List<Parameter> params=Arrays.asList(parameters);
+            List<Parameter> paramsExclTheta=params.stream().filter(p -> !p.name.equals("theta")).collect(Collectors.toList());
+            viewService.changeParameterValues(paramsExclTheta);
+
+        } catch (RestClientException e) {
+            log.warning("URL = " + VERTEX_URL + " does not exist");
+            setDummyPanelData();
+        } catch (Exception e) {
+            log.warning("Unknown exception, class = "+e.getClass());
+        }
+    }
+
+
     private void setDummyPanelData() {
         List<Dot2D> vertexList=Arrays.asList(
                 new Dot2D(111,111),
@@ -118,8 +146,6 @@ public class ScheduledPanelPainting {
 
         panel.setVertices(vertexList);
         panel.setEdges(edgeList);
-
-
 
     }
 }

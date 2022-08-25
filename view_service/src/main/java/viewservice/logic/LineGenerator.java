@@ -34,7 +34,6 @@ public class LineGenerator extends MediatorMemberAbstract {
             Dot2D dot2 = dots.get((int) dot2Idx);
             line=Optional.of(new Line2D(dot1.getX(), dot1.getY(), dot2.getX(), dot2.getY()));
 
-
         } catch (IndexOutOfBoundsException e)
         {
             log.warning("Faulty vertex index for line generation, edge = "+edge);

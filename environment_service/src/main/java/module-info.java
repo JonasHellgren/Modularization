@@ -3,8 +3,9 @@ module environment_service
   // exports environment_service.api;
    exports test to junit;
    exports environment_service.api;
+    exports environment_service.inmem_parameter_repo;
 
-   requires transitive  domain;
+    requires transitive  domain;
 
    requires java.logging;
    //requires lombok;
