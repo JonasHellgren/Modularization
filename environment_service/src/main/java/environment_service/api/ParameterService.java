@@ -5,6 +5,8 @@ import environment_service.inmem_parameter_repo.InMemParameterRepo;
 import environment_service.inmem_parameter_repo.InMemParameterRepoThreeDim;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ParameterService implements ParameterServiceInterface {
 
@@ -19,8 +21,16 @@ public class ParameterService implements ParameterServiceInterface {
         return inMemParameterRepo.get(name);
     }
 
+    public List<Parameter> getParameters()  {
+        return inMemParameterRepo.getAll();
+    }
+
+
     @Override
     public void changeParameterValue(String name, float newValue) {
         inMemParameterRepo.changeValue(name,newValue);
     }
+
+
+
 }

@@ -1,13 +1,11 @@
 package viewservice.api;
 
-import domain.models.Dot2D;
-import domain.models.Edge3D;
-import domain.models.Line2D;
-import domain.models.Vertex3D;
+import domain.models.*;
 import org.springframework.stereotype.Service;
 import viewservice.view_mediator.ViewMediator;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ViewService implements ViewServiceInterface {
@@ -27,6 +25,18 @@ public class ViewService implements ViewServiceInterface {
     @Override
     public void insertEdges(List<Edge3D> edge3DS) {
         viewMediator.setEdges(edge3DS);
+    }
+
+    public void changeParameterValues(List<Parameter> pars) {
+
+        for (Parameter p:pars) {
+            changeParameterValue(p);
+        }
+
+    }
+
+    public void changeParameterValue(Parameter par) {
+        viewMediator.changeParameterValue(par);
     }
 
     @Override
@@ -58,4 +68,8 @@ public class ViewService implements ViewServiceInterface {
     public void setAlpha(float newAlpha) {
         viewMediator.setAlpha(newAlpha);
     }
+
+
+
+
 }

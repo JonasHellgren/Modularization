@@ -1,11 +1,8 @@
 package viewer;
 
-import domain.models.Edge3D;
-import domain.models.Vertex3D;
+import domain.models.*;
 import domain.settings.Constants;
 import lombok.extern.java.Log;
-import domain.models.Dot2D;
-import domain.models.Line2D;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,6 +15,7 @@ import viewservice.api.ViewServiceDummy;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Log
@@ -29,6 +27,8 @@ public class ScheduledPanelPainting {
 
     public static final String VERTEX_URL = "http://localhost:8080/vertices";
     public static final String EDGE_URL = "http://localhost:8080/edges";
+    public static final String PARAMETER_URL = "http://localhost:8080/parameters";
+
     float theta;
 
     @Autowired
@@ -105,6 +105,29 @@ public class ScheduledPanelPainting {
             log.warning("Unknown exception, class = "+e.getClass());
         }
     }
+
+    private void restReadParameter() {
+        try {
+            ResponseEntity<Parameter[]> response =
+                    restTemplate.getForEntity(
+                            PARAMETER_URL,
+                            Parameter[].class);
+
+            Parameter[] parameters = response.getBody();
+            assert parameters != null;
+            // System.out.println("Arrays.asList(parameters) = " + Arrays.asList(parameters));
+            List<Parameter> params=Arrays.asList(parameters);
+            List<Parameter> paramsExclTheta=params.stream().filter(p -> !p.name.equals("theta")).collect(Collectors.toList());
+            viewService.changeParameterValues(paramsExclTheta);
+
+        } catch (RestClientException e) {
+            log.warning("URL = " + VERTEX_URL + " does not exist");
+            setDummyPanelData();
+        } catch (Exception e) {
+            log.warning("Unknown exception, class = "+e.getClass());
+        }
+    }
+
 
     private void setDummyPanelData() {
         List<Dot2D> vertexList=Arrays.asList(
