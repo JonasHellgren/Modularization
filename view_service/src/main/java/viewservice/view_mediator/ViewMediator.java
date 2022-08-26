@@ -61,6 +61,10 @@ public class ViewMediator implements ViewMediatorInterface {
         newLineGenerator();
     }
 
+    public static ViewMediator newViewMediator() {
+        return new ViewMediator();
+    }
+
     @Override
     public void transformAndProject() {
         UVNVertices=transformer.transform(worldVertices);

@@ -4,9 +4,6 @@ import environment_service.inmem_data_repo.InMemRepoInterface;
 import environment_service.inmem_data_repo.VertexRepo;
 import org.junit.Assert;
 import org.junit.Test;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.Test;
 
 public class TestVertex3DRepo {
 

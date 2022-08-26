@@ -1,9 +1,7 @@
 package viewservice.api;
-
 import domain.models.*;
 import org.springframework.stereotype.Service;
 import viewservice.view_mediator.ViewMediator;
-
 import java.util.List;
 
 @Service
@@ -12,8 +10,7 @@ public class ViewService implements ViewServiceInterface {
     ViewMediator viewMediator;
 
     public ViewService() {
-        System.out.println("view constructor");
-        this.viewMediator = new ViewMediator();  //todo static factory
+        this.viewMediator = ViewMediator.newViewMediator();
     }
 
     @Override

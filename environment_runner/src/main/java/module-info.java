@@ -1,6 +1,5 @@
 open module environment_runner
 {
-
     requires environment_service;
 
     requires spring.context;

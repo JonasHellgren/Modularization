@@ -1,9 +1,6 @@
 package environment_service.inmem_data_repo;
-
 import domain.models.Vertex3D;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 

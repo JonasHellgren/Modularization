@@ -25,7 +25,6 @@ public class ParameterService implements ParameterServiceInterface {
         return inMemParameterRepo.getAll();
     }
 
-
     @Override
     public void changeParameterValue(String name, float newValue) {
         inMemParameterRepo.changeValue(name,newValue);

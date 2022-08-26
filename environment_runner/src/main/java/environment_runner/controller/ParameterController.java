@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * postman (POST):
+ * http://localhost:8080/parchange
+ * {"name":"R","value":4, "description":"R"}
+ */
+
 @RestController
 public class ParameterController {
     @Autowired

@@ -20,14 +20,13 @@ import java.util.stream.Collectors;
 @Component
 @Log
 public class ScheduledPanelPainting {
-
-
     public static final long CALLING_TIME = Constants.DT_MILLIS;
     public static final long INIT_DELAY = 1000L;
 
     public static final String VERTEX_URL = "http://localhost:8080/vertices";
     public static final String EDGE_URL = "http://localhost:8080/edges";
     public static final String PARAMETER_URL = "http://localhost:8080/parameters";
+    public static final float THETA_SPEED = 0.01f;
 
     float theta;
 
@@ -36,7 +35,6 @@ public class ScheduledPanelPainting {
 
     @Autowired
     ViewService viewService;
-   // ViewServiceDummy viewServiceDummy;
 
     private RestTemplate restTemplate;
 
@@ -52,22 +50,18 @@ public class ScheduledPanelPainting {
         setPanelFromRestEndPointData();
         panel.repaint();
 
-        theta= (float) (theta+0.01);
-        //viewService.setTheta(theta);
-        viewService.changeParameterValue(new Parameter("theta",theta,""));
+        theta= theta+ THETA_SPEED;
+        viewService.changeParameterValue(Parameter.newParameter("theta",theta));
 
     }
 
     private void setPanelFromRestEndPointData() {
-
         restReadVertices();
         restReadEdges();
         viewService.transformAndProject();
         panel.setVertices(viewService.getDots());
         panel.setEdges(viewService.getLines());
-
     }
-
 
     private void restReadVertices() {
         try {
