@@ -1,0 +1,56 @@
+@startuml
+interface viewservice.view_mediator.ViewMediatorInterface {
+}
+class viewservice.logic.UVNCoordinateProjector {
++ List<Vertex3D> project(List<Vertex3D>)
+}
+class viewservice.api.ViewService {
++ void insertVertices(List<Vertex3D>)
++ void insertEdges(List<Edge3D>)
++ void changeParameterValues(List<Parameter>)
++ void changeParameterValue(Parameter)
++ void transformAndProject()
++ List<Dot2D> getDots()
++ List<Line2D> getLines()
+}
+class viewservice.logic.WorldToCameraTransformer {
++ Matrix createM()
++ List<Vertex3D> transform(List<Vertex3D>)
++ Vector3D getVectorBetweenCameraAndWorldOrigo(float,float,float)
+}
+interface viewservice.view_mediator.MediatorMemberInterface {
+}
+class viewservice.view_mediator.MediatorMemberAbstract {
++ void setMediator(ViewMediatorInterface)
+}
+class viewservice.logic.LineGenerator {
++ List<Line2D> getLines(List<Dot2D>)
+}
+class viewservice.logic.ViewPortTransformer {
++ Matrix createM()
++ List<Vertex3D> divideProjectedVerticesWithAspectRatio(List<Vertex3D>)
++ List<Dot2D> transform(List<Vertex3D>)
+}
+interface viewservice.api.ViewServiceInterface {
+}
+class viewservice.view_mediator.ViewMediator {
++ {static} ViewMediator newViewMediator()
++ void transformAndProject()
++ List<Dot2D> getDotsToPlot()
++ List<Line2D> getLinesToPlot()
++ List<Vertex3D> getWorldVertices()
++ List<Vertex3D> getUVNVertices()
++ List<Vertex3D> getProjectedVertices()
++ void changeParameterValue(Parameter)
++ float getParValue(String)
+}
+
+
+viewservice.view_mediator.MediatorMemberAbstract <|-- viewservice.logic.UVNCoordinateProjector
+viewservice.api.ViewServiceInterface <|.. viewservice.api.ViewService
+viewservice.view_mediator.MediatorMemberAbstract <|-- viewservice.logic.WorldToCameraTransformer
+viewservice.view_mediator.MediatorMemberInterface <|.. viewservice.view_mediator.MediatorMemberAbstract
+viewservice.view_mediator.MediatorMemberAbstract <|-- viewservice.logic.LineGenerator
+viewservice.view_mediator.MediatorMemberAbstract <|-- viewservice.logic.ViewPortTransformer
+viewservice.view_mediator.ViewMediatorInterface <|.. viewservice.view_mediator.ViewMediator
+@enduml

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import viewservice.api.ViewService;
-import viewservice.api.ViewServiceDummy;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -45,7 +44,7 @@ public class ScheduledPanelPainting {
     }
 
     @Scheduled(initialDelay = INIT_DELAY, fixedRate = CALLING_TIME)
-    public void calculate() throws InterruptedException {
+    public void paint3d() throws InterruptedException {
         restReadParameter();
         setPanelFromRestEndPointData();
         panel.repaint();

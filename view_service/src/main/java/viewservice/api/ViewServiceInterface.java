@@ -13,9 +13,5 @@ public interface ViewServiceInterface {
     List<Line2D> getLines();
     void changeParameterValues(List<Parameter> pars);
     void changeParameterValue(Parameter par);
-    //   void setR(float newR);
-  //  void setTheta(float newTheta);
-//    void setAlpha(float newAlpha);
-
 
 }

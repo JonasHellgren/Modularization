@@ -1,7 +1,5 @@
 package viewservice.view_mediator;
-
 import domain.models.*;
-
 import java.util.List;
 
 public interface ViewMediatorInterface {

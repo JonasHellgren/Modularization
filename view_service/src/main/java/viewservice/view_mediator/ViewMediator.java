@@ -17,6 +17,7 @@ import java.util.Optional;
 /**
  * Thanks to the mediator pattern fields do not need to be transferred to objects via method parameters.
  * The working horses WorldToCameraTransformer..LineGenerator do all have access to parameters, for ex R
+ * A higher class decoupling is achieved
  */
 
 @Setter
@@ -28,7 +29,7 @@ public class ViewMediator implements ViewMediatorInterface {
     static final float R_DEFAULT=5;
     static final float THETA_DEFAULT=(float) (0.2*Math.PI/2);
     static final float ALPHA_DEFAULT=(float) Math.PI/2;
-    static final float GAMMA_DEFAULT=(float) Math.PI/8;
+    static final float GAMMA_DEFAULT=(float) Math.PI/10;
     static final float DEFAULT_PAR_VALUE=1;
 
     List<Vertex3D> worldVertices;  //3d data
@@ -51,10 +52,10 @@ public class ViewMediator implements ViewMediatorInterface {
         this.worldVertices =new ArrayList<>();
         this.edges=new ArrayList<>();
         this.parameters=new ArrayList<>();
-        parameters.add(new Parameter("R",R_DEFAULT,""));
-        parameters.add(new Parameter("theta",THETA_DEFAULT,""));
-        parameters.add(new Parameter("alpha",ALPHA_DEFAULT,""));
-        parameters.add(new Parameter("gamma",GAMMA_DEFAULT,""));
+        parameters.add(Parameter.newParameter("R",R_DEFAULT));
+        parameters.add(Parameter.newParameter("theta",THETA_DEFAULT));
+        parameters.add(Parameter.newParameter("alpha",ALPHA_DEFAULT));
+        parameters.add(Parameter.newParameter("gamma",GAMMA_DEFAULT));
         newTransformer();
         newProjector();
         newViewPortTransformer();
