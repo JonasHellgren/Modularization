@@ -19,7 +19,10 @@ LineExtractor  x
 try i LineExtractor  x
 se mer från ovan - modda r   x
 renare mediator  x
-sätta zoom etc via REST
+sätta zoom etc via REST x
+comments
+pusha
+
 
 ev clean up:
 repo för params i mediator

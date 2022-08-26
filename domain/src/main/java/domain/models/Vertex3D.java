@@ -1,12 +1,12 @@
 package domain.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealVector;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor  //needed for RestTemplate to work, else HttpException
 public class Vertex3D {

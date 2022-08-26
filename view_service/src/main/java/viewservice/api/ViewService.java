@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import viewservice.view_mediator.ViewMediator;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ViewService implements ViewServiceInterface {
@@ -46,12 +45,12 @@ public class ViewService implements ViewServiceInterface {
 
     @Override
     public List<Dot2D> getDots() {
-        return viewMediator.getViewPortDots();
+        return viewMediator.getDotsToPlot();
     }
 
     @Override
     public List<Line2D> getLines() {
-        return viewMediator.getLines();
+        return viewMediator.getLinesToPlot();
     }
 
 }

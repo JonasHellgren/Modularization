@@ -36,7 +36,7 @@ public class TestViewMediator {
 
         List<Vertex3D> projectedVertices = getProjectedVertices();
         System.out.println("projectedVertices = " + projectedVertices);
-        List<Dot2D> dots=vm.getViewPortDots();
+        List<Dot2D> dots=vm.getDotsToPlot();
 
         System.out.println("dots = " + dots);
 

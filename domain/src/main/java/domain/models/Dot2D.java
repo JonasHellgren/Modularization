@@ -1,10 +1,6 @@
 package domain.models;
-
 import domain.utils.CommonMath;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.Arrays;
 
 @Data
 public class Dot2D {

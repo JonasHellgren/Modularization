@@ -7,12 +7,12 @@ import java.util.List;
 public interface ViewMediatorInterface {
     void transformAndProject();
     List<Edge3D> getEdges();
-    List<Dot2D> getViewPortDots();
-    List<Line2D> getLines();
-    float getParValue(String name);
-    void changeParameterValue(Parameter par);
+    List<Dot2D> getDotsToPlot();
+    List<Line2D> getLinesToPlot();
     List<Vertex3D> getWorldVertices();
     List<Vertex3D> getUVNVertices();
     List<Vertex3D> getProjectedVertices();
+    float getParValue(String name);
+    void changeParameterValue(Parameter par);
 
 }

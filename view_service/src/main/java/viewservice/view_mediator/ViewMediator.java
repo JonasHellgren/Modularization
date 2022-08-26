@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Thanks to the mediator pattern fields do not need to be transferred via method parameters.
+ * Thanks to the mediator pattern fields do not need to be transferred to objects via method parameters.
  * The working horses WorldToCameraTransformer..LineGenerator do all have access to parameters, for ex R
  */
 
@@ -55,7 +55,6 @@ public class ViewMediator implements ViewMediatorInterface {
         parameters.add(new Parameter("theta",THETA_DEFAULT,""));
         parameters.add(new Parameter("alpha",ALPHA_DEFAULT,""));
         parameters.add(new Parameter("gamma",GAMMA_DEFAULT,""));
-
         newTransformer();
         newProjector();
         newViewPortTransformer();
@@ -68,14 +67,15 @@ public class ViewMediator implements ViewMediatorInterface {
         projectedVertices=projector.project(UVNVertices);
     }
 
-    public List<Dot2D> getViewPortDots() {
+    @Override
+    public List<Dot2D> getDotsToPlot() {
         List<Vertex3D> vertices = viewPortTransformer.divideProjectedVerticesWithAspectRatio(projectedVertices);
         viewPortDots = viewPortTransformer.transform(vertices);
         return viewPortDots;
     }
 
     @Override
-    public List<Line2D> getLines() {
+    public List<Line2D> getLinesToPlot() {
         lines=lineGenerator.getLines(viewPortDots);
         return lines;
     }
