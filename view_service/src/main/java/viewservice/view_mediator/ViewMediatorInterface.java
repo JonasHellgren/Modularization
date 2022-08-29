@@ -10,7 +10,15 @@ public interface ViewMediatorInterface {
     List<Vertex3D> getWorldVertices();
     List<Vertex3D> getUVNVertices();
     List<Vertex3D> getProjectedVertices();
+
+    void setWorldVertices(List<Vertex3D> vertices);
+    void setEdges(List<Edge3D> edge3DS);
+
     float getParValue(String name);
     void changeParameterValue(Parameter par);
+
+     static ViewMediator newViewMediator() {   //todo till interface
+        return new ViewMediator();
+    }
 
 }

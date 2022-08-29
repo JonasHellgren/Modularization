@@ -2,15 +2,17 @@ package viewservice.api;
 import domain.models.*;
 import org.springframework.stereotype.Service;
 import viewservice.view_mediator.ViewMediator;
+import viewservice.view_mediator.ViewMediatorInterface;
+
 import java.util.List;
 
 @Service
 public class ViewService implements ViewServiceInterface {
 
-    ViewMediator viewMediator;  //todo använda interface
+    ViewMediatorInterface viewMediator;
 
     public ViewService() {
-        this.viewMediator = ViewMediator.newViewMediator();
+        this.viewMediator = ViewMediatorInterface.newViewMediator();
     }
 
     @Override
