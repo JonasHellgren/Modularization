@@ -74,10 +74,11 @@ public class TestViewMediator {
        // vm.setR(R);
        // vm.setTheta(theta);
 
+        /*
         vm.changeParameterValue(new Parameter("theta",theta,""));
         vm.changeParameterValue(new Parameter("R",R,""));
         vm.setAlpha(alpha);
-        vm.setGamma(0);
+        vm.setGamma(0);  */
 
         vm.changeParameterValue(new Parameter("R",R,""));
         vm.changeParameterValue(new Parameter("theta",theta,""));

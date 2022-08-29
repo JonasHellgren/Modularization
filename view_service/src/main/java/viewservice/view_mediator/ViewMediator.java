@@ -87,21 +87,13 @@ public class ViewMediator implements ViewMediatorInterface {
         return lines;
     }
 
-    public float getR() {
-        return getPar("R");
-    }
-
-
-    @Override
-    public float getAlpha() {
-        return getPar("alpha");
-    }
 
     @Override
     public float getGamma() {
         return getPar("gamma");
     }
 
+    @Override
     public void changeParameterValue(Parameter par)  {
         Optional<Parameter> parToChange=parameters.stream().filter(p -> p.name.equals(par.getName())).findAny();
 
@@ -123,10 +115,6 @@ public class ViewMediator implements ViewMediatorInterface {
         return par.map(parameter -> parameter.value).orElse(DEFAULT_PAR_VALUE);
     }
 
-    @Override
-    public List<Vertex3D> getWorldVertices() {
-        return worldVertices;
-    }
 
     @Override
     public List<Vertex3D> getUVNVertices() {

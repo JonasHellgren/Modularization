@@ -21,11 +21,7 @@ public class ParameterService implements ParameterServiceInterface {
         return inMemParameterRepo.get(name);
     }
 
-<<<<<<< HEAD
-    public List<Parameter>  getParameters()  {
-=======
     public List<Parameter> getParameters()  {
->>>>>>> tmp
         return inMemParameterRepo.getAll();
     }
 

@@ -33,10 +33,12 @@ public class TestWorldToCameraTransformer {
         Vector3D rDesired=new Vector3D(0,0,10);
         Assert.assertTrue(wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getPar("theta"), mediator.getGamma(), mediator.getPar("R")).equals(rDesired));
 
+        /*
         System.out.println("mediator.getR() = " + mediator.getParValue("R"));
        // System.out.println("mediator.getM() = " + mediator.getM());
         Vector3D rDesired=new Vector3D(0,0,10);
         Assert.assertTrue(wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getParValue("theta"), mediator.getParValue("gamma"), mediator.getParValue("R")).equals(rDesired));
+*/
 
         System.out.println("wtct.getM() = " + wtct.createM());
 //        Assert.assertEquals(-1,wtct.getM().getElementAsFloat(0,0), DELTA);
@@ -62,6 +64,7 @@ public class TestWorldToCameraTransformer {
         Vector3D rDesired=new Vector3D(7.0711f, 0, 7.0711f);
         Assert.assertTrue(wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getPar("theta"), mediator.getPar("gamma"), mediator.getPar("R")).equals(rDesired));
 
+        /*
         System.out.println("wtct.getR() = " + wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getParValue("theta"), mediator.getParValue("gamma"), mediator.getParValue("R")));
       //  System.out.println("wtct.getM() = " + wtct.getM());
 
@@ -70,6 +73,8 @@ public class TestWorldToCameraTransformer {
         Vector3D rDesired=new Vector3D(7.0711f, 0, 7.0711f);
         Assert.assertTrue(wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getParValue("theta"), mediator.getParValue("gamma"), mediator.getParValue("R")).equals(rDesired));
 
+
+         */
         Assert.assertEquals(-0.7071,wtct.createM().getElementAsFloat(0,0), DELTA);
     }
 

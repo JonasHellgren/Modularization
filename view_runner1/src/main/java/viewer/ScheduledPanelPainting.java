@@ -23,14 +23,11 @@ import java.util.stream.Collectors;
 public class ScheduledPanelPainting {
     public static final long CALLING_TIME = Constants.DT_MILLIS;
     public static final long INIT_DELAY = 1000L;
-
-
     public static final String VERTICES_URL = "http://localhost:8080/data3d/vertices";
     public static final String EDGES_URL = "http://localhost:8080/data3d/edges";
     public static final String PARAMETERS_URL = "http://localhost:8080/parameters/all";
     public static final float THETA_SPEED = 0.01f;
     public static final int THETA_INIT = 0;
-
 
     float theta;
 
@@ -56,13 +53,8 @@ public class ScheduledPanelPainting {
         restReadParameter();
         setPanelFromRestEndPointData();
         panel.repaint();
-        theta= (float) (theta+ THETA_SPEED);
-    //    viewService.setTheta(theta);
-
-
         theta= theta+ THETA_SPEED;
         viewService.changeParameterValue(Parameter.newParameter("theta",theta));
-
 
     }
 

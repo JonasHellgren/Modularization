@@ -1,9 +1,5 @@
 package environment_service.inmem_parameter_repo;
 import domain.models.Parameter;
-<<<<<<< HEAD
-
-=======
->>>>>>> tmp
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +28,6 @@ public class InMemParameterRepo implements InMemParameterRepoInterface {
         return new ArrayList<>(parameterMap.values());
     }
 
-    @Override
-    public List<Parameter> getAll() {
-        return new ArrayList<>(parameterMap.values());
-    }
 
     @Override
     public float getValue(String name) {

@@ -27,7 +27,6 @@ public class ViewService implements ViewServiceInterface {
     }
 
 
-
     @Override
     public void changeParameterValues(List<Parameter> pars) {
         for (Parameter p:pars) {

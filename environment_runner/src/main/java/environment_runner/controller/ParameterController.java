@@ -36,7 +36,6 @@ public class ParameterController {
 
 
     @PostMapping(path = "/change")  //handles post requests from client
-    //@Valid, triggers validations on person, @RequestBody put json body into object
     public void changeParameter(@RequestBody Parameter par) {
         System.out.println("changeParameter called, added:" + par.getName());
         parameterService.changeParameterValue(par.name, par.value);

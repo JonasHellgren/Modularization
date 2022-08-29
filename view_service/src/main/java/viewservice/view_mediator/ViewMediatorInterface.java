@@ -5,20 +5,10 @@ import java.util.List;
 public interface ViewMediatorInterface {
     void transformAndProject();
     List<Edge3D> getEdges();
-
-    List<Dot2D> getViewPortDots();
-    List<Line2D> getLines();
-
-
-    //float getTheta();
-    float getAlpha();
     float getGamma();
     float getPar(String name);
-
     List<Dot2D> getDotsToPlot();
     List<Line2D> getLinesToPlot();
-
-    List<Vertex3D> getWorldVertices();
     List<Vertex3D> getUVNVertices();
     List<Vertex3D> getProjectedVertices();
 
@@ -28,7 +18,7 @@ public interface ViewMediatorInterface {
     float getParValue(String name);
     void changeParameterValue(Parameter par);
 
-     static ViewMediator newViewMediator() {   //todo till interface
+     static ViewMediator newViewMediator() {
         return new ViewMediator();
     }
 
