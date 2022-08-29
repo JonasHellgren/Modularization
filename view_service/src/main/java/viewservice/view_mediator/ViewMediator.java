@@ -62,7 +62,7 @@ public class ViewMediator implements ViewMediatorInterface {
         newLineGenerator();
     }
 
-    public static ViewMediator newViewMediator() {
+    public static ViewMediator newViewMediator() {   //todo till interface
         return new ViewMediator();
     }
 

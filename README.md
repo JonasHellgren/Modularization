@@ -4,7 +4,6 @@
 * run ViewApplication
 
 
-
 ## Issues
 DL4J gives "Error occurred during initialization of boot layer"
 

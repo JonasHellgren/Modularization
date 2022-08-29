@@ -20,9 +20,12 @@ try i LineExtractor  x
 se mer från ovan - modda r   x
 renare mediator  x
 sätta zoom etc via REST x
-comments
+comments x
+pusha x
+3d matte md fil x
+en major path per controller
+mediator med resp utan projektion
 pusha
-
 
 ev clean up:
 repo för params i mediator

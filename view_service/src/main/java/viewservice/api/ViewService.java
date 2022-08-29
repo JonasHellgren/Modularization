@@ -7,7 +7,7 @@ import java.util.List;
 @Service
 public class ViewService implements ViewServiceInterface {
 
-    ViewMediator viewMediator;
+    ViewMediator viewMediator;  //todo använda interface
 
     public ViewService() {
         this.viewMediator = ViewMediator.newViewMediator();
