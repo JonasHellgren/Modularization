@@ -5,7 +5,8 @@ import domain.models.Vertex3D;
 import domain.utils.CommonMath;
 import org.junit.Assert;
 import org.junit.Test;
-import viewservice.view_mediator.ViewMediator;
+import viewservice.view_mediator.ViewMediatorAbstract;
+import viewservice.view_mediator.ViewMediatorProjection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class TestViewMediator {
 
-    ViewMediator vm;
+    ViewMediatorAbstract vm;
 
     @Test
     public void testTransformAndProjectThetaIsZer0() {
@@ -67,7 +68,7 @@ public class TestViewMediator {
         List<Vertex3D> vertices = getVertex3DS();
         List<Edge3D> edges = new ArrayList<>();
 
-        vm = new ViewMediator();
+        vm = new ViewMediatorProjection();
         vm.setWorldVertices(vertices);
         vm.setEdges(edges);
 
@@ -96,7 +97,7 @@ public class TestViewMediator {
 
         List<Vertex3D> vertices = getVertex3DS();
 
-        vm = new ViewMediator();
+        vm = new ViewMediatorProjection();
         vm.setWorldVertices(vertices);
         vm.transformAndProject();
         return vm.getProjectedVertices();

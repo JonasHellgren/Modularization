@@ -4,7 +4,8 @@ import domain.models.Vertex3D;
 import org.junit.Assert;
 import org.junit.Test;
 import viewservice.logic.WorldToCameraTransformer;
-import viewservice.view_mediator.ViewMediator;
+import viewservice.view_mediator.ViewMediatorAbstract;
+import viewservice.view_mediator.ViewMediatorProjection;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +26,7 @@ public class TestWorldToCameraTransformer {
         List<Vertex3D> vertexList = getVertex3DS();
 
         WorldToCameraTransformer wtct=new WorldToCameraTransformer();
-        ViewMediator mediator = getViewMediator(vertexList,0,R,ALPHA,GAMMA);
+        ViewMediatorAbstract mediator = getViewMediator(vertexList,0,R,ALPHA,GAMMA);
         wtct.setMediator(mediator);
 
         System.out.println("mediator.getR() = " + mediator.getPar("R"));
@@ -53,28 +54,14 @@ public class TestWorldToCameraTransformer {
         List<Vertex3D> vertexList = getVertex3DS();
 
         WorldToCameraTransformer wtct=new WorldToCameraTransformer();
-        ViewMediator mediator = getViewMediator(vertexList,PIDIV4,R,ALPHA,GAMMA);
+        ViewMediatorAbstract mediator = getViewMediator(vertexList,PIDIV4,R,ALPHA,GAMMA);
         wtct.setMediator(mediator);
 
         System.out.println("wtct.getR() = " + wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getPar("theta"), mediator.getGamma(), mediator.getPar("R")));
-      //  System.out.println("wtct.getM() = " + wtct.getM());
-
         System.out.println("wtct.getrVector(mediator.theta, mediator.getR()) = " + wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getPar("theta"), mediator.getPar("gamma"), mediator.getPar("R")));
 
         Vector3D rDesired=new Vector3D(7.0711f, 0, 7.0711f);
         Assert.assertTrue(wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getPar("theta"), mediator.getPar("gamma"), mediator.getPar("R")).equals(rDesired));
-
-        /*
-        System.out.println("wtct.getR() = " + wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getParValue("theta"), mediator.getParValue("gamma"), mediator.getParValue("R")));
-      //  System.out.println("wtct.getM() = " + wtct.getM());
-
-        System.out.println("wtct.getrVector(mediator.getTheta(), mediator.getR()) = " + wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getParValue("theta"), mediator.getParValue("gamma"), mediator.getParValue("R")));
-
-        Vector3D rDesired=new Vector3D(7.0711f, 0, 7.0711f);
-        Assert.assertTrue(wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getParValue("theta"), mediator.getParValue("gamma"), mediator.getParValue("R")).equals(rDesired));
-
-
-         */
         Assert.assertEquals(-0.7071,wtct.createM().getElementAsFloat(0,0), DELTA);
     }
 
@@ -82,7 +69,7 @@ public class TestWorldToCameraTransformer {
     public void transformToCameraThetaIsZero() {
         List<Vertex3D> vertexList = getVertex3DS();
         WorldToCameraTransformer wtct=new WorldToCameraTransformer();
-        ViewMediator mediator = getViewMediator(vertexList, 0,R,ALPHA,GAMMA);
+        ViewMediatorAbstract mediator = getViewMediator(vertexList, 0,R,ALPHA,GAMMA);
         wtct.setMediator(mediator);
         List<Vertex3D> vertexListCamera=wtct.transform(vertexList);
 //        List<Vertex3D> vertexListCamera = wtct.getUVNVertices();
@@ -102,7 +89,7 @@ public class TestWorldToCameraTransformer {
         List<Vertex3D> vertexList = getVertex3DS();
 
         WorldToCameraTransformer wtct=new WorldToCameraTransformer();
-        ViewMediator mediator = getViewMediator(vertexList, (float) Math.PI/4,R,ALPHA,GAMMA);
+        ViewMediatorAbstract mediator = getViewMediator(vertexList, (float) Math.PI/4,R,ALPHA,GAMMA);
         wtct.setMediator(mediator);
 
         System.out.println("wtct.getR() = " + wtct.getVectorBetweenCameraAndWorldOrigo(mediator.getParValue("theta"), mediator.getParValue("gamma"), mediator.getParValue("R")));
@@ -128,8 +115,8 @@ public class TestWorldToCameraTransformer {
         );
     }
 
-    private ViewMediator getViewMediator(List<Vertex3D> vertexList, float theta, float R, float alpha, float gamma ) {
-        ViewMediator mediator=new ViewMediator();
+    private ViewMediatorAbstract getViewMediator(List<Vertex3D> vertexList, float theta, float R, float alpha, float gamma ) {
+        ViewMediatorAbstract mediator=new ViewMediatorProjection();
         mediator.setWorldVertices(vertexList);
         mediator.changeParameterValue(new Parameter("theta",theta,""));
         mediator.changeParameterValue(new Parameter("R",R,""));

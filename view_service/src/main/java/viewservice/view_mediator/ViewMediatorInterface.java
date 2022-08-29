@@ -18,8 +18,13 @@ public interface ViewMediatorInterface {
     float getParValue(String name);
     void changeParameterValue(Parameter par);
 
-     static ViewMediator newViewMediator() {
-        return new ViewMediator();
+    static ViewMediatorAbstract newViewMediatorProjection() {
+        return new ViewMediatorProjection();
     }
+
+    static ViewMediatorAbstract newViewMediatorNoProjection() {
+        return new ViewMediatorNoProjection();
+    }
+
 
 }

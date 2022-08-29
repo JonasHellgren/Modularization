@@ -5,10 +5,7 @@ import domain.settings.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
-import viewservice.logic.LineGenerator;
-import viewservice.logic.UVNCoordinateProjector;
-import viewservice.logic.ViewPortTransformer;
-import viewservice.logic.WorldToCameraTransformer;
+import viewservice.logic.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,7 @@ import java.util.Optional;
 @Setter
 @Getter
 @Log
-public class ViewMediator implements ViewMediatorInterface {
+public abstract class ViewMediatorAbstract implements ViewMediatorInterface {
 
     //given data
     static final float R_DEFAULT=5;
@@ -40,7 +37,7 @@ public class ViewMediator implements ViewMediatorInterface {
 
     //work horses that all can access mediator
     WorldToCameraTransformer transformer;
-    UVNCoordinateProjector projector;
+    UVNCoordinateProjectorAbstract projector;
     ViewPortTransformer viewPortTransformer;
     LineGenerator lineGenerator;
 
@@ -50,7 +47,7 @@ public class ViewMediator implements ViewMediatorInterface {
     List<Dot2D> viewPortDots;           //the dots to show in panel
     List<Line2D> lines;                 //the lines to show in panel
 
-    public ViewMediator() {
+    public ViewMediatorAbstract() {
         this.worldVertices =new ArrayList<>();
         this.edges=new ArrayList<>();
 
@@ -65,8 +62,6 @@ public class ViewMediator implements ViewMediatorInterface {
         newLineGenerator();
     }
 
-
-
     @Override
     public void transformAndProject() {
         UVNVertices=transformer.transform(worldVertices);
@@ -74,7 +69,6 @@ public class ViewMediator implements ViewMediatorInterface {
     }
 
     @Override
-
     public List<Dot2D> getDotsToPlot() {
         List<Vertex3D> vertices = viewPortTransformer.divideProjectedVerticesWithAspectRatio(projectedVertices);
         viewPortDots = viewPortTransformer.transform(vertices);
@@ -137,7 +131,7 @@ public class ViewMediator implements ViewMediatorInterface {
     }
 
     private void newProjector() {
-        this.projector = new UVNCoordinateProjector();
+        this.projector = new UVNCoordinateProjectorFixedDistance();
         projector.setMediator(this);
     }
 

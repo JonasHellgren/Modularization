@@ -2,8 +2,9 @@ import domain.models.Parameter;
 import domain.models.Vertex3D;
 import org.junit.Assert;
 import org.junit.Test;
-import viewservice.logic.UVNCoordinateProjector;
-import viewservice.view_mediator.ViewMediator;
+import viewservice.logic.UVNCoordinateProjectorVertexDependingDistance;
+import viewservice.view_mediator.ViewMediatorAbstract;
+import viewservice.view_mediator.ViewMediatorProjection;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,8 +18,8 @@ public class TestUVNCoordinateProjector {
     @Test
     public void transformToCameraThetaIsZero() {
         List<Vertex3D> vertexList = getVertexThetaIsZero();
-        UVNCoordinateProjector projector=new UVNCoordinateProjector();
-        ViewMediator mediator = getViewMediator(PIDIV4,R,ALPHA);
+        UVNCoordinateProjectorVertexDependingDistance projector=new UVNCoordinateProjectorVertexDependingDistance();
+        ViewMediatorAbstract mediator = getViewMediator(PIDIV4,R,ALPHA);
         mediator.setUVNVertices(vertexList);
         projector.setMediator(mediator);
 
@@ -37,8 +38,8 @@ public class TestUVNCoordinateProjector {
     @Test
     public void transformToCameraThetaIsPiDiv4() {
         List<Vertex3D> vertexList = getVertexThetaIsPIDiv4();
-        UVNCoordinateProjector projector=new UVNCoordinateProjector();
-        ViewMediator mediator = getViewMediator(PIDIV4,R,ALPHA);
+        UVNCoordinateProjectorVertexDependingDistance projector=new UVNCoordinateProjectorVertexDependingDistance();
+        ViewMediatorAbstract mediator = getViewMediator(PIDIV4,R,ALPHA);
         mediator.setUVNVertices(vertexList);
         projector.setMediator(mediator);
         //projector.project();
@@ -73,8 +74,8 @@ public class TestUVNCoordinateProjector {
         );
     }
 
-    private ViewMediator getViewMediator(float theta, float R, float alpha ) {
-        ViewMediator mediator=new ViewMediator();
+    private ViewMediatorAbstract getViewMediator(float theta, float R, float alpha ) {
+        ViewMediatorAbstract mediator=new ViewMediatorProjection();
         mediator.changeParameterValue(new Parameter("theta",theta,""));
         mediator.changeParameterValue(new Parameter("R",R,""));
         mediator.changeParameterValue(new Parameter("alpha",alpha,""));

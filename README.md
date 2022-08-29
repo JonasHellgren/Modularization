@@ -4,6 +4,11 @@
 * run ViewApplication
 
 
+projection on or off is choosen by following line in ViewService
+
+this.viewMediator = ViewMediatorInterface.newViewMediatorProjection();
+
+
 ## Issues
 DL4J gives "Error occurred during initialization of boot layer"
 
@@ -24,4 +29,8 @@ Apache linear algebra works with module system
 
 ![img_2.png](png_figures/img_2.png)
 
-![img_4.png](png_figures/img_4.png)
+![img_1.png](png_figures/uml2.png)
+
+![img_2.png](png_figures/uml3.png)
+
+![img_1.png](png_figures/uml324.png)
