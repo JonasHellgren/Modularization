@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import viewservice.api.ViewService;
-import viewservice.api.ViewServiceDummy;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -22,16 +21,17 @@ import java.util.stream.Collectors;
 @Component
 @Log
 public class ScheduledPanelPainting {
-
-
     public static final long CALLING_TIME = Constants.DT_MILLIS;
     public static final long INIT_DELAY = 1000L;
 
-    public static final String VERTEX_URL = "http://localhost:8080/vertices";
-    public static final String EDGE_URL = "http://localhost:8080/edges";
-    public static final String PARAMETER_URL = "http://localhost:8080/parameters";
-    public static final double THETA_SPEED = 0.01;
+
+    public static final String VERTICES_URL = "http://localhost:8080/data3d/vertices";
+    public static final String EDGES_URL = "http://localhost:8080/data3d/edges";
+    public static final String PARAMETERS_URL = "http://localhost:8080/parameters/all";
+    public static final float THETA_SPEED = 0.01f;
     public static final int THETA_INIT = 0;
+
+
     float theta;
 
     @Autowired
@@ -39,9 +39,6 @@ public class ScheduledPanelPainting {
 
     @Autowired
     ViewService viewService;
-
- //   @Autowired
-  //  ParameterService parameterService;
 
     private RestTemplate restTemplate;
 
@@ -53,14 +50,20 @@ public class ScheduledPanelPainting {
     }
 
     @Scheduled(initialDelay = INIT_DELAY, fixedRate = CALLING_TIME)
-    public void calculate() throws InterruptedException {
+
+    public void paint3d() throws InterruptedException {
+
         restReadParameter();
         setPanelFromRestEndPointData();
         panel.repaint();
         theta= (float) (theta+ THETA_SPEED);
     //    viewService.setTheta(theta);
 
-        viewService.changeParameterValue(new Parameter("theta",theta,"I am theta"));
+
+        theta= theta+ THETA_SPEED;
+        viewService.changeParameterValue(Parameter.newParameter("theta",theta));
+
+
     }
 
     private void setPanelFromRestEndPointData() {
@@ -71,12 +74,11 @@ public class ScheduledPanelPainting {
         panel.setEdges(viewService.getLines());
     }
 
-
     private void restReadVertices() {
         try {
             ResponseEntity<Vertex3D[]> response =
                     restTemplate.getForEntity(
-                            VERTEX_URL,
+                            VERTICES_URL,
                             Vertex3D[].class);
 
             Vertex3D[] vertices = response.getBody();
@@ -84,7 +86,7 @@ public class ScheduledPanelPainting {
             viewService.insertVertices(Arrays.asList(vertices));
 
         } catch (RestClientException e) {
-            log.warning("URL = " + VERTEX_URL + " does not exist");
+            log.warning("URL = " + VERTICES_URL + " does not exist");
             setDummyPanelData();
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
@@ -96,7 +98,7 @@ public class ScheduledPanelPainting {
         try {
             ResponseEntity<Edge3D[]> response =
                     restTemplate.getForEntity(
-                            EDGE_URL,
+                            EDGES_URL,
                             Edge3D[].class);
 
             Edge3D[] edges = response.getBody();
@@ -104,7 +106,7 @@ public class ScheduledPanelPainting {
             viewService.insertEdges(Arrays.asList(edges));
 
         } catch (RestClientException e) {
-            log.warning("URL = " + EDGE_URL + " does not exist");
+            log.warning("URL = " + EDGES_URL + " does not exist");
             setDummyPanelData();
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
@@ -115,23 +117,23 @@ public class ScheduledPanelPainting {
         try {
             ResponseEntity<Parameter[]> response =
                     restTemplate.getForEntity(
-                            PARAMETER_URL,
+                            PARAMETERS_URL,
                             Parameter[].class);
 
             Parameter[] parameters = response.getBody();
             assert parameters != null;
-           // System.out.println("Arrays.asList(parameters) = " + Arrays.asList(parameters));
             List<Parameter> params=Arrays.asList(parameters);
             List<Parameter> paramsExclTheta=params.stream().filter(p -> !p.name.equals("theta")).collect(Collectors.toList());
             viewService.changeParameterValues(paramsExclTheta);
 
         } catch (RestClientException e) {
-            log.warning("URL = " + VERTEX_URL + " does not exist");
+            log.warning("URL = " + VERTICES_URL + " does not exist");
             setDummyPanelData();
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
         }
     }
+
 
 
     private void setDummyPanelData() {

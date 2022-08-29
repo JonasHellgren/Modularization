@@ -1,5 +1,3 @@
-//import domain.models.Vector3D;
-
 import domain.models.Vector3D;
 import org.junit.Assert;
 import org.junit.Test;

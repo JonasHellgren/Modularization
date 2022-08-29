@@ -5,9 +5,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
-
-
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -45,9 +42,6 @@ public class TestMatrix {
 
         Matrix Mat=new Matrix(v1,v2,v3);
         System.out.println(Arrays.deepToString(Mat.getMarray()));
-     //   System.out.println("Mat = " + Mat);
-     //   System.out.println("Mat = " + Mat);
-     //   System.out.println("\"balle\" = " + "balle");
 
         Assert.assertEquals(3, Mat.size()[0] , DELTA);
         Assert.assertEquals(3, Mat.size()[1] , DELTA);

@@ -12,9 +12,8 @@ public interface ViewServiceInterface {
     void transformAndProject();
     List<Dot2D> getDots();
     List<Line2D> getLines();
-   // void setR(float newR);
-   // void setTheta(float newTheta);
-   // void setAlpha(float newAlpha);
 
+    void changeParameterValues(List<Parameter> pars);
+    void changeParameterValue(Parameter par);
 
 }

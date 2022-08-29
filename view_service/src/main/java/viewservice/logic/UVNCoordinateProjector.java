@@ -16,7 +16,8 @@ public  class UVNCoordinateProjector extends MediatorMemberAbstract {
     public  List<Vertex3D> project(@NonNull List<Vertex3D> UVNVertices) {
 
         List<Vertex3D> projectedVertices= new ArrayList<>();
-        double alpha=mediator.getPar("alpha");
+
+        double alpha=mediator.getParValue("alpha");
         float tanHalfAlpha= (float) Math.tan(alpha/2);
         assert !CommonMath.isZero(tanHalfAlpha);
         float d=CommonMath.safeDiv(1,tanHalfAlpha);

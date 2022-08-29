@@ -11,7 +11,7 @@ public class InMemParameterRepo {
         InMemParameterRepoInterface repo=InMemParameterRepoInterface.newParameterRepoThreeDim();
         System.out.println("repo = " + repo);
         float R=repo.getValue("R");
-        Assert.assertEquals(10,R,0.1);
+        Assert.assertEquals(3,R,0.1);
     }
 
 

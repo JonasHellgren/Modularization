@@ -36,7 +36,7 @@ public class TestViewMediator {
 
         List<Vertex3D> projectedVertices = getProjectedVertices();
         System.out.println("projectedVertices = " + projectedVertices);
-        List<Dot2D> dots=vm.getViewPortDots();
+        List<Dot2D> dots=vm.getDotsToPlot();
 
         System.out.println("dots = " + dots);
 
@@ -70,6 +70,7 @@ public class TestViewMediator {
         vm = new ViewMediator();
         vm.setWorldVertices(vertices);
         vm.setEdges(edges);
+
        // vm.setR(R);
        // vm.setTheta(theta);
 
@@ -77,6 +78,13 @@ public class TestViewMediator {
         vm.changeParameterValue(new Parameter("R",R,""));
         vm.setAlpha(alpha);
         vm.setGamma(0);
+
+        vm.changeParameterValue(new Parameter("R",R,""));
+        vm.changeParameterValue(new Parameter("theta",theta,""));
+        vm.changeParameterValue(new Parameter("alpha",alpha,""));
+
+        vm.changeParameterValue(new Parameter("gamma",0,""));
+
 
         vm.transformAndProject();
         return vm.getProjectedVertices();

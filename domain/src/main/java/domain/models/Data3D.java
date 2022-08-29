@@ -1,14 +1,9 @@
 package domain.models;
-
-
 import domain.utils.CommonMath;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.math3.linear.*;
-
-import java.util.Arrays;
-
 
 @Data
 @AllArgsConstructor
@@ -40,7 +35,7 @@ public class Data3D {
         return (float) v.getNorm();
     }
 
-    public boolean equals(Data3D dataOther) {
+    public boolean equals(Object dataOther) {
         //check if the argument is a reference to this object
         if (dataOther == this) return true;
 
@@ -48,7 +43,7 @@ public class Data3D {
         if (!(dataOther instanceof Data3D)) return false;
 
         //For each significant field in the class, check if that field matches the corresponding field of this object
-        if (CommonMath.compareArrays(this.getFloatArray(), dataOther.getFloatArray(),DELTA)) {
+        if (CommonMath.compareArrays(this.getFloatArray(),  ((Data3D) dataOther).getFloatArray(),DELTA)) {
             return true;
         }
 

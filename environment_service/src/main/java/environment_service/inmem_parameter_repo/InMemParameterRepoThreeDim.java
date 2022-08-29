@@ -12,9 +12,9 @@ public class InMemParameterRepoThreeDim extends InMemParameterRepo {
         super();
         List<Parameter> parameterList = new ArrayList<>(
                 Arrays.asList(
-                new Parameter("R",10,"Camera distance (m)"),
+                new Parameter("R",3,"Camera distance (m)"),
                 new Parameter("theta", (float) (0.2*Math.PI/2),"Camera angle (rad)"),
-                new Parameter("alpha", (float) (1.0*Math.PI/4),"Zoom factor (rad)")
+                new Parameter("alpha", (float) (1.0*Math.PI/2),"Zoom factor (rad)")
 
         ));
         super.insertAll(parameterList);

@@ -1,12 +1,14 @@
 package domain.models;
-
 import lombok.Getter;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
-
 import java.util.Arrays;
+
+/**
+ * Used for linear algebra Matrix 3D operations. Depends on apache library.
+ */
 
 @Getter
 public class Matrix {

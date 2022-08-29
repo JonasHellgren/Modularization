@@ -2,15 +2,19 @@ package domain.models;
 
 import domain.utils.CommonMath;
 import lombok.Data;
+import lombok.Getter;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
-@Data
+/**
+ * Used for linear algebra Matrix 3D operations. Depends on apache library.
+ */
+
+@Getter
 public class Vector3D {
     Data3D data;
-  // INDArray ind;
 
     public Vector3D(float x, float y, float z) {
         this.data = new Data3D(x, y, z);
@@ -25,7 +29,7 @@ public class Vector3D {
     }
 
 
-    public Vector3D reverse() {  //todo clean up with INdatrray method
+    public Vector3D reverse() {
         float[] v=data.getFloatArray();
         return new Vector3D(-v[0],-v[1],-v[2]);
     }
