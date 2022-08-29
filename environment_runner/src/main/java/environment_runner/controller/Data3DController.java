@@ -9,6 +9,7 @@ import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 //web browser: http://localhost:8080/edges
 
 @RestController
+@RequestMapping(path = "/data3d")
 public class Data3DController {
 
 

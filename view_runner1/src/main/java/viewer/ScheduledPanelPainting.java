@@ -22,9 +22,9 @@ public class ScheduledPanelPainting {
     public static final long CALLING_TIME = Constants.DT_MILLIS;
     public static final long INIT_DELAY = 1000L;
 
-    public static final String VERTEX_URL = "http://localhost:8080/vertices";
-    public static final String EDGE_URL = "http://localhost:8080/edges";
-    public static final String PARAMETER_URL = "http://localhost:8080/parameters";
+    public static final String VERTICES_URL = "http://localhost:8080/data3d/vertices";
+    public static final String EDGES_URL = "http://localhost:8080/data3d/edges";
+    public static final String PARAMETERS_URL = "http://localhost:8080/parameters/all";
     public static final float THETA_SPEED = 0.01f;
 
     float theta;
@@ -66,7 +66,7 @@ public class ScheduledPanelPainting {
         try {
             ResponseEntity<Vertex3D[]> response =
                     restTemplate.getForEntity(
-                            VERTEX_URL,
+                            VERTICES_URL,
                             Vertex3D[].class);
 
             Vertex3D[] vertices = response.getBody();
@@ -74,7 +74,7 @@ public class ScheduledPanelPainting {
             viewService.insertVertices(Arrays.asList(vertices));
 
         } catch (RestClientException e) {
-            log.warning("URL = " + VERTEX_URL + " does not exist");
+            log.warning("URL = " + VERTICES_URL + " does not exist");
             setDummyPanelData();
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
@@ -86,7 +86,7 @@ public class ScheduledPanelPainting {
         try {
             ResponseEntity<Edge3D[]> response =
                     restTemplate.getForEntity(
-                            EDGE_URL,
+                            EDGES_URL,
                             Edge3D[].class);
 
             Edge3D[] edges = response.getBody();
@@ -94,7 +94,7 @@ public class ScheduledPanelPainting {
             viewService.insertEdges(Arrays.asList(edges));
 
         } catch (RestClientException e) {
-            log.warning("URL = " + EDGE_URL + " does not exist");
+            log.warning("URL = " + EDGES_URL + " does not exist");
             setDummyPanelData();
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
@@ -105,7 +105,7 @@ public class ScheduledPanelPainting {
         try {
             ResponseEntity<Parameter[]> response =
                     restTemplate.getForEntity(
-                            PARAMETER_URL,
+                            PARAMETERS_URL,
                             Parameter[].class);
 
             Parameter[] parameters = response.getBody();
@@ -115,7 +115,7 @@ public class ScheduledPanelPainting {
             viewService.changeParameterValues(paramsExclTheta);
 
         } catch (RestClientException e) {
-            log.warning("URL = " + VERTEX_URL + " does not exist");
+            log.warning("URL = " + VERTICES_URL + " does not exist");
             setDummyPanelData();
         } catch (Exception e) {
             log.warning("Unknown exception, class = "+e.getClass());
