@@ -1,5 +1,6 @@
 package trainer;
 
+import lombok.Getter;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.nnet.MultiLayerPerceptron;
@@ -8,6 +9,7 @@ import training_data.XoRDataSetProvider;
 
 import java.util.Arrays;
 
+@Getter
 public class XoRTrainer {
 
     public static final double DELTA = 0.1;

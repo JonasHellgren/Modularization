@@ -5,4 +5,5 @@ module trainer
 
     requires data_provider;
     requires neuroph;
+    requires lombok;
 }
