@@ -28,6 +28,7 @@ import org.neuroph.nnet.Adaline;
 import org.neuroph.nnet.learning.LMS;
 import org.neuroph.util.data.norm.MaxNormalizer;
 import org.neuroph.util.data.norm.Normalizer;
+import training_data.SwedishAutoInsuranceDataProvider;
 
 /**
  *
@@ -66,23 +67,9 @@ public class SwedishAutoInsurance implements LearningEventListener {
     }
 
     public void run() {
-        System.out.println("Creating training set...");
-        String dataSetFileName = "data_sets/autodata.txt";
-        int inputsCount = 1;
-        int outputsCount = 1;
 
-        // create training set from file
-        DataSet dataSet = DataSet.createFromFile(dataSetFileName, inputsCount, outputsCount, ",", false);
-        Normalizer norm = new MaxNormalizer();
-        norm.normalize(dataSet);
-        dataSet.shuffle();
+        SwedishAutoInsuranceDataProvider dataProvider=new SwedishAutoInsuranceDataProvider();
 
-        //dataSet.createTrainingAndTestSubsets()
-             //   dataSet.
-        //List<DataSet> subSets = dataSet.createTrainingAndTestSubsets(60, 40);
-        DataSet[] subSets = dataSet.createTrainingAndTestSubsets(60, 40);
-        DataSet trainingSet = subSets[0];
-        DataSet testSet = subSets[1];
 
         System.out.println("Creating neural network...");
         Adaline neuralNet = new Adaline(1);
@@ -93,12 +80,12 @@ public class SwedishAutoInsurance implements LearningEventListener {
 
         // train the network with training set
         System.out.println("Training network...");
-        neuralNet.learn(trainingSet);
+        neuralNet.learn(dataProvider.getTrainingSet());
         System.out.println("Training completed.");
         System.out.println("Testing network...");
 
         System.out.println("Network performance on the test set");
-        evaluate(neuralNet, testSet);
+        evaluate(neuralNet, dataProvider.getTestSet());
 
         System.out.println("Saving network");
         // save neural network to file
