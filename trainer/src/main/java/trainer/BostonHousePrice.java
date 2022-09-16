@@ -74,15 +74,13 @@ import training_data.BostonHousePriceDataProvider;
 6. Missing Values: None.
 
 
-
-
  */
 public class BostonHousePrice implements LearningEventListener {
 
 
     public static final int NOF_NEURONS_HIDDEN = 2;
     public static final double LEARNING_RATE = 0.1;
-    public static final int MAX_ITERATIONS = 5000;
+    public static final int MAX_ITERATIONS = 100;
     public static final double MAX_ERROR = 0.001;
     public static final int PERCENTAGE_TEST_SET = 2;
 
@@ -104,7 +102,7 @@ public class BostonHousePrice implements LearningEventListener {
 
         neuralNet.setLearningRule(new MomentumBackpropagation());
         MomentumBackpropagation learningRule = (MomentumBackpropagation) neuralNet.getLearningRule();
-        learningRule.addListener(this);
+       // learningRule.addListener(this);
         learningRule.setLearningRate(LEARNING_RATE);
         learningRule.setMaxIterations(MAX_ITERATIONS);
         learningRule.setMaxError(MAX_ERROR);

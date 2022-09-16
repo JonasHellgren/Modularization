@@ -11,11 +11,11 @@ public class SwedishAutoInsuranceDataProvider {
     DataSet trainingSet;
     DataSet testSet;
 
-    public SwedishAutoInsuranceDataProvider() {
-        createSets();
+    public SwedishAutoInsuranceDataProvider(int percentageTestSet) {
+        createSets(percentageTestSet);
     }
 
-    private void createSets() {
+    private void createSets(int percentageTestSet) {
         System.out.println("Creating training set...");
         String dataSetFileName = "data_sets/autodata.txt";
         int inputsCount = 1;
@@ -30,7 +30,7 @@ public class SwedishAutoInsuranceDataProvider {
         //dataSet.createTrainingAndTestSubsets()
         //   dataSet.
         //List<DataSet> subSets = dataSet.createTrainingAndTestSubsets(60, 40);
-        DataSet[] subSets = dataSet.createTrainingAndTestSubsets(60, 40);
+        DataSet[] subSets = dataSet.createTrainingAndTestSubsets(100-percentageTestSet, percentageTestSet);
         trainingSet = subSets[0];
         testSet = subSets[1];
 

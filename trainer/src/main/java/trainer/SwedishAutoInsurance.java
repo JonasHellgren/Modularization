@@ -18,6 +18,9 @@ package trainer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import helper.Evaluator;
+import helper.ResultPrinter;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
@@ -62,20 +65,29 @@ import training_data.SwedishAutoInsuranceDataProvider;
  */
 public class SwedishAutoInsurance implements LearningEventListener {
 
+    public static final double LEARNING_RATE = 0.1;
+    public static final int MAX_ITERATIONS = 10;
+    public static final double MAX_ERROR = 0.00001;
+    public static final int INPUT_NEURONS_COUNT = 1;
+    public static final int PERCENTAGE_TEST_SET = 2;
+
     public static void main(String[] args) {
         (new SwedishAutoInsurance()).run();
     }
 
     public void run() {
 
-        SwedishAutoInsuranceDataProvider dataProvider=new SwedishAutoInsuranceDataProvider();
+        SwedishAutoInsuranceDataProvider dataProvider=new SwedishAutoInsuranceDataProvider(PERCENTAGE_TEST_SET);
 
         System.out.println("Creating neural network...");
-        Adaline neuralNet = new Adaline(1);
+        Adaline neuralNet = new Adaline(INPUT_NEURONS_COUNT);
 
         neuralNet.setLearningRule(new LMS());
         LMS learningRule = (LMS) neuralNet.getLearningRule();
         learningRule.addListener(this);
+        learningRule.setLearningRate(LEARNING_RATE);
+        learningRule.setMaxIterations(MAX_ITERATIONS);
+        learningRule.setMaxError(MAX_ERROR);
 
         // train the network with training set
         System.out.println("Training network...");
@@ -84,7 +96,8 @@ public class SwedishAutoInsurance implements LearningEventListener {
         System.out.println("Testing network...");
 
         System.out.println("Network performance on the test set");
-        evaluate(neuralNet, dataProvider.getTestSet());
+        double avg= Evaluator.calculateAverageError(neuralNet, dataProvider.getTestSet());
+        System.out.println("Avg error on test set is: " + avg);
 
         System.out.println("Saving network");
         // save neural network to file
@@ -94,51 +107,9 @@ public class SwedishAutoInsurance implements LearningEventListener {
 
         System.out.println();
         System.out.println("Network outputs for test set");
-       // testNeuralNetwork(neuralNet, testSet);
+        ResultPrinter.printNetworkAndDesiredOutputForEveryDataRow(neuralNet, dataProvider.getTestSet());
     }
 
-    // Displays inputs, desired output (from dataset) and actual output (calculated by neural network) for every row from data set.
-    public void testNeuralNetwork(NeuralNetwork neuralNet, DataSet testSet) {
-
-        System.out.println("Showing inputs, desired output and neural network output for every row in test set.");
-
-        for (DataSetRow testSetRow : testSet.getRows()) {
-            neuralNet.setInput(testSetRow.getInput());
-            neuralNet.calculate();
-            double[] networkOutput = neuralNet.getOutput();
-
-            System.out.println("Input: " + Arrays.toString(testSetRow.getInput()));
-            System.out.println("Output: " + networkOutput[0]);
-            System.out.println("Desired output" + Arrays.toString(networkOutput));
-
-        }
-    }
-
-    // Evaluates performance of neural network.
-    // Contains calculation of Confusion matrix for classification tasks or Mean Ssquared Error and Mean Absolute Error for regression tasks.
-    // Difference in binary and multi class classification are made when adding Evaluator (MultiClass or Binary).
-    public void evaluate(NeuralNetwork neuralNet, DataSet dataSet) {
-
-        System.out.println("Calculating performance indicators for neural network.");
-
-        MeanSquaredError mse = new MeanSquaredError();
-        double[] networkOutput=new double[dataSet.size()];
-        double[]  desiredOutput=new double[dataSet.size()];
-
-        int idx=0;
-        for (DataSetRow testSetRow : dataSet.getRows()) {
-            neuralNet.setInput(testSetRow.getInput());
-            neuralNet.calculate();
-            networkOutput[idx]=neuralNet.getOutput()[0];
-            desiredOutput[idx]=testSetRow.getDesiredOutput()[0];
-            idx++;
-        }
-
-        mse.calculatePatternError(networkOutput,desiredOutput);
-
-        System.out.println("Mean squared error is: " + mse.getTotalError());
-
-    }
 
     @Override
     public void handleLearningEvent(LearningEvent event) {
