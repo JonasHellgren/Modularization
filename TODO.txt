@@ -1,0 +1,3 @@
+
+
+flera inputs helst binära, en double output exempel

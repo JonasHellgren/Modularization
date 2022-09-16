@@ -70,7 +70,6 @@ public class SwedishAutoInsurance implements LearningEventListener {
 
         SwedishAutoInsuranceDataProvider dataProvider=new SwedishAutoInsuranceDataProvider();
 
-
         System.out.println("Creating neural network...");
         Adaline neuralNet = new Adaline(1);
 
